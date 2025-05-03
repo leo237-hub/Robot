@@ -2,7 +2,8 @@
 #define LAUTSPRECHER_H    
   
 // Hier können Sie notwendige Standardbibliotheken einfügen  
-#include <iostream>  
+#include <iostream> 
+ 
   
 // Weitere notwendige Includes hier  
   
@@ -12,7 +13,7 @@ class Lautsprecher  { // Vererbung von Aktoren
 private:  
 // Membervariablen  
 int Lautstärke;
-//boolean Starus; //bolean ist nicht definiert
+bool Starus; //bolean ist nicht definiert
 float TonFrequenz;
 
   

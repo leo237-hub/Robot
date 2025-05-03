@@ -9,7 +9,8 @@
 
 
 using namespace std;
-class SignalWandler {
+
+class Fernbedienung {
     private:
     HauptDisplay Display;
     joystick stick1;
