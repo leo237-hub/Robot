@@ -1,53 +1,49 @@
 # Coding Standard
-The following rules are to be followed during development.
-These guidelines will be dynamically updated.
-1. [Bad Practice](#1-bad-practice)
-2. [Scope size](#2-function-size)
-3. [Nesting](#3-nesting)
-4. [Comments](#4-comments)
-5. [Scope purpose](#5-scope)
-6. [MACROS](#6-macros)
-7. [namingConvention](#7-namingConvention)
+Die folgenden Regeln sind während der Entwicklung zu befolgen.
+Diese Richtlinien werden dynamisch aktualisiert.
+1. [Schlechte Praktiken](#1-schlechte-praktiken)
+2. [Umfang der Funktionen](#2-funktionsgröße)
+3. [Verschachtelung](#3-verschachtelung)
+4. [Kommentare](#4-kommentare)
+5. [Zweck des Geltungsbereichs](#5-geltungsbereich)
+6. [MAKROS](#6-makros)
+7. [Namenskonvention](#7-namenskonvention)
 8. [Commits](#8-commits)
-9. [Exceptions/Error-handling](#9-exceptions-and-errors)
+9. [Ausnahmen/Fehlerbehandlung](#9-ausnahmen-und-fehler)
 
-## 1. Bad Practice 
-The following practices are never to be used without proper reason.
+## 1. Schlechte Praktiken
+Die folgenden Praktiken sollten niemals ohne triftigen Grund verwendet werden.
 
-- **GOTO statements**: Leads to unreadable error prone spaghetti code
-- **not checking return values**: Not checking return values of non void functions leads to unexpected / error prone behaviour.
-- **Unitiliazed variables**: Unpredictable behaviour , espacially when deealing with raw pointers.
-- **raw pointers**: C++ offers smart pointers that deal with the memory management, not using these amplifies the complexity of the code.
+- **GOTO-Anweisungen**: Führen zu unlesbarem, fehleranfälligem Spaghetti-Code
+- **Nicht überprüfen von Rückgabewerten**: Das Nicht-Überprüfen von Rückgabewerten bei Nicht-Void-Funktionen führt zu unerwartetem/fehleranfälligem Verhalten.
+- **Nicht initialisierte Variablen**: Unvorhersehbares Verhalten, besonders bei der Verwendung von Rohzeigern.
+- **Rohzeiger**: C++ bietet intelligente Zeiger, die die Speicherverwaltung übernehmen. Die Nichtverwendung dieser erhöht die Komplexität des Codes.
 
+## 2. Funktionsgröße
+Die Größe des Geltungsbereichs von Funktionen und Klassen sollte ein bestimmtes Limit nicht überschreiten, um die Lesbarkeit zu erhalten.
+1. Die Größe von Funktionen sollte generell unter **35 Codezeilen** gehalten werden, um nicht gegen das **Single-Responsibility-Prinzip** zu verstoßen. Dies ist keine harte Grenze, Ausnahmen können vorkommen, sollten aber die **Ausnahme** sein.
+2. Die Größe von Klassen (dies bezieht sich nur auf die Header-Deklaration, nicht auf die Implementierung) sollte **70 Codezeilen** nicht überschreiten. Dies ist eine großzügige Grenze, was bedeutet, dass das Ziel sein sollte, tatsächlich weit unter 70 zu bleiben. Wir wollen keine monolithischen Klassen.
 
+## 3. Verschachtelung
+Bei der Arbeit mit Schleifen/if-Anweisungen/case-Anweisungen sollte es eine harte Grenze geben, wie tief die Verschachtelung erlaubt ist.
+Verschachtelung macht den Code **exponentiell** unleserlich.
+Die Grenze für Verschachtelung ist 2, das bedeutet Folgendes:
 
-## 2. Scope size
-The size of the scope of functions and classes shouldn't exceed a certain limit to mantain readability.
-1. The size of functions should generally be kept under **35 lines of code**, this is to avoid going against the **Single-Responsibility-Principle**. This is not a hard limit , exceptions can happen, but they should be the **exception**.
-2. The size of classes (this references only the header declaration, not the implementation), shpuldn't exceed **70 lines of code**. This is a generous limit , meaning the goal should be to actually keep it way belo 70 , we don't want Monolithic classes.
-
-
-## 3. Nesting
-Whenever dealing with loops/if-statements/case statements , there should be a hard limit as to how deep nesting is allowed. 
-Nesting makes the code **exponentially** unreadable.           
-The limit for nesting is 2, this mean the following:
-
-
-``` 
+```
 if(condition){
     if(anotherCondition){
-        // No more if!
+        // Keine weiteren if-Anweisungen!
     }
 }
 ```
-**Should there be a case where the nesting goes to a third level , the code should be redone.This is a hard limit**
+**Sollte es einen Fall geben, in dem die Verschachtelung eine dritte Ebene erreicht, sollte der Code überarbeitet werden. Dies ist eine harte Grenze.**
 
-## 4. Comments
-Comments are good practice and are more damaging in absence than in abundance. To mantain readability , comments should be written in blocks of logic.
-``` 
+## 4. Kommentare
+Kommentare sind eine gute Praxis und sind durch ihre Abwesenheit schädlicher als durch ihren Überfluss. Um die Lesbarkeit zu erhalten, sollten Kommentare in Logikblöcken geschrieben werden.
+```
 /*
-Comment here what the next block of 
-Code does , do not comment line for line. 
+Kommentiere hier, was der nächste Block von
+Code tut, kommentiere nicht Zeile für Zeile.
 */
 
 int userInput = convertInput(userStringInput);
@@ -55,29 +51,30 @@ if(userInput == 5){
     cout << "User inputted 5 << endl;
 }
 ```
-A class/function should always have a comment in the beginning defining purpose,behaviour,input and output values.
+Eine Klasse/Funktion sollte immer zu Beginn einen Kommentar haben, der Zweck, Verhalten, Eingabe- und Ausgabewerte definiert.
 
-## 5. Scope purpose
-This is part is crucial to adhere to good practice of OOP. 
-**A function or a class should always do one thing, this lets us adhere to the DRY and SRP principles.** 
-Including whatever functionality we have already coded without having to think about dependencies and repeating ourselves.
+## 5. Geltungsbereich
+Dieser Teil ist entscheidend, um gute OOP-Praktiken einzuhalten.
+**Eine Funktion oder eine Klasse sollte immer nur eine Sache tun, dadurch können wir die DRY- und SRP-Prinzipien einhalten.**
+Einschließlich aller Funktionalitäten, die wir bereits kodiert haben, ohne über Abhängigkeiten nachdenken zu müssen und uns zu wiederholen.
 
-## 6. MACROS
-Whenever using constant reocurring variables that are used as a reference value , these should be handled with enums/defines, to mantain readibility and not with inconsitent named variables.
+## 6. MAKROS
+Bei der Verwendung von konstanten, wiederkehrenden Variablen, die als Referenzwert verwendet werden, sollten diese mit Enums/Defines behandelt werden, um die Lesbarkeit zu erhalten, und nicht mit inkonsistent benannten Variablen.
 
-## 7. namingConvention
-To keep a coherent style and mantain readibility , the naming convention for classes and variables is camelCase.     
-For reference: [https://en.wikipedia.org/wiki/Camel_case](url)   
-In this project the convention starts with lower letter, this means we dont use CamelCase, rather **camelCase**.
+## 7. Namenskonvention
+Um einen kohärenten Stil zu bewahren und die Lesbarkeit zu erhalten, ist die Namenskonvention für Klassen und Variablen camelCase.
+Zur Referenz: [https://en.wikipedia.org/wiki/Camel_case](url)
+In diesem Projekt beginnt die Konvention mit Kleinbuchstaben, das heißt, wir verwenden nicht CamelCase, sondern **camelCase**.
 
 ## 8. Commits
-Commits should be done , with a coherent piece of code , this mean not uploading half finished functions. The commit message should explicitely explain what was changed and wheter or not a new feature has been tested.
+Commits sollten mit einem kohärenten Stück Code durchgeführt werden, das heißt, keine halbfertigen Funktionen hochladen. Die Commit-Nachricht sollte explizit erklären, was geändert wurde und ob eine neue Funktion getestet wurde.
+#### **Bitte bevor ein Commit gepushed wird, den commit nochmal ueberpruefen**
 
-## 9. Exceptions and Errors
+## 9. Ausnahmen und Fehler
 
-Proper exception and error handling ensures the application is robust, debuggable, and does not crash unexpectedly. The following guidelines apply:
+Eine ordnungsgemäße Ausnahme- und Fehlerbehandlung stellt sicher, dass die Anwendung robust, debuggbar ist und nicht unerwartet abstürzt. Die folgenden Richtlinien gelten:
 
-- **Always catch known exceptions**: Handle all known exception types gracefully. Do not use empty `catch(...)` blocks.
+- **Immer bekannte Ausnahmen abfangen**: Behandle alle bekannten Ausnahmetypen elegant. Verwende keine leeren `catch(...)` Blöcke.
 
 ```cpp
 try {
@@ -85,3 +82,4 @@ try {
 } catch (const std::runtime_error& e) {
     logError(e.what());
 }
+```
