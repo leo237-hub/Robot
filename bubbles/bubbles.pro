@@ -36,6 +36,12 @@ HEADERS += \
     include/sensor/Lidarsensor.h \
     include/sensor/TemperaturSensor.h \
     include/sensor/Wassersensor.h \
+    include/drehmotor.h \
+    include/selfcheck.h \
+    include/antenne.h \
+    include/lampe.h \
+    include/aktoren.h \
+    include/antenne.h \
     mainwindow.h
 
 
