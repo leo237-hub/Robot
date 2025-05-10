@@ -2,24 +2,24 @@
 #include <aktoren.h>
 
 
-void dcMotor:: vorgehen(){
+void dcMotor:: vorgehen() {
 
 }
 
-void dcMotor:: zuruektreten(){
+void dcMotor:: zuruektreten() {
 
 }
 
-void dcMotor:: Halten(){
+void dcMotor:: Halten() {
 
 }
 
-float dcMotor:: WinkelDrehen(float Winkel){
+float dcMotor:: WinkelDrehen(float Winkel) {
     return Winkel;
 }
 
-float dcMotor:: Drehzahlaendern(float Zahl){
+float dcMotor:: Drehzahlaendern(float Zahl) {
     return Zahl;
 }
 dcMotor::dcMotor() {}
-dcMotor::~dcMotor(){}
+dcMotor::~dcMotor() {}

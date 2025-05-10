@@ -1,10 +1,10 @@
 #pragma once
 using namespace std;
 class DreheSignalInterpreter {
-    private:
+private:
     float Stromstaerke;
     float Spannung;
 
-    public:
+public:
     void Signalinterpretieren();
 };

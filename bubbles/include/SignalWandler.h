@@ -3,12 +3,12 @@
 #include <PaketFach>
 using namespace std;
 class SignalWandler {
-    private:
+private:
     string sensorsignal;
     string Fernbedienungsbefehl;
     PaketFach Fach;
 
-    public:
+public:
     string EmpfangeBefehlFernBedienung(Knopf gedrucktesKnopf);
     string SendeStatusAnFernBedienung();
     float SendeSensordatenAnFernbedienung();

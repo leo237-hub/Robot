@@ -9,7 +9,7 @@ private:
     bool status;
     string knopfID;
 public:
-    Knopf(bool status , string ID);
+    Knopf(bool status, string ID);
     bool holeStatus();
     string holeID();
 };

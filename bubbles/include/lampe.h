@@ -2,13 +2,13 @@
 #define LAMPE_H
 #include <iostream>
 #include "aktoren.h"
-class Lampe : public Aktoren{
-    private:
+class Lampe : public Aktoren {
+private:
     //an? aus?
     bool Status ;
     int Helligkeit;
 
-    public:
+public:
     Lampe();
     ~Lampe();
     float HelligkeitAnpassen(float);

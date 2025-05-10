@@ -5,11 +5,11 @@
 using namespace std;
 
 class ReturnHome {
-    private:
+private:
     string Akkuzustand;
     GPSSensor Strecke;
 
-    public:
+public:
     string ZurueckZurStation(GPSSensor Strecke);
 
 

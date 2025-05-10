@@ -11,7 +11,7 @@
 using namespace std;
 
 class Fernbedienung {
-    private:
+private:
     HauptDisplay Display;
     joystick stick1;
     joystick2 stick2;
@@ -19,7 +19,7 @@ class Fernbedienung {
     bool ControllerOff;
     bool RobotOff;
 
-    public:
+public:
     ReturnHome Returner;
     void DisplayinfoAktualisieren();
     void MotorBewegen();
@@ -28,6 +28,6 @@ class Fernbedienung {
     void DremotorBewegen();
     void ausschalten();
     void Anschalten();
-    
+
 
 };

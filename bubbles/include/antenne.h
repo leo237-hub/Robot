@@ -2,12 +2,12 @@
 #define ANTENNE_H
 #include<aktoren.h>
 #include<iostream>
-class Antenne : public Aktoren{
-    private:
+class Antenne : public Aktoren {
+private:
     bool Status;
     float Frequenz;
 
-    public:
+public:
     Antenne();
     ~Antenne();
     float FrequnezWechseln(float);

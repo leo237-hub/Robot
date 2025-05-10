@@ -2,11 +2,11 @@
 #include <Dc-SignalInterpreter.h>
 using namespace std;
 class joystick {
-    private:
+private:
     float winkel;
     float intensitaet;
 
-    public:
+public:
     Dc_SignalInterpreter interpreter;
     void Fahren();
     void Halten();

@@ -1,10 +1,10 @@
 #pragma once
 using namespace std;
 class Dc_SignalInterpreter {
-    private:
+private:
     float Stromstaerke;
     float Spannung;
 
-    public:
+public:
     void Signalinterpretieren();
 };

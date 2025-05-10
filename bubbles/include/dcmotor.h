@@ -19,7 +19,7 @@ public:
     float WinkelDrehen(float);        // BestimmtenWinkelumdrehen
     float Drehzahlaendern(float);     // Drehzahleinstellen
 
-     dcMotor();
+    dcMotor();
     ~dcMotor();
 };
 

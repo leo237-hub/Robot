@@ -4,15 +4,15 @@
 #include<iostream>
 using namespace  std;
 class Selfcheck {
-    private:
+private:
     string TemperaturSensor,
            FeutigkeitSensor,
-                Lidarsensor,
-                  GPSsensor,
-                  Gassensor,
-                    DCmotor;
+           Lidarsensor,
+           GPSsensor,
+           Gassensor,
+           DCmotor;
 
-    public:
+public:
     Selfcheck();
     ~Selfcheck();
     string TemperaturSensPruefen();

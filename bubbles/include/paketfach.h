@@ -15,6 +15,6 @@ public:
 
     PaketFach(); // Konstruktor
     ~PaketFach(); //Destruktor
- };
+};
 
 #endif // PAKETFACH_H

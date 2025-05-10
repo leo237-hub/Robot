@@ -2,11 +2,11 @@
 #include <DreheSignalinterpreter.h>
 using namespace std;
 class joystick2 {
-    private:
+private:
     float winkel;
     float intensitaet;
 
-    public:
+public:
     DreheSignalInterpreter interpreter;
     void WinkelAnpassen(float winkel);
 
