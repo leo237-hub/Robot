@@ -26,9 +26,11 @@ HEADERS += \
     include/ReturnHome.h \
     include/Sensors.h \
     include/SignalWandler.h \
+    include/drehmotor.h \
     include/joystick.h \
     include/joystick2.h \
     include/knopf.h \
+    include/paketfach.h \
     include/sensor/Feuchtigkeitssensor.h \
     include/sensor/Gassensor.h \
     include/sensor/GpsSensor.h \
@@ -36,6 +38,7 @@ HEADERS += \
     include/sensor/Lidarsensor.h \
     include/sensor/TemperaturSensor.h \
     include/sensor/Wassersensor.h \
+
     mainwindow.h
 
 

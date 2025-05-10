@@ -6,9 +6,9 @@ class SignalWandler {
     private:
     string sensorsignal;
     string Fernbedienungsbefehl;
+    PaketFach Fach;
 
     public:
-    PaketFach Fach;
     string EmpfangeBefehlFernBedienung(Knopf gedrucktesKnopf);
     string SendeStatusAnFernBedienung();
     float SendeSensordatenAnFernbedienung();

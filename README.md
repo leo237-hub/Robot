@@ -10,6 +10,7 @@ Diese Richtlinien werden dynamisch aktualisiert.
 7. [Namenskonvention](#7-namenskonvention)
 8. [Commits](#8-commits)
 9. [Ausnahmen/Fehlerbehandlung](#9-ausnahmen-und-fehler)
+10. [Form](#10-Form)
 
 ## 1. Schlechte Praktiken
 Die folgenden Praktiken sollten niemals ohne triftigen Grund verwendet werden.
@@ -17,7 +18,6 @@ Die folgenden Praktiken sollten niemals ohne triftigen Grund verwendet werden.
 - **GOTO-Anweisungen**: Führen zu unlesbarem, fehleranfälligem Spaghetti-Code
 - **Nicht überprüfen von Rückgabewerten**: Das Nicht-Überprüfen von Rückgabewerten bei Nicht-Void-Funktionen führt zu unerwartetem/fehleranfälligem Verhalten.
 - **Nicht initialisierte Variablen**: Unvorhersehbares Verhalten, besonders bei der Verwendung von Rohzeigern.
-- **Rohzeiger**: C++ bietet intelligente Zeiger, die die Speicherverwaltung übernehmen. Die Nichtverwendung dieser erhöht die Komplexität des Codes.
 
 ## 2. Funktionsgröße
 Die Größe des Geltungsbereichs von Funktionen und Klassen sollte ein bestimmtes Limit nicht überschreiten, um die Lesbarkeit zu erhalten.
@@ -83,3 +83,9 @@ try {
     logError(e.what());
 }
 ```
+
+### 10. Form
+Bei Header Definition , ist **#pragma** once zu benutzen.
+
+Die Einrueckungen und Position dieser Klammer **{}** ist mit den Befehl astyle zu vereinheitlichen.
+Abweichung von der Form sind **nicht akzeptiert**.

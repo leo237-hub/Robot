@@ -9,13 +9,14 @@ class Drehmotor : public Aktoren
     float MaxDrehzahl, Aktuelwinkel, Leistung, Winkel;
 
 public:
+    Drehmotor();  //konstruktor
+    virtual ~Drehmotor(); //destuktor
 
     float DrehWinkel(float Winkel); //BestimmtenWinkelUmdrehen
     float DrehZahl(float ZAhl);     //DrehzahlEinstellen
     void Stoppen();
 
-    Drehmotor();  //konstruktor
-    ~Drehmotor(); //destuktor
+
 };
 //Fehlt noch die Methode Ein-Ausschalten von der Klasse Aktoren
 #endif // DREHMOTOR_H
