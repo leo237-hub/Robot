@@ -1,17 +1,14 @@
 #ifndef DREHMOTOR_H
 #define DREHMOTOR_H
 #include "aktoren.h"
-//create by Leonel on 23.04.2025
+class Drehmotor : public Aktoren{
+    private:
+    float MaxDrehzahl;
+    float Aktuelwinkel;
+    float Leistung;
+    float Winkel;
 
-class Drehmotor : public Aktoren
-
-{
-    float MaxDrehzahl, Aktuelwinkel, Leistung, Winkel;
-
-public:
-    Drehmotor();  //konstruktor
-    virtual ~Drehmotor(); //destuktor
-
+    public:
     float DrehWinkel(float Winkel); //BestimmtenWinkelUmdrehen
     float DrehZahl(float ZAhl);     //DrehzahlEinstellen
     void Stoppen();
