@@ -85,7 +85,7 @@ try {
 ```
 
 ### 10. Form
-Bei Header Definition , ist **#pragma** once zu benutzen.
+Bei Header Definition , ist **#pragma** once zu benutzen und **using namespace std;**
 
 Die Einrueckungen und Position dieser Klammer **{}** ist mit den Befehl astyle zu vereinheitlichen.
 Abweichung von der Form sind **nicht akzeptiert**.
