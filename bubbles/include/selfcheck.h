@@ -2,6 +2,7 @@
 #define SELFCHECK_H
 #include<string.h>
 #include<iostream>
+#include"sensors.h"
 using namespace  std;
 class Selfcheck {
 private:
@@ -15,6 +16,7 @@ private:
 public:
     Selfcheck();
     ~Selfcheck();
+    std::vector<Sensor * > Sensor;
     string TemperaturSensPruefen();
     string FeuchtigkeitSensPruefen();
     string LidarSensorPruefen();

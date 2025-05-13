@@ -9,6 +9,8 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    include/dcmotor.cpp \
+    include/roboter.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -31,6 +33,7 @@ HEADERS += \
     include/joystick2.h \
     include/knopf.h \
     include/paketfach.h \
+    include/roboter.h \
     include/sensor/Feuchtigkeitssensor.h \
     include/sensor/Gassensor.h \
     include/sensor/GpsSensor.h \
@@ -44,6 +47,8 @@ HEADERS += \
     include/lampe.h \
     include/aktoren.h \
     include/antenne.h \
+    include/dcmotor.h \
+    include/Kettesensor.h \
     mainwindow.h
 
 

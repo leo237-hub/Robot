@@ -1,0 +1,11 @@
+#ifndef ROBOTER_H
+#define ROBOTER_H
+
+class roboter {
+    float leistung;
+    int richt
+public:
+    roboter();
+};
+
+#endif // ROBOTER_H

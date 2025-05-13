@@ -2,19 +2,17 @@
 #define PAKETFACH_H
 #include<string>
 #include <iostream>
+#include "SignalWandler.h"
 using namespace std;
-
-class PaketFach
-{
+class PaketFach {
 private:
     float flaesche;
     string Zustand;
 public:
+    PaketFach();
+    ~PaketFach();
     void Oeffnen();
     void Schliessen();
-
-    PaketFach(); // Konstruktor
-    ~PaketFach(); //Destruktor
 };
 
 #endif // PAKETFACH_H

@@ -1,20 +1,14 @@
 #ifndef AKTOREN_H
 #define AKTOREN_H
-
-//create by Leonel on 23.04.2025
-class Aktoren
-{
+#include "Fernbedienung.h"
+class Aktoren {
 private:
-    int ID;
     bool if_activ;
-
 public:
+    Aktoren();
+    virtual~Aktoren();
+    std::vector<Fernbedienung * > Fernbedienung;
     void Anschalten();
     void ausschalten();
-
-    Aktoren();  //construktor
-
-    ~Aktoren(); //Detructor
 };
-
 #endif // AKTOREN_H

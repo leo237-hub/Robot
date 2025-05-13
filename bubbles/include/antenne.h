@@ -9,7 +9,7 @@ private:
 
 public:
     Antenne();
-    ~Antenne();
+    ~Antenne()override;
     float FrequnezWechseln(float);
 
 };

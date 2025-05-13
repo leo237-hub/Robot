@@ -10,7 +10,7 @@ private:
 
 public:
     Lampe();
-    ~Lampe();
+    ~Lampe() override;
     float HelligkeitAnpassen(float);
 };
 #endif // LAMPE_H

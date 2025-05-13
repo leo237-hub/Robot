@@ -1,6 +1,7 @@
 #ifndef DREHMOTOR_H
 #define DREHMOTOR_H
 #include "aktoren.h"
+#include "DreheSignalinterpreter.h"
 class Drehmotor : public Aktoren {
 private:
     float MaxDrehzahl;
@@ -9,6 +10,9 @@ private:
     float Winkel;
 
 public:
+    Drehmotor();
+    ~Drehmotor() override;
+    std::vector<DreheSignalInterpreter * > DreheSignalInterpreter ;
     float DrehWinkel(float Winkel); //BestimmtenWinkelUmdrehen
     float DrehZahl(float ZAhl);     //DrehzahlEinstellen
     void Stoppen();
