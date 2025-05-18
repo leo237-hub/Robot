@@ -1,15 +1,15 @@
 #include<iostream>
 #include<vector>
-#include "dcmotor.h"
-#include "aktoren.h"
-#include "ReturnHome.h"
-#include "Dc-SignalInterpreter.h"
-#include "selfcheck.h"
-#include "roboter.h"
+#include "../include/dcmotor.h"
+#include "../include/aktoren.h"
+#include "../include/ReturnHome.h"
+#include "../include/Dc-SignalInterpreter.h"
+#include "../include/selfcheck.h"
+#include "../include/roboter.h"
 
 dcMotor::dcMotor()
     :Leistung(0.0f), Richtung(0){}
-dcMotor::~dcMotor() override {}
+dcMotor::~dcMotor() {}
 
 void dcMotor:: drehen(float leistung, int richtung ) {
     // sicherstellen, dass die Richtung nur  -1, 0 oder 1 ist
@@ -34,17 +34,18 @@ void dcMotor:: drehen(float leistung, int richtung ) {
     Leistung = leistung;
     Richtung = richtung;
 
+
     //Aufgabe zur kontrolle
     std::cout<< "Drehen aktiviert:\n";
     std::cout<<"        Leistung = " << leistung << "\n";
     std::cout<<"        Richtung = ";
     if (richtung == 1)
     {
-         std::cout<< "Vorwaerts\n"
+        std::cout<< "Vorwaerts\n";
     }
     else if(richtung == -1)
     {
-         std::cout<< " Rueckwert\n"
+        std::cout<< " Rueckwert\n";
     }
     else
         std::cout<< " Stopp\n";

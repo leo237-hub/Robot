@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,6 +15,20 @@ MainWindow::MainWindow(QWidget *parent)
     4. Display
     5. Joystick
     */
+    scene = new QGraphicsScene(this);
+    ui->graphicsView->setScene(scene);
+    ui->graphicsView->setSceneRect(0, 0, 400, 300);
+
+    roboter = new Roboter(50, 100);
+    feuer = new Feuer(250, 120);
+
+    scene->addItem(roboter);
+    scene->addItem(feuer);
+
+    double distance = feuer->calculateDistance(roboter->getCenterPosition());
+    double temperature = feuer->calculateTemperature(distance);
+    qDebug() << "Entfernung:" << distance;
+    qDebug() << "Temperatur am Roboter:" << temperature;
 }
 
 MainWindow::~MainWindow()

@@ -1,11 +1,10 @@
 #pragma once
-#include <Hauptdisplay.h>
+#include "Hauptdisplay/Hauptdisplay.h"
 #include <string>
-#include <stdbool>
-#include <Fernbedienung-Interpreter.h>
-#include <joystick2.h>
-#include <joystick.h>
-#include <ReturnHome.h>
+#include "Fernbedienung-Interpreter.h"
+#include "joystick.h"
+#include "joystick2.h"
+#include "ReturnHome.h"
 
 
 using namespace std;

@@ -1,6 +1,6 @@
 #include<string>
 #include<iostream>
-#include "selfcheck.h"
+#include "../include/selfcheck.h"
 
 using namespace  std;
 

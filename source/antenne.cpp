@@ -1,5 +1,5 @@
-#include "aktoren.h"
-#include "antenne.h"
+#include "../include/aktoren.h"
+#include "../include/antenne.h"
 /*
 Antenne::Antenne() {}
 

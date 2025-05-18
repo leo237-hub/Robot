@@ -1,5 +1,5 @@
-#include "drehmotor.h"
-#include<aktoren.h>
+#include "../include/drehmotor.h"
+#include "../include/aktoren.h"
 
 /*
 //void Aktoren::Anschalten(){}

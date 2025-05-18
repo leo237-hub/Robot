@@ -1,10 +1,11 @@
 #pragma once
+/*
 #include <iostream>
 #include <fire.h>
 #include <position.h>
 using namespace  std;
 
-
+*/
 /*
 Zweck und Verhalten der Feuerklasse: 
 
@@ -15,6 +16,7 @@ Die Temperatur geht mit der Zeit runter,wie bei einen normalen Feuer.
 
 */
 
+/*
 class Feuer {
 private:
     Position feuerPosition;
@@ -28,4 +30,15 @@ public:
     void setzePosition(const float& xPosition,const float& yPosition, const float& zPosition);
 
 
+};
+*/
+#include <QGraphicsEllipseItem>
+
+class Feuer: public QGraphicsEllipseItem {
+public:
+    Feuer(double x, double y, double radius = 20.0);
+
+    QPointF getCenterPosition() const;
+    double calculateDistance(const QPointF& other) const;
+    double calculateTemperature(double distance) const;
 };

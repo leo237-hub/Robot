@@ -1,5 +1,4 @@
-#ifndef APPEND_C_LIDARSENSOR_H
-#define APPEND_C_LIDARSENSOR_H
+#pragma once
 #include <vector>
 
 class LidarSensor {
@@ -19,4 +18,4 @@ public:
     // Analysiert die gescannten Daten, um Hindernisse zu erkennen
     bool HindernisseErkennen() const;
 };
-#endif //APPEND_C_LIDARSENSOR_H
+

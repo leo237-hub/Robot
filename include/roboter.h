@@ -1,26 +1,22 @@
 #ifndef ROBOTER_H
 #define ROBOTER_H
-#include<iostream>
-#include"dcmotor.h"
+
+/*
 class roboter {
-    dcMotor motorLinks;
-    dcMotor motorRecht;
-    //Position x,y-Richtung
-    float x, y;
-    // Richtung in Grad (0 = Rechts, 90 = oben, ...)
-    float winkel;
+    float leistung;
+    int richt;
 public:
     roboter();
-    ~roboter();
-    void vorwaerts(float );
-    void rueckwaerts(float );
-    void drehenLinks(float );
-    void drehenRechts(float winkelGrad);
-    void stoppen();
-    void aktualisierePosition(float deltazeit);
-    float getx() const;
-    float gety() const;
-    float getRichtung();
+};
+*/
+
+#include <QGraphicsEllipseItem>
+
+class Roboter : public QGraphicsEllipseItem {
+public:
+    Roboter(double x, double y, double radius = 20.0);
+
+    QPointF getCenterPosition() const;
 };
 
 #endif // ROBOTER_H

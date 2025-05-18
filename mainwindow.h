@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsScene>
+#include "include/simulation/feuer.h"
+#include "include/roboter.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,5 +22,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QGraphicsScene* scene;
+    Roboter* roboter;
+    Feuer* feuer;
 };
 #endif // MAINWINDOW_H

@@ -7,6 +7,7 @@
 #include "Dc-SignalInterpreter.h"
 #include "selfcheck.h"   // to do : include Header Kettesensor
 #include "roboter.h"
+
 class dcMotor : public Aktoren {
 private:
     //Drehzahl (z. B. von 0.0 bis 1.0)
@@ -19,7 +20,7 @@ public:
     ~dcMotor() override;
     std::vector<Selfcheck * > Selfcheck;
     std::vector<Dc_SignalInterpreter * > Dc_SignalInterpreter;
-    std::vector<roboter *> roboter;
+  //  std::vector<roboter *> roboter;
     //to do die Klasse Kettesensor instanzieren
     std::vector<ReturnHome * > ReturnHome;
     //setzt Leistung und Richtung

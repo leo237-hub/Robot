@@ -1,10 +1,11 @@
 #include <iostream>
 #include <cmath>
-#include "roboter.h"
-#include "dcmotor.h"
+#include "../include/roboter.h"
+#include "../include/dcmotor.h"
 
 #define PI 3.14159265f
 
+/*
 roboter::roboter()
     :x(0.0f), y(0.0f), winkel(0.0f){}
 roboter::~roboter(){}
@@ -33,6 +34,8 @@ void roboter::stoppen() {
     motorLinks.stoppen();
     motorRecht.stoppen();
 }
+*/
+
 /* Die methode simuliert die bewegung und Drehung eines Motors.
  * EffektivLeistung: Motor vorwärt läuft (Richtung = 1), bleibt der Wert +
  * wenn Rückwärts(-1), ist die Leeistung - =>zeigt dass sich der Motor in entgegengesetzte Richtung dreht.
@@ -40,6 +43,7 @@ void roboter::stoppen() {
  * Drehung: Dreheffekt, Wenn rechts > links → der Roboter dreht sich nach links.Umgekehrt → nach rechts.
  * Der Winkel (Richtung des Roboters) wird um die Drehung pro Zeit aktualisiert.
 */
+/*
 void roboter::aktualisierePosition(float deltazeit) {
     float effektiveLeistungLinks = motorLinks.getLeistung() * motorLinks.getRichtung();
     float effektiveLeistungRechts = motorRechts.getLeistung() * motorRechts.getRichtung();
@@ -68,3 +72,16 @@ float roboter::gety() const {
 float roboter::getRichtung() {
     reuturn winkel;
 }
+*/
+#include <QBrush>
+
+Roboter::Roboter(double x, double y, double radius) {
+    setRect(0, 0, radius, radius);
+    setBrush(Qt::blue);
+    setPos(x, y);
+}
+
+QPointF Roboter::getCenterPosition() const {
+    return scenePos() + rect().center();
+}
+

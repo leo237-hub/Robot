@@ -2,7 +2,7 @@
 #define SELFCHECK_H
 #include<string.h>
 #include<iostream>
-#include"sensors.h"
+#include"Sensors.h"
 using namespace  std;
 class Selfcheck {
 private:
