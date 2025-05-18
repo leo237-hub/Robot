@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <feuer.h>
 using namespace  std;
 
 /*
@@ -13,13 +14,13 @@ Fuer jedes attribut ist eine eigene Klasse notwendig.
 
 */
 
+
 class Simulation {
 private:
-    /*
-    TODO: Define an attribute corresponding to each sensor
-    */    
-    
+    Feuer * gruppeFeuer; 
 public:
+
+    float erzeugeTemperatur(const Position& aktuellePosition);
     /*
     TODO: 
     1. getter and setter Methods for each Attribute 
@@ -28,5 +29,7 @@ public:
     4. There has to be some kind of logic makin the values fluctuate (fire dwindles down as time goes on)
 
     */
+
+
 };
 
