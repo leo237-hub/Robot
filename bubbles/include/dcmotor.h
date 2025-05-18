@@ -6,25 +6,27 @@
 #include "ReturnHome.h"
 #include "Dc-SignalInterpreter.h"
 #include "selfcheck.h"   // to do : include Header Kettesensor
+#include "roboter.h"
 class dcMotor : public Aktoren {
 private:
-    int MotorNummer;
+    //Drehzahl (z. B. von 0.0 bis 1.0)
     float Leistung;
-    float Winkel ;
+    //1 = vorwärt -1 = rückwärts 0 = stop
+    int Richtung ;
 
 public:
     dcMotor();
     ~dcMotor() override;
     std::vector<Selfcheck * > Selfcheck;
     std::vector<Dc_SignalInterpreter * > Dc_SignalInterpreter;
+    std::vector<roboter *> roboter;
     //to do die Klasse Kettesensor instanzieren
     std::vector<ReturnHome * > ReturnHome;
-    void vorgehen();
-    void zuruektreten();
+    //setzt Leistung und Richtung
+    void drehen(float, int);
+    //setzt Leistung auf 0 und Richtung auf 0
     void stoppen();
-    // BestimmtenWinkelumdrehen
-    float WinkelDrehen(float);
-    // Drehzahleinstellen
-    float Drehzahlaendern(float);
+    float getLeistung() const;
+    int getRichtung() const ;
 };
 #endif // DCMOTOR_H

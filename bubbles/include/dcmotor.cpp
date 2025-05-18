@@ -5,25 +5,67 @@
 #include "ReturnHome.h"
 #include "Dc-SignalInterpreter.h"
 #include "selfcheck.h"
+#include "roboter.h"
 
-dcMotor::dcMotor() {}
-dcMotor::~dcMotor() {}
+dcMotor::dcMotor()
+    :Leistung(0.0f), Richtung(0){}
+dcMotor::~dcMotor() override {}
 
-void dcMotor:: vorgehen() {
-}
+void dcMotor:: drehen(float leistung, int richtung ) {
+    // sicherstellen, dass die Richtung nur  -1, 0 oder 1 ist
+    if (richtung < -1)
+    {
+        richtung = -1 ;
+    }
+    else if(richtung > 1)
+    {
+        richtung = 1;
+    }
 
-void dcMotor:: zuruektreten() {
+    //sicherstellen, das die Leistung nur  0.0 bis 1.0
+    if (leistung < 0.0f)
+    {
+        leistung = 0.0f;
+    }
+    else if(leistung > 1.0f)
+    {
+        leistung = 1.0f;
+    }
+    Leistung = leistung;
+    Richtung = richtung;
+
+    //Aufgabe zur kontrolle
+    std::cout<< "Drehen aktiviert:\n";
+    std::cout<<"        Leistung = " << leistung << "\n";
+    std::cout<<"        Richtung = ";
+    if (richtung == 1)
+    {
+         std::cout<< "Vorwaerts\n"
+    }
+    else if(richtung == -1)
+    {
+         std::cout<< " Rueckwert\n"
+    }
+    else
+        std::cout<< " Stopp\n";
 }
 
 void dcMotor:: stoppen() {
+    Leistung = 0.0f;
+    Richtung = 0;
+
+    std::cout << " Motor gestoppt.\n";
 }
 
-float dcMotor:: WinkelDrehen(float Winkel) {
-    return Winkel;
+float dcMotor::getLeistung() const {
+    return Leistung;
 }
 
-float dcMotor:: Drehzahlaendern(float neueLeistung) {
-    return neueLeistung;
+int dcMotor::getRichtung() const {
+    return Richtung;
 }
+
+
+
 
 

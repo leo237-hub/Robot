@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <PaketFach>
+#include <paketfach.h>
 using namespace std;
 class SignalWandler {
 private:
