@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
-#include <feuer.h>
+#include "feuer.h"
+#include <vector>
 using namespace  std;
 
 /*
@@ -17,10 +18,11 @@ Fuer jedes attribut ist eine eigene Klasse notwendig.
 
 class Simulation {
 private:
-    Feuer * gruppeFeuer; 
+    vector<Feuer*> gruppeFeuer;
 public:
 
-    float erzeugeTemperatur(const Position& aktuellePosition);
+    float erzeugeTemperatur(const QPointF& objPosition);
+    void addiereFeuerUmgebung(Feuer * addiereMich);
     /*
     TODO: 
     1. getter and setter Methods for each Attribute 

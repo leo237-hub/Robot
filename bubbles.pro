@@ -18,6 +18,8 @@ SOURCES += \
     source/roboter.cpp \
     source/selfcheck.cpp \
     source/feuer.cpp \
+    source/simulation.cpp \
+    source/position.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -56,7 +58,9 @@ HEADERS += \
     include/antenne.h \
     include/dcmotor.h \
     include/Kettesensor.h \
-    include/feuer.h \
+    include/simulation/feuer.h \
+    include/simulation/position.h \
+    include/simulation/simulation.h \
     mainwindow.h
 
 

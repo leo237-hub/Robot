@@ -2,12 +2,12 @@
 #include "../include/simulation/position.h"
 #include "../include/simulation/feuer.h"
 
-Simulation::erzeugeTemperatur(const Position& anderePosition){
+float Simulation::erzeugeTemperatur(const QPointF& objPosition){
 /*
 Diese Funktion iteriert durch alle existierende Feuern und berechnet die Temperatur mit gewichtung nach den Abstand.
 Falls es keine Feuern gibt ,  dann gibt diese Funktion die Raumtemperatur zurueck.
 */
-float maxTemperatur = 0;
+float maxTemperatur = 20;
 float gesamtTemperatur = 0;
 float gewichteteTemperatur;
 
@@ -16,14 +16,15 @@ if(sizeof(gruppeFeuer) == 0)
     return 20;
 }
 
-for(auto& iterator : this->gruppeFeuer){
+for(auto& feuer : this->gruppeFeuer){
     
-    int abstand = iterator.feuerPosition.vergleichePosition(anderePosition);
+    float abstand = feuer->berechneAbstand(objPosition)/30;
+
     if(abstand == 0){
-        gewichteteTemperatur = iterator.Temperatur;
+        gewichteteTemperatur = feuer->holeTemperatur();
     }
     else{
-        gewichteteTemperatur = iterator.Temperatur/(abstand*abstand);
+        gewichteteTemperatur = feuer->holeTemperatur()/(abstand*abstand);
     }
 
     if(maxTemperatur < gewichteteTemperatur){
@@ -35,5 +36,9 @@ for(auto& iterator : this->gruppeFeuer){
     
 }
 
-return maxTemperatur + (0.15*gesamtTemperatur)
+return maxTemperatur + (0.15*gesamtTemperatur);
+}
+
+void Simulation::addiereFeuerUmgebung(Feuer *addiereMich){
+    this->gruppeFeuer.push_back(addiereMich);
 }

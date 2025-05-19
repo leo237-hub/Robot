@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
+#include "include/simulation/simulation.h"
+#include <QRandomGenerator>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -15,18 +17,30 @@ MainWindow::MainWindow(QWidget *parent)
     4. Display
     5. Joystick
     */
+    
+/*
+ * mahle rote punkt als feuer und blaue als roboter
+ *
+ */
+    Simulation  * simulation = new Simulation();
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setSceneRect(0, 0, 400, 300);
 
     roboter = new Roboter(50, 100);
-    feuer = new Feuer(250, 120);
-
     scene->addItem(roboter);
-    scene->addItem(feuer);
+    for(int i = 0; i < 5;i++){
 
-    double distance = feuer->calculateDistance(roboter->getCenterPosition());
-    double temperature = feuer->calculateTemperature(distance);
+    feuer = new Feuer(QRandomGenerator::global()->bounded(0, 500), QRandomGenerator::global()->bounded(0, 200)); // Zufaellige Zahlen fuer die Position um verschiedene Umgebungen zu SImulieren
+    //feuer = new Feuer(100 , 100 + 20*i); // Konstante Position zum Testen
+
+    simulation->addiereFeuerUmgebung(feuer);
+    scene->addItem(feuer);
+    }
+
+    double distance = feuer->berechneAbstand(roboter->getCenterPosition());
+    double temperature = simulation->erzeugeTemperatur(roboter->getCenterPosition());
+    
     qDebug() << "Entfernung:" << distance;
     qDebug() << "Temperatur am Roboter:" << temperature;
 }

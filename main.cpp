@@ -4,6 +4,7 @@
 #include <QCoreApplication>
 
 #include "include/simulation/feuer.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
