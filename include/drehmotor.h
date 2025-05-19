@@ -2,6 +2,9 @@
 #define DREHMOTOR_H
 #include "aktoren.h"
 #include "DreheSignalinterpreter.h"
+#include <vector>
+using namespace std;
+
 class Drehmotor : public Aktoren {
 private:
     float MaxDrehzahl;

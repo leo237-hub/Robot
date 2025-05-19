@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<<<<<<< HEAD:bubbles/bubbles.pro.user
-<!-- Written by QtCreator 16.0.1, 2025-05-14T04:13:05. -->
-=======
-<!-- Written by QtCreator 14.0.2, 2025-05-18T13:13:46. -->
->>>>>>> eee7f8b2fe95b1e1bfaaa5c0b3cef9919cbd7274:bubbles.pro.user
+<!-- Written by QtCreator 14.0.2, 2025-05-19T18:00:53. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>

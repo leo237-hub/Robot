@@ -1,29 +1,25 @@
 #pragma once
-#include <iostream>
-#include <fire.h>
+#include <QGraphicsEllipseItem>
+#include <QtMath>
+#include <QBrush>
+
 using namespace  std;
 
 /*
 Zweck und Verhalten der Positionsklasse
 
-Zweck: Um die x,y,z Position , einer belibigen Klasse zu speichern.
-Verhalten: Die klasse speichert die Position in 3 verschieden Attribute, die man mit setter und getter Verwalten kann.
-Die Klasse stellt zur Verfuegung die moeglichkeit zwei Positionen im Bezug des abstand zu vergleichen.
-
+Zweck: Position tracken und Abstand ergebn
+Verhalten: Die Klasse erbt von QGraphicsEllipseItem , somit stehen sehr viele Funktionalitaeten zur Verfuegung
 */
 
-class Position {
-private:    
-    float xPosition;
-    float yPosition;
-    float zPosition;
+class Position : public QGraphicsEllipseItem {    
 public:
-float holexPosition();
-float holeyPosition();
-float holezPosition();
-float vergleichePosition(const Position& anderePosition);
+    Position(double x = 0.0, double y = 0.0, double radius = 10.0) 
+        : QGraphicsEllipseItem(x - radius, y - radius, 2 * radius, 2 * radius) {
+    }
+    QPointF holePosition() const;
+    float berechneAbstand(const QPointF& objPosition);
 
     
-    
-
 };
+

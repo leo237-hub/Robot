@@ -1,4 +1,6 @@
 #pragma once
+#include <QGraphicsEllipseItem>
+#include "position.h"
 /*
 #include <iostream>
 #include <fire.h>
@@ -16,29 +18,10 @@ Die Temperatur geht mit der Zeit runter,wie bei einen normalen Feuer.
 
 */
 
-/*
-class Feuer {
+class Feuer: public Position {
 private:
-    Position feuerPosition;
-    float Temperatur;
-
-
+float Temperatur;
 public:
-    void aktualisiereTemperature();
+    Feuer(double x, double y, double radius = 20.0,float Temperatur = 100);
     float holeTemperatur();
-    Position holePosition();
-    void setzePosition(const float& xPosition,const float& yPosition, const float& zPosition);
-
-
-};
-*/
-#include <QGraphicsEllipseItem>
-
-class Feuer: public QGraphicsEllipseItem {
-public:
-    Feuer(double x, double y, double radius = 20.0);
-
-    QPointF getCenterPosition() const;
-    double calculateDistance(const QPointF& other) const;
-    double calculateTemperature(double distance) const;
 };

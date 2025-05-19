@@ -1,6 +1,8 @@
 #ifndef AKTOREN_H
 #define AKTOREN_H
 #include "Fernbedienung.h"
+#include <vector>
+
 class Aktoren {
 private:
     bool if_activ;
