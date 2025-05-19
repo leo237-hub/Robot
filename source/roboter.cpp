@@ -2,7 +2,7 @@
 #include <cmath>
 #include "../include/roboter.h"
 #include "../include/dcmotor.h"
-
+#include <QBrush>
 #define PI 3.14159265f
 
 /*
@@ -34,7 +34,7 @@ void roboter::stoppen() {
     motorLinks.stoppen();
     motorRecht.stoppen();
 }
-*/
+
 
 /* Die methode simuliert die bewegung und Drehung eines Motors.
  * EffektivLeistung: Motor vorwärt läuft (Richtung = 1), bleibt der Wert +
@@ -72,7 +72,7 @@ float roboter::gety() const {
 float roboter::getRichtung() {
     reuturn winkel;
 }
-*/
+
 #include <QBrush>
 
 Roboter::Roboter(double x, double y, double radius) {
@@ -84,4 +84,68 @@ Roboter::Roboter(double x, double y, double radius) {
 QPointF Roboter::getCenterPosition() const {
     return scenePos() + rect().center();
 }
+*/
 
+
+Roboter::Roboter(double x, double y, double radius)
+    : x(x), y(y), winkel(0.0f) {
+    setRect(0, 0, radius, radius);
+    setBrush(Qt::blue);
+    setPos(x, y);
+}
+
+Roboter::~Roboter() {}
+
+void Roboter::vorwaerts(float leistung) {
+    motorLinks.drehen(leistung, 1);
+    motorRechts.drehen(leistung, 1);
+}
+
+void Roboter::rueckwaerts(float leistung) {
+    motorLinks.drehen(leistung, -1);
+    motorRechts.drehen(leistung, -1);
+}
+
+void Roboter::drehenLinks(float leistung) {
+    motorLinks.drehen(leistung, -1);
+    motorRechts.drehen(leistung, 1);
+}
+
+void Roboter::drehenRechts(float leistung) {
+    motorLinks.drehen(leistung, 1);
+    motorRechts.drehen(leistung, -1);
+}
+
+void Roboter::stoppen() {
+    motorLinks.stoppen();
+    motorRechts.stoppen();
+}
+
+void Roboter::aktualisierePosition(float deltaZeit) {
+    float effektiveLeistungLinks = motorLinks.getLeistung() * motorLinks.getRichtung();
+    float effektiveLeistungRechts = motorRechts.getLeistung() * motorRechts.getRichtung();
+
+    float geschwindigkeit = (effektiveLeistungLinks + effektiveLeistungRechts) / 2.0f;
+    float drehung = (effektiveLeistungRechts - effektiveLeistungLinks) * 50.0f;
+
+    winkel += drehung * deltaZeit;
+    if (winkel >= 360.0f) winkel -= 360.0f;
+    if (winkel < 0.0f)    winkel += 360.0f;
+
+    float rad = winkel * PI / 180.0f;
+    x += std::cos(rad) * geschwindigkeit * deltaZeit;
+    y += std::sin(rad) * geschwindigkeit * deltaZeit;
+
+    setPos(x, y);  // grafisch aktualisieren
+    setRotation(winkel);  // Richtung anzeigen
+
+    std::cout << "[Roboter] neue Position: (" << x << ", " << y << "), Richtung: " << winkel << "°\n";
+}
+
+float Roboter::getX() const { return x; }
+float Roboter::getY() const { return y; }
+float Roboter::getRichtung() const { return winkel; }
+
+QPointF Roboter::getCenterPosition() const {
+    return scenePos() + rect().center();
+}

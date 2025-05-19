@@ -35,7 +35,7 @@ void dcMotor:: drehen(float leistung, int richtung ) {
     Richtung = richtung;
 
 
-    //Aufgabe zur kontrolle
+    //Ausgabe zur kontrolle
     std::cout<< "Drehen aktiviert:\n";
     std::cout<<"        Leistung = " << leistung << "\n";
     std::cout<<"        Richtung = ";
