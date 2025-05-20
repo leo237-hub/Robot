@@ -1,0 +1,36 @@
+# Use Ubuntu with Qt installed via apt
+image: "ubuntu:20.04"
+
+# Define pipeline stages
+stages:
+  - build
+
+# Global variables
+variables:
+  # Define the directory where the project will be built
+  BUILD_DIR: "build"
+  # Avoid interactive prompts during package installation
+  DEBIAN_FRONTEND: noninteractive
+
+# Commands to run before each job
+before_script:
+  - echo "Setting up environment..."
+  - apt-get update -qq
+  - apt-get install -y build-essential qt5-default qtbase5-dev
+  - mkdir -p $BUILD_DIR
+
+# Job to compile the project
+build_job:
+  stage: build
+  script:
+    - echo "Compiling project..."
+    - cd $BUILD_DIR
+    - qmake ../
+    - make -j$(nproc)
+    # If compilation fails, the job will automatically fail
+  # Run this job only on these branches or MRs
+  only:
+    - merge_requests
+    - main
+    - master
+    - develop
