@@ -11,4 +11,5 @@ release/simulation.o
 release/position.o
 release/main.o
 release/mainwindow.o
+release/moc_simulation.o
 release/moc_mainwindow.o
