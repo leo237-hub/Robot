@@ -1,0 +1,32 @@
+# Use a Docker image with Qt pre-installed
+image: "fredblgr/ubuntu-qt:5.12.8"
+
+# Define pipeline stages
+stages:
+  - build
+
+# Global variables
+variables:
+  # Define the directory where the project will be built
+  BUILD_DIR: "build"
+
+# Commands to run before each job
+before_script:
+  - echo "Setting up environment..."
+  - mkdir -p $BUILD_DIR
+
+# Job to compile the project
+build_job:
+  stage: build
+  script:
+    - echo "Compiling project..."
+    - cd $BUILD_DIR
+    - qmake ../
+    - make -j$(nproc)
+    # If compilation fails, the job will automatically fail
+    # This will prevent the merge/push of the code
+  # Run this job only on these branches or MRs
+  only:
+    - merge_requests
+    - main
+
