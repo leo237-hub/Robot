@@ -31,17 +31,20 @@ MainWindow::MainWindow(QWidget *parent)
 
     roboter = new Roboter(50, 100);
     scene->addItem(roboter);
+    simulation->setRoboter(roboter);
     for(int i = 0; i < 5;i++){
-
-    feuer = new Feuer(QRandomGenerator::global()->bounded(0, 500), QRandomGenerator::global()->bounded(0, 200)); // Zufaellige Zahlen fuer die Position um verschiedene Umgebungen zu SImulieren
+    // Zufaellige Zahlen fuer die Position um verschiedene Umgebungen zu SImulieren
+    feuer = new Feuer(QRandomGenerator::global()->bounded(0, 500), QRandomGenerator::global()->bounded(0, 200));
     //feuer = new Feuer(100 , 100 + 20*i); // Konstante Position zum Testen
 
     simulation->addiereFeuerUmgebung(feuer);
-    simulation->setRoboter(roboter);
-    simulation->startBewegung(0.5f);
+    //simulation->setRoboter(roboter);
 
     scene->addItem(feuer);
     }
+
+    //Bewegung Einmal starten
+    simulation->startBewegung(0.5f);
 
     double distance = feuer->berechneAbstand(roboter->getCenterPosition());
     double temperature = simulation->erzeugeTemperatur(roboter->getCenterPosition());

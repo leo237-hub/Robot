@@ -5,8 +5,8 @@
 #include "aktoren.h"
 #include "ReturnHome.h"
 #include "Dc-SignalInterpreter.h"
-#include "selfcheck.h"   // to do : include Header Kettesensor
-//#include "roboter.h"
+#include "selfcheck.h"
+// to do : include Header Kettesensor
 
 class dcMotor : public Aktoren {
 private:

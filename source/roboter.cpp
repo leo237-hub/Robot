@@ -6,7 +6,7 @@
 #define PI 3.14159265f
 
 Roboter::Roboter(double x, double y, double radius)
-    : x(x), y(y), winkel(0.0f) {
+    : x(x), y(y), winkel(30.0f) {
     setRect(0, 0, radius, radius);
     setBrush(Qt::blue);
     //Drehung um Mittelpunkt
@@ -15,29 +15,29 @@ Roboter::Roboter(double x, double y, double radius)
     setPos(x, y);
 }
 
-Roboter::~Roboter() {}
+Roboter::~Roboter(){}
 
-void Roboter::vorwaerts(float leistung) {
+void Roboter::vorwaerts(float leistung){
     motorLinks.drehen(leistung, 1);
     motorRechts.drehen(leistung, 1);
 }
 
-void Roboter::rueckwaerts(float leistung) {
+void Roboter::rueckwaerts(float leistung){
     motorLinks.drehen(leistung, -1);
     motorRechts.drehen(leistung, -1);
 }
 
-void Roboter::drehenLinks(float leistung) {
+void Roboter::drehenLinks(float leistung){
     motorLinks.drehen(leistung, -1);
     motorRechts.drehen(leistung, 1);
 }
 
-void Roboter::drehenRechts(float leistung) {
+void Roboter::drehenRechts(float leistung){
     motorLinks.drehen(leistung, 1);
     motorRechts.drehen(leistung, -1);
 }
 
-void Roboter::stoppen() {
+void Roboter::stoppen(){
     motorLinks.stoppen();
     motorRechts.stoppen();
 }
@@ -49,7 +49,7 @@ void Roboter::stoppen() {
  * Drehung: Dreheffekt, Wenn rechts > links → der Roboter dreht sich nach links.Umgekehrt → nach rechts.
  * Der Winkel (Richtung des Roboters) wird um die Drehung pro Zeit aktualisiert.
 */
-void Roboter::aktualisierePosition(float deltaZeit) {
+void Roboter::aktualisierePosition(float deltaZeit){
     float effektiveLeistungLinks = motorLinks.getLeistung() * motorLinks.getRichtung();
     float effektiveLeistungRechts = motorRechts.getLeistung() * motorRechts.getRichtung();
 
@@ -67,8 +67,25 @@ void Roboter::aktualisierePosition(float deltaZeit) {
     setPos(x, y);
     //QGraphics-Rotation
     setRotation(winkel);
-    std::cout << "[Roboter] neue Position: (" <<pos().x() << ", " << pos().y() << "), Richtung: " << winkel << "°\n";
+    //std::cout << "[Roboter] neue Position: (" <<pos().x() << ", " << pos().y() << "), Richtung: " << winkel << "°\n";
 }
+
+QPointF Roboter::getCenterPosition() const{
+    return scenePos() + rect().center();
+}
+
+float Roboter::getX() const{
+    return pos().x();
+}
+
+float Roboter::getY() const{
+    return pos().y();
+}
+
+float Roboter::getRichtung() const{
+    return winkel;
+}
+
 /*
 float Roboter::getX() const { return x; }
 float Roboter::getY() const { return y; }
@@ -78,19 +95,3 @@ QPointF Roboter::getCenterPosition() const {
     return scenePos() + rect().center();
 }
 */
-
-QPointF Roboter::getCenterPosition() const {
-    return scenePos() + rect().center();
-}
-
-float Roboter::getX() const {
-    return pos().x();
-}
-
-float Roboter::getY() const {
-    return pos().y();
-}
-
-float Roboter::getRichtung() const {
-    return winkel;
-}
