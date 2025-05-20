@@ -7,6 +7,9 @@ debug/paketfach.o
 debug/roboter.o
 debug/selfcheck.o
 debug/feuer.o
+debug/simulation.o
+debug/position.o
 debug/main.o
 debug/mainwindow.o
+debug/moc_simulation.o
 debug/moc_mainwindow.o

@@ -3,6 +3,8 @@
 #include <QDebug>
 #include "include/simulation/simulation.h"
 #include <QRandomGenerator>
+#include <QGraphicsView>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -35,6 +37,9 @@ MainWindow::MainWindow(QWidget *parent)
     //feuer = new Feuer(100 , 100 + 20*i); // Konstante Position zum Testen
 
     simulation->addiereFeuerUmgebung(feuer);
+    simulation->setRoboter(roboter);
+    simulation->startBewegung(0.5f);
+
     scene->addItem(feuer);
     }
 

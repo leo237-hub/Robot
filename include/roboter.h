@@ -1,37 +1,3 @@
-/*
-#ifndef ROBOTER_H
-#define ROBOTER_H
-
-/*
-class roboter {
-    float leistung;
-    int richt;
-public:
-    roboter();
-};
-*/
-/*
-
-#include <QGraphicsEllipseItem>
-
-class Roboter : public QGraphicsEllipseItem {
-public:
-    Roboter(double x, double y, double radius = 20.0);
-
-    QPointF getCenterPosition() const;
-};
-
-
-#endif // ROBOTER_H
-
-*/
-
-
-
-
-
-
-
 #ifndef ROBOTER_H
 #define ROBOTER_H
 
@@ -42,10 +8,9 @@ class Roboter : public QGraphicsEllipseItem {
 private:
     dcMotor motorLinks;
     dcMotor motorRechts;
-
     float x;
     float y;
-    float winkel; // in Grad
+    float winkel;
 
 public:
     Roboter(double x = 0.0, double y = 0.0, double radius = 20.0);
@@ -59,6 +24,7 @@ public:
 
     void aktualisierePosition(float deltaZeit);
 
+    // basiert auf QGraphicsItem::pos()
     float getX() const;
     float getY() const;
     float getRichtung() const;
@@ -67,3 +33,31 @@ public:
 };
 
 #endif // ROBOTER_H
+
+
+/*
+#ifndef ROBOTER_H
+#define ROBOTER_H
+
+
+class roboter {
+    float leistung;
+    int richt;
+public:
+    roboter();
+};
+*/
+/*
+#include <QGraphicsEllipseItem>
+
+class Roboter : public QGraphicsEllipseItem {
+public:
+    Roboter(double x, double y, double radius = 20.0);
+
+    QPointF getCenterPosition() const;
+};
+
+
+#endif // ROBOTER_H
+
+*/

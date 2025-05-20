@@ -20,7 +20,7 @@ public:
     ~dcMotor() override;
     std::vector<Selfcheck * > Selfcheck;
     std::vector<Dc_SignalInterpreter * > Dc_SignalInterpreter;
-  //  std::vector<roboter *> roboter;
+    //  std::vector<roboter *> roboter;
     //to do die Klasse Kettesensor instanzieren
     std::vector<ReturnHome * > ReturnHome;
     //setzt Leistung und Richtung
