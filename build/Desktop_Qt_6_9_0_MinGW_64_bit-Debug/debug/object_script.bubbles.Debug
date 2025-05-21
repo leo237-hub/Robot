@@ -2,6 +2,7 @@ debug/aktoren.o
 debug/antenne.o
 debug/dcmotor.o
 debug/drehmotor.o
+debug/hauptdisplay.o
 debug/lampe.o
 debug/paketfach.o
 debug/roboter.o

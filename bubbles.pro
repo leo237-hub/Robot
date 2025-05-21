@@ -14,6 +14,7 @@ SOURCES += \
     source/antenne.cpp \
     source/dcmotor.cpp \
     source/drehmotor.cpp \
+    source/hauptdisplay.cpp \
     source/lampe.cpp \
     source/paketfach.cpp \
     source/roboter.cpp \
@@ -33,8 +34,8 @@ HEADERS += \
     include/Hauptdisplay/Lautsprecher.h \
     include/Hauptdisplay/NormalKamera.h \
     include/Hauptdisplay/SensorDisplay.h \
-    include/Hauptdisplay/WärmeKameraDisplay.h \
-    include/Hauptdisplay/Wärmekamera.h \
+    include/Hauptdisplay/WaermeKameraDisplay.h \
+    include/Hauptdisplay/Waermekamera.h \
     include/ReturnHome.h \
     include/Sensors.h \
     include/SignalWandler.h \

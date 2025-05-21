@@ -1,44 +1,26 @@
-#ifndef HAUPTDISPLAY_H
-#define HAUPTDISPLAY_H
-
+#pragma once
 // Hier können Sie notwendige Standardbibliotheken einfügen
-#include <iostream>
+#include <cstdint>
+#include <string>
 using namespace std;
 
 // Weitere notwendige Includes hier
 
 // Beginn der Klassendefinition
 class HauptDisplay {
-
 private:
-
     int helligkeit;
-    byte bild;
-    string auflösung;
+    uint8_t bild;  // uint8_t statt byte
+    string aufloesung;
+    bool istAn;  // ob die Oberfläche an oder aus
 public:
-    // Konstruktoren
     HauptDisplay();
-    // Destruktor
-    virtual ~ HauptDisplay();
+        // Constructor
+    virtual ~HauptDisplay();      // Destructor
 
-    // Kopierkonstruktor und Zuweisungsoperator
-    //MyClass(const MyClass& other); // Kopierkonstruktor
-    //MyClass& operator=(const MyClass& other); // Zuweisungsoperator
-
-    // Methoden
-    void einschalten() const;
-
-    void eusschalten() const;
-
-    void AnzeigeAktualiesieren(byte* bild) const;
-
-    void HelligkeitAnpassen(int helligkeit) const;
-
-    // Getter und Setter nach Bedarf
-    //int getValue() const;
-    //void setValue(int value);
-
-
+    void einschalten();          // Display anschalten
+    void ausschalten();          // Display ausschalten
+    void anzeigeAktualiesieren(uint8_t neuesBild) ;
+    void helligkeitAnpassen(int neueHelligkeit);
+    bool isEingeschaltet() const ;
 };
-
-#endif //HAUPTDISPLAY_H 

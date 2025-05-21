@@ -1,5 +1,4 @@
-#ifndef LAUTSPRECHER_H
-#define LAUTSPRECHER_H
+#pragma once
 
 // Hier können Sie notwendige Standardbibliotheken einfügen
 #include <iostream>
@@ -12,7 +11,7 @@ class Lautsprecher  { // Vererbung von Aktoren
 
 private:
 // Membervariablen
-    int Lautstärke;
+    int Lautstaerke;
     bool Starus; //bolean ist nicht definiert
     float TonFrequenz;
 
@@ -26,9 +25,9 @@ public:
 
 
     // Methoden
-    void SpracheAusgeben() const; // Beispiel für eine Methode
-    void LautStärkeAnpassen() const;
+    void spracheAusgeben() const; // Beispiel für eine Methode
+    void lautStaerkeAnpassen() const;
 
 };
 
-#endif // LAUTSPRECHER_H    
+ 

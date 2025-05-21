@@ -2,6 +2,7 @@ release/aktoren.o
 release/antenne.o
 release/dcmotor.o
 release/drehmotor.o
+release/hauptdisplay.o
 release/lampe.o
 release/paketfach.o
 release/roboter.o

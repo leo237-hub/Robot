@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include "include/simulation/feuer.h"
 #include "include/roboter.h"
+#include "include/Hauptdisplay/Hauptdisplay.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,5 +26,12 @@ private:
     QGraphicsScene* scene;
     Roboter* roboter;
     Feuer* feuer;
+    HauptDisplay hauptDisplay;
+
+private slots:
+    void on_pushButtonEinschalten_clicked();
+    void on_pushButtonAusschalten_clicked();
+    void on_verticalSliderHelligkeit_valueChanged(int value);
+
 };
 #endif // MAINWINDOW_H

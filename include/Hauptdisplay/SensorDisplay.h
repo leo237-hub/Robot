@@ -1,8 +1,6 @@
-#ifndef SENSORDISPLAY_H
-#define SENSORDISPLAY_H
+#pragma once
 
 // Hier können Sie notwendige Standardbibliotheken einfügen
-#include <iostream>
 using namespace std;
 
 // Weitere notwendige Includes hier
@@ -27,11 +25,11 @@ public:
     // Methoden
     void kameraLiveStarten() const;
 
-    void KAmeraLiveStoppen() const;
+    void kAmeraLiveStoppen() const;
 
-    void SensorInformationenAnzeigen() const;
+    void sensorInformationenAnzeigen() const;
 
-    void GesamteDarstellungAktualisieren() const;
+    void gesamteDarstellungAktualisieren() const;
 
     // Getter und Setter nach Bedarf
     //int getValue() const;
@@ -40,4 +38,3 @@ public:
 
 };
 
-#endif //SENSORDISPLAY_H 
