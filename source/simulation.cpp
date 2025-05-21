@@ -3,6 +3,8 @@
 #include "../include/simulation/feuer.h"
 #include "../include/roboter.h"
 #include <QGraphicsScene>
+#include <QGraphicsView>
+#include <cmath>
 float Simulation::erzeugeTemperatur(const QPointF& objPosition){
 /*
 Diese Funktion iteriert durch alle existierende Feuern und berechnet die Temperatur mit gewichtung nach den Abstand.
@@ -44,7 +46,7 @@ void Simulation::addiereFeuerUmgebung(Feuer *addiereMich){
     this->gruppeFeuer.push_back(addiereMich);
 }
 
-// simulation.cpp (nur die neuen Methoden)
+
 
 Simulation::Simulation(QObject* parent)
     : QObject(parent)
@@ -52,30 +54,106 @@ Simulation::Simulation(QObject* parent)
     connect(&timer, &QTimer::timeout, this, &Simulation::update);
 }
 
-void Simulation::setRoboter(Roboter* rob) {
+void Simulation::setRoboter(Roboter* rob){
     roboter = rob;
 }
 
-void Simulation::startBewegung(float leistung) {
-    if (roboter) {
+void Simulation::startBewegung(float leistung){
+    if(roboter){
         roboter->vorwaerts(leistung);
-        timer.start(100);  // alle 100ms update
+        timer.start(16);  // alle 16ms update
     }
 }
 
-void Simulation::stoppen() {
-    if (roboter) {
+void Simulation::stoppen(){
+    if(roboter){
         roboter->stoppen();
         timer.stop();
     }
 }
 
-void Simulation::update() {
-    if (roboter) {
-        float deltaZeit = 0.1f;  // 100 ms in Sekunden
-        roboter->aktualisierePosition(deltaZeit);
-        if (roboter->scene()) {
-            roboter->scene()->update(); // Szene neu zeichnen
+
+void Simulation::update(){
+    if(roboter){
+        // Zeitintervall zwischen Updates (100 ms)
+        float deltaZeit = 0.1f;
+        // Gesamtzeit seit Start der Simulation
+        static float zeit = 0.0f;
+        // Merkt sich die zuletzt ausgefuehrte Bewegung
+        static QString letzteBewegung = "";
+        // Gesamtzeit erhoehen um deltaZeit
+        zeit += deltaZeit;
+
+        // Variable fuer aktuelle Bewegung
+        QString aktuelleBewegung;
+        // Bewegungsphasen abhaengig von der Gesamtzeit (in Sekunden)
+        if(zeit < 5.0f){
+            // 0-5s vorwaerts fahren
+            aktuelleBewegung = "vorwaerts";
+            roboter->vorwaerts(1.0f);
+        }
+        else if(zeit < 10.0f){
+            // 5-10s links drehen
+            aktuelleBewegung = "drehenLinks";
+            roboter->drehenLinks(1.0f);
+        }
+        else if(zeit < 20.0f){
+            // 10-20s rueckwaerts fahren
+            aktuelleBewegung = "rueckwaerts";
+            roboter->rueckwaerts(1.0f);
+        }
+        else if(zeit < 30.0f){
+            // 20-30s rechts drehen
+            aktuelleBewegung = "drehenRechts";
+            roboter->drehenRechts(1.0f);
+        }
+        else if(zeit < 40.0f){
+            // 30-40s vorwaerts fahren
+            aktuelleBewegung = "vorwaerts";
+            roboter->vorwaerts(1.0f);
+        }
+        else if(zeit < 50.0f){
+            // 40-50s rueckwaerts fahren
+            aktuelleBewegung = "rueckwaerts";
+            roboter->rueckwaerts(1.0f);
+        }
+        else if(zeit < 55.0f) {
+            // 50-55s links drehen
+            aktuelleBewegung = "drehenLinks";
+            roboter->drehenLinks(1.0f);
+        }
+        else if(zeit < 60.0f) {
+            // 55-60s rechts drehen
+            aktuelleBewegung = "drehenRechts";
+            roboter->drehenRechts(1.0f);
+        }
+        else{
+            // Nach 60s stoppen
+            aktuelleBewegung = "stoppen";
+            roboter->stoppen();
+        }
+
+        // Ausgabe auf Konsole nur, wenn sich die Bewegung geaendert hat
+        if(aktuelleBewegung != letzteBewegung){
+            std::cout << "[Roboter] Zeit: " << static_cast<int>(zeit)
+            << "s | Aktion: " << aktuelleBewegung.toStdString()
+            << " | Position: (" << roboter->getX() << ", " << roboter->getY()
+            << ") | Richtung: " << roboter->getRichtung() << "°" << std::endl;
+            // Neue Bewegung merken
+            letzteBewegung = aktuelleBewegung;
+        }
+
+        // Position nur bis 60 Sekunden aktualisieren (danach bleibt Roboter stehen)
+        if(zeit <= 60.0f){
+            roboter->aktualisierePosition(deltaZeit);
+        }
+
+        // Szene und Viewport aktualisieren, damit Bewegung auch auf dem Display sichtbar ist
+        if(roboter->scene()){
+            roboter->scene()->update();
+            if(!roboter->scene()->views().isEmpty()){
+                roboter->scene()->views().first()->viewport()->update();
+            }
         }
     }
 }

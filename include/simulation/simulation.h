@@ -23,9 +23,7 @@ Fuer jedes attribut ist eine eigene Klasse notwendig.
 class Simulation : public QObject {
      Q_OBJECT
 private:
-
     vector<Feuer*> gruppeFeuer;
-
     QTimer timer;
     Roboter* roboter = nullptr;
 private slots:
