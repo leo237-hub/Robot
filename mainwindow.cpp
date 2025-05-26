@@ -50,7 +50,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     double distance = feuer->berechneAbstand(roboter->getCenterPosition());
     double temperature = simulation->erzeugeTemperatur(roboter->getCenterPosition());
-
     qDebug() << "Entfernung:" << distance;
     qDebug() << "Temperatur am Roboter:" << temperature;
 }

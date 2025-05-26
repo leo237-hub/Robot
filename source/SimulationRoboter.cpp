@@ -4,16 +4,14 @@
 #include <QGraphicsView>
 #include <cmath>
 
-
 SimRoboter::~SimRoboter(){}
-
 
 SimRoboter::SimRoboter(QObject * parent)
     : QObject(parent){
     connect(&timer, &QTimer::timeout, this, &SimRoboter::update);
 }
 
-void SimRoboter ::setRoboter(Roboter *rob){
+void SimRoboter::setRoboter(Roboter *rob){
     roboter = rob;
 }
 

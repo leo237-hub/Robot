@@ -5,7 +5,6 @@
 #include "feuer.h"
 #include <vector>
 using namespace  std;
-
 /*
 Zweck und Verhalten der Simulationsklasse: 
 
@@ -16,13 +15,10 @@ Nach instanziierung steht die Simulationsklasse zur verfuegung um die Daten abzu
 Fuer jedes attribut ist eine eigene Klasse notwendig.
 
 */
-
-
 class Simulation : public QObject {
      Q_OBJECT
 private:
     vector<Feuer*> gruppeFeuer;
-    //QTimer timer;
 public:
     explicit Simulation(QObject* parent = nullptr);
     float erzeugeTemperatur(const QPointF& objPosition);
@@ -35,7 +31,5 @@ public:
     4. There has to be some kind of logic makin the values fluctuate (fire dwindles down as time goes on)
 
     */
-
-
 };
 
