@@ -85,13 +85,3 @@ float Roboter::getY() const{
 float Roboter::getRichtung() const{
     return winkel;
 }
-
-/*
-float Roboter::getX() const { return x; }
-float Roboter::getY() const { return y; }
-float Roboter::getRichtung() const { return winkel; }
-
-QPointF Roboter::getCenterPosition() const {
-    return scenePos() + rect().center();
-}
-*/

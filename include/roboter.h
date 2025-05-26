@@ -1,6 +1,4 @@
-#ifndef ROBOTER_H
-#define ROBOTER_H
-
+#pragma once
 #include <QGraphicsEllipseItem>
 #include "../include/dcmotor.h"
 
@@ -32,7 +30,7 @@ public:
     QPointF getCenterPosition() const;
 };
 
-#endif // ROBOTER_H
+
 
 
 /*

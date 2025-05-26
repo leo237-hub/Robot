@@ -4,8 +4,6 @@
 #include <iostream>
 #include "feuer.h"
 #include <vector>
-#include "../roboter.h"
-
 using namespace  std;
 
 /*
@@ -24,19 +22,12 @@ class Simulation : public QObject {
      Q_OBJECT
 private:
     vector<Feuer*> gruppeFeuer;
-    QTimer timer;
-    Roboter* roboter = nullptr;
-private slots:
-    void update();
+    //QTimer timer;
 public:
     explicit Simulation(QObject* parent = nullptr);
     float erzeugeTemperatur(const QPointF& objPosition);
     void addiereFeuerUmgebung(Feuer * addiereMich);
-
-    void setRoboter(Roboter* rob);
-    void startBewegung(float leistung);
-    void stoppen();
-    /*
+ /*
     TODO: 
     1. getter and setter Methods for each Attribute 
     2. generation function / setter function , for each Attribute

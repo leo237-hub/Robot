@@ -1,11 +1,11 @@
-#ifndef DCMOTOR_H
-#define DCMOTOR_H
+#pragma once
 #include<iostream>
 #include<vector>
 #include "aktoren.h"
 #include "ReturnHome.h"
 #include "Dc-SignalInterpreter.h"
 #include "selfcheck.h"
+
 // to do : include Header Kettesensor
 
 class dcMotor : public Aktoren {
@@ -30,4 +30,4 @@ public:
     float getLeistung() const;
     int getRichtung() const ;
 };
-#endif // DCMOTOR_H
+

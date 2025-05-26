@@ -10,6 +10,7 @@ CONFIG += moc
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    source/SimulationRoboter.cpp \
     source/aktoren.cpp \
     source/antenne.cpp \
     source/dcmotor.cpp \
@@ -60,6 +61,7 @@ HEADERS += \
     include/antenne.h \
     include/dcmotor.h \
     include/Kettesensor.h \
+    include/simulation/SimulationRoboter.h \
     include/simulation/feuer.h \
     include/simulation/position.h \
     include/simulation/simulation.h \

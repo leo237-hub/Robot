@@ -1,11 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include "include/simulation/feuer.h"
 #include "include/roboter.h"
 #include "include/Hauptdisplay/Hauptdisplay.h"
+#include "include/simulation/SimulationRoboter.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -35,3 +35,4 @@ private slots:
 
 };
 #endif // MAINWINDOW_H
+

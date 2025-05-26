@@ -1,3 +1,4 @@
+release/SimulationRoboter.o
 release/aktoren.o
 release/antenne.o
 release/dcmotor.o
@@ -12,5 +13,6 @@ release/simulation.o
 release/position.o
 release/main.o
 release/mainwindow.o
+release/moc_SimulationRoboter.o
 release/moc_simulation.o
 release/moc_mainwindow.o

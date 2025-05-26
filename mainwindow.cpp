@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include "include/simulation/simulation.h"
+#include "include/simulation/SimulationRoboter.h"
 #include <QRandomGenerator>
 #include <QGraphicsView>
 #include "include/Hauptdisplay/Hauptdisplay.h"
@@ -19,11 +20,12 @@ MainWindow::MainWindow(QWidget *parent)
     4. Display done
     5. Joystick
     */
-    
-/*
+
+    /*
  * mahle rote punkt als feuer und blaue als roboter
  *
  */
+    SimRoboter * simRoboter = new SimRoboter();
     Simulation  * simulation = new Simulation();
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
@@ -31,24 +33,24 @@ MainWindow::MainWindow(QWidget *parent)
 
     roboter = new Roboter(50, 100);
     scene->addItem(roboter);
-    simulation->setRoboter(roboter);
+    simRoboter->setRoboter(roboter);
     for(int i = 0; i < 5;i++){
-    // Zufaellige Zahlen fuer die Position um verschiedene Umgebungen zu SImulieren
-    feuer = new Feuer(QRandomGenerator::global()->bounded(0, 500), QRandomGenerator::global()->bounded(0, 200));
-    //feuer = new Feuer(100 , 100 + 20*i); // Konstante Position zum Testen
+        // Zufaellige Zahlen fuer die Position um verschiedene Umgebungen zu SImulieren
+        feuer = new Feuer(QRandomGenerator::global()->bounded(0, 500), QRandomGenerator::global()->bounded(0, 200));
+        //feuer = new Feuer(100 , 100 + 20*i); // Konstante Position zum Testen
 
-    simulation->addiereFeuerUmgebung(feuer);
-    //simulation->setRoboter(roboter);
+        simulation->addiereFeuerUmgebung(feuer);
+        //simulation->setRoboter(roboter);
 
-    scene->addItem(feuer);
+        scene->addItem(feuer);
     }
 
     //Bewegung Einmal starten
-    simulation->startBewegung(0.5f);
+    simRoboter->startBewegung(0.5f);
 
     double distance = feuer->berechneAbstand(roboter->getCenterPosition());
     double temperature = simulation->erzeugeTemperatur(roboter->getCenterPosition());
-    
+
     qDebug() << "Entfernung:" << distance;
     qDebug() << "Temperatur am Roboter:" << temperature;
 }
@@ -86,3 +88,4 @@ void MainWindow::on_verticalSliderHelligkeit_valueChanged(int value)
         ui->labelAnzeige->update();
     }
 }
+
