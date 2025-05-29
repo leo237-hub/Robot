@@ -1,6 +1,6 @@
 #pragma once
 #include <QGraphicsEllipseItem>
-#include "../include/dcmotor.h"
+#include "dcmotor.h"
 
 class Roboter : public QGraphicsEllipseItem {
 private:

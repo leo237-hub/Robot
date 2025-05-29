@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
-#include "../include/roboter.h"
-#include "../include/dcmotor.h"
+#include "roboter.h"
+#include "dcmotor.h"
 #include <QBrush>
 #define PI 3.14159265f
 

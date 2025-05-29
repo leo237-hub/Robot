@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../include/paketfach.h"
+#include "paketfach.h"
 /*
 void PaketFach::Oeffnen(){}
 void PaketFach::Schliessen(){}

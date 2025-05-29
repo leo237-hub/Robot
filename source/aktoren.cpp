@@ -1,4 +1,4 @@
-#include "../include/aktoren.h"
+#include "aktoren.h"
 #include <iostream>
 
 

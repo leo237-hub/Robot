@@ -1,4 +1,4 @@
-#include "include/Hauptdisplay/Hauptdisplay.h"
+#include "Hauptdisplay.h"
 #include <QDebug>// qDebug statt std::
 #include <cstdint>
 #include <string>

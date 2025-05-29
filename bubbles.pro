@@ -66,7 +66,10 @@ HEADERS += \
     include/simulation/position.h \
     include/simulation/simulation.h \
     mainwindow.h
-
+INCLUDEPATH += $$PWD/include/
+INCLUDEPATH += $$PWD/include/Hauptdisplay/
+INCLUDEPATH += $$PWD/include/sensor/
+INCLUDEPATH += $$PWD/include/simulation/
 
 FORMS += \
     mainwindow.ui

@@ -1,5 +1,5 @@
-#include "../include/lampe.h"
-#include "../include/aktoren.h"
+#include "lampe.h"
+#include "aktoren.h"
 
 /*
 float Lampe::HelligkeitAnpassen(float Helligkeit){}

@@ -1,4 +1,4 @@
-#include "../include/simulation/position.h"
+#include "position.h"
 
 QPointF Position::holePosition() const {
     return scenePos() + rect().center();
