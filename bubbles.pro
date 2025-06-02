@@ -1,4 +1,6 @@
 QT       += core gui
+QT += xml
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -23,6 +25,7 @@ SOURCES += \
     source/feuer.cpp \
     source/simulation.cpp \
     source/position.cpp \
+    source/xmlHandler.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -65,6 +68,7 @@ HEADERS += \
     include/simulation/feuer.h \
     include/simulation/position.h \
     include/simulation/simulation.h \
+    include/simulation/xmlHandler.h \
     mainwindow.h
 INCLUDEPATH += $$PWD/include/
 INCLUDEPATH += $$PWD/include/Hauptdisplay/

@@ -17,9 +17,8 @@ Fuer jedes attribut ist eine eigene Klasse notwendig.
 */
 class Simulation : public QObject {
      Q_OBJECT
-private:
-    vector<Feuer*> gruppeFeuer;
 public:
+    vector<Feuer*> gruppeFeuer;    
     explicit Simulation(QObject* parent = nullptr);
     float erzeugeTemperatur(const QPointF& objPosition);
     void addiereFeuerUmgebung(Feuer * addiereMich);

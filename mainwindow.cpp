@@ -6,6 +6,7 @@
 #include <QRandomGenerator>
 #include <QGraphicsView>
 #include "Hauptdisplay.h"
+#include "xmlHandler.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,22 +21,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     roboter = new Roboter(50, 100);
     scene->addItem(roboter);
-    for(int i = 0; i < 5;i++){
-        // Zufaellige Zahlen fuer die Position um verschiedene Umgebungen zu SImulieren
-        feuer = new Feuer(QRandomGenerator::global()->bounded(0, 500), QRandomGenerator::global()->bounded(0, 200));
-        //feuer = new Feuer(100 , 100 + 20*i); // Konstante Position zum Testen
-
-        simulation->addiereFeuerUmgebung(feuer);
-        //simulation->setRoboter(roboter);
-
-        scene->addItem(feuer);
+    xmlHandler SimulationManager ;
+    
+    SimulationManager.ladeXmlSimulation("./../../resources/umgebung.xml", *simulation);
+    for(auto it :simulation->gruppeFeuer){
+        scene->addItem(it);
     }
 
 
-    double distance = feuer->berechneAbstand(roboter->getCenterPosition());
     double temperature = simulation->erzeugeTemperatur(roboter->getCenterPosition());
-    qDebug() << "Entfernung:" << distance;
     qDebug() << "Temperatur am Roboter:" << temperature;
+
 }
 
 MainWindow::~MainWindow()

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simulation>
+    <fires>
+        <fire id="1" x="100" y="100" temperature="450.0"/>
+        <fire id="2" x="200" y="200" temperature="520.5"/>
+        <fire id="3" x="300" y="100"  temperature="380.2"/>
+        <fire id="4" x="150" y="100" temperature="450.0"/>
+        <fire id="5" x="250" y="100" temperature="520.5"/>
+        <fire id="6" x="222" y="108"  temperature="380.2"/>
+    </fires>
+</simulation>
+
