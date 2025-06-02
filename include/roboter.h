@@ -1,9 +1,15 @@
 #pragma once
 #include <QGraphicsEllipseItem>
+<<<<<<< HEAD
+#include <string>
 #include "dcmotor.h"
+#include "BewegungsRoboter.h"
+#include "dcmotor.h"
+
 
 class Roboter : public QGraphicsEllipseItem {
 private:
+    BewegungsRoboter bewegungslogik;
     dcMotor motorLinks;
     dcMotor motorRechts;
     float x;
@@ -19,8 +25,9 @@ public:
     void drehenLinks(float leistung);
     void drehenRechts(float leistung);
     void stoppen();
-
     void aktualisierePosition(float deltaZeit);
+    void bewegungtesten();
+    void statusausgeben();
 
     // basiert auf QGraphicsItem::pos()
     float getX() const;
