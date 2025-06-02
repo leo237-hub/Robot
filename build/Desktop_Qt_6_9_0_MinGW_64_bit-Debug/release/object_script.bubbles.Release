@@ -1,6 +1,8 @@
+release/BewegungsRoboter.o
 release/SimulationRoboter.o
 release/aktoren.o
 release/antenne.o
+release/dc-SingnalInterpreter.o
 release/dcmotor.o
 release/drehmotor.o
 release/hauptdisplay.o
