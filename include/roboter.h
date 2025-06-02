@@ -1,6 +1,5 @@
 #pragma once
 #include <QGraphicsEllipseItem>
-<<<<<<< HEAD
 #include <string>
 #include "dcmotor.h"
 #include "BewegungsRoboter.h"
