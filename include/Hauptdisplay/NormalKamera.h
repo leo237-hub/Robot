@@ -1,6 +1,4 @@
-#ifndef NORMALEKAMERA_H
-#define NORMALEKAMERA_H
-
+#pragma once
 // Hier können Sie notwendige Standardbibliotheken einfügen
 #include <iostream>
 using namespace std;
@@ -34,4 +32,3 @@ public:
     //void setValue(int value);
 };
 
-#endif //NORMALEKAMERA_H

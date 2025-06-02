@@ -1,10 +1,16 @@
 #include <QBrush>
 #include <iostream>
 #include <cmath>
+<<<<<<< HEAD
 #include <string>
 #include "../include/roboter.h"
 #include "../include/dcmotor.h"
 #include "../include/Dc-SignalInterpreter.h"
+=======
+#include "roboter.h"
+#include "dcmotor.h"
+#include <QBrush>
+>>>>>>> d7bc28e2aa29386f15a438312a94ab71a5dd378c
 #define PI 3.14159265f
 using namespace std;
 

@@ -1,5 +1,5 @@
-#include "../include/simulation/SimulationRoboter.h"
-#include "../include/roboter.h"
+#include "SimulationRoboter.h"
+#include "roboter.h"
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <cmath>

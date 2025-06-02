@@ -1,4 +1,4 @@
-#include "../include/simulation/feuer.h"
+#include "feuer.h"
 #include <QtMath>
 #include <QBrush>
 

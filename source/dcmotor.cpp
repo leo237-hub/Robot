@@ -1,11 +1,11 @@
 #include<iostream>
 #include<vector>
-#include "../include/dcmotor.h"
-#include "../include/aktoren.h"
-#include "../include/ReturnHome.h"
-#include "../include/Dc-SignalInterpreter.h"
-#include "../include/selfcheck.h"
-#include "../include/roboter.h"
+#include "dcmotor.h"
+#include "aktoren.h"
+#include "ReturnHome.h"
+#include "Dc-SignalInterpreter.h"
+#include "selfcheck.h"
+#include "roboter.h"
 
 dcMotor::dcMotor()
     :Leistung(0.0f), Richtung(0){}

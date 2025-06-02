@@ -2,7 +2,7 @@
 #include<QObject>
 #include<QTimer>
 #include<iostream>
-#include "../roboter.h"
+#include "roboter.h"
 using namespace std;
 
 class SimRoboter: public QObject {

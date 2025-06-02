@@ -1,6 +1,6 @@
-#include "../include/simulation/simulation.h"
-#include "../include/simulation/position.h"
-#include "../include/simulation/feuer.h"
+#include "simulation.h"
+#include "position.h"
+#include "feuer.h"
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <cmath>
@@ -11,11 +11,10 @@ float Simulation::erzeugeTemperatur(const QPointF& objPosition){
 Diese Funktion iteriert durch alle existierende Feuern und berechnet die Temperatur mit gewichtung nach den Abstand.
 Falls es keine Feuern gibt ,  dann gibt diese Funktion die Raumtemperatur zurueck.
 */
+
 float maxTemperatur = 20;
 float gesamtTemperatur = 0;
 float gewichteteTemperatur;
-
-
 if(sizeof(gruppeFeuer) == 0)
 {
     return 20;

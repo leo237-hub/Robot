@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "DreheSignalinterpreter.h"
-#include "sensor/GpsSensor.h"
+#include "GpsSensor.h"
 using namespace std;
 
 class ReturnHome {
