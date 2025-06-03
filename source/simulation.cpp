@@ -47,5 +47,9 @@ void Simulation::addiereFeuerUmgebung(Feuer *addiereMich){
     this->gruppeFeuer.push_back(addiereMich);
 }
 
+void Simulation::addiereSteineUmgebung(simulationElement *addiereMich){
+    this->Steine.push_back(addiereMich);
+}
+
 
 

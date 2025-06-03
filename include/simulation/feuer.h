@@ -1,13 +1,8 @@
 #pragma once
 #include <QGraphicsEllipseItem>
-#include "position.h"
-/*
-#include <iostream>
-#include <fire.h>
-#include <position.h>
-using namespace  std;
+#include "simulationElement.h"
 
-*/
+
 /*
 Zweck und Verhalten der Feuerklasse: 
 
@@ -18,10 +13,12 @@ Die Temperatur geht mit der Zeit runter,wie bei einen normalen Feuer.
 
 */
 
-class Feuer: public Position {
+class Feuer: public simulationElement {
 private:
+
 float Temperatur;
 public:
-    Feuer(double x, double y, double radius = 20.0,float Temperatur = 100);
+
+    Feuer(double x, double y, Qt::GlobalColor color = Qt::red,bool solidStatus = false,double radius = 20.0,float Temperatur = 100);
     float holeTemperatur();
 };

@@ -8,3 +8,5 @@ private:
 public:
     void Signalinterpretieren();
 };
+
+

@@ -18,17 +18,16 @@ Fuer jedes attribut ist eine eigene Klasse notwendig.
 class Simulation : public QObject {
      Q_OBJECT
 public:
-    vector<Feuer*> gruppeFeuer;    
-    explicit Simulation(QObject* parent = nullptr);
-    float erzeugeTemperatur(const QPointF& objPosition);
-    void addiereFeuerUmgebung(Feuer * addiereMich);
- /*
-    TODO: 
-    1. getter and setter Methods for each Attribute 
-    2. generation function / setter function , for each Attribute
-    3. In the constructor , the position and generation of the elements has to be handled ( where are the fires? how many fires?)
-    4. There has to be some kind of logic makin the values fluctuate (fire dwindles down as time goes on)
 
-    */
+    vector<Feuer*> gruppeFeuer;
+    vector<simulationElement*> Steine; 
+
+    explicit Simulation(QObject* parent = nullptr);
+    void addiereFeuerUmgebung(Feuer * addiereMich);
+    void addiereSteineUmgebung(simulationElement * addiereMich); 
+
+    float erzeugeTemperatur(const QPointF& objPosition); // temperatur sensor
+    void aktualisierePosition(const QPointF& objPosition); // gps sensor
+
 };
 
