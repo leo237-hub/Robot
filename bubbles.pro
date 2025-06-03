@@ -28,11 +28,11 @@ SOURCES += \
     source/simulation.cpp \
     source/position.cpp \
     source/xmlHandler.cpp \
+    source/simulationElement.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
-    SignalTyp.h \
     include/BewegungsRoboter.h \
     include/Dc-SignalInterpreter.h \
     include/DreheSignalinterpreter.h \
@@ -73,11 +73,15 @@ HEADERS += \
     include/simulation/position.h \
     include/simulation/simulation.h \
     include/simulation/xmlHandler.h \
+    include/simulation/simulationElement.h \
+    include/SignalTyp.h \
     mainwindow.h
 INCLUDEPATH += $$PWD/include/
 INCLUDEPATH += $$PWD/include/Hauptdisplay/
 INCLUDEPATH += $$PWD/include/sensor/
 INCLUDEPATH += $$PWD/include/simulation/
+
+RESOURCES += resources.qrc
 
 FORMS += \
     mainwindow.ui

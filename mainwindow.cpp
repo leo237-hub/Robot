@@ -8,6 +8,10 @@
 #include "Hauptdisplay.h"
 #include "xmlHandler.h"
 
+
+
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -22,11 +26,16 @@ MainWindow::MainWindow(QWidget *parent)
     roboter = new Roboter(50, 100);
     scene->addItem(roboter);
     xmlHandler SimulationManager ;
-    
-    SimulationManager.ladeXmlSimulation("./../../resources/umgebung.xml", *simulation);
+
+
+    SimulationManager.ladeXmlSimulation(":/data/resources/umgebung.xml", *simulation);
     for(auto it :simulation->gruppeFeuer){
         scene->addItem(it);
     }
+    for(auto it :simulation->Steine){
+        scene->addItem(it);
+    }
+
 
 
     double temperature = simulation->erzeugeTemperatur(roboter->getCenterPosition());
