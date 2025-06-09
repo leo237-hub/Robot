@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/data">
         <file>resources/umgebung.xml</file>
+        <file>resources/umgebung.png</file>
     </qresource>
 </RCC>

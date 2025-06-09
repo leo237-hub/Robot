@@ -7,8 +7,8 @@
 #include <QGraphicsView>
 #include "Hauptdisplay.h"
 #include "xmlHandler.h"
-
-
+#include "qpixmap.h"
+#include "QFile"
 
 
 
@@ -19,14 +19,19 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     Simulation  * simulation = new Simulation();
+    QPixmap pixmap(":/data/resources/umgebung.png");
+
+    // Ridimensiona l'immagine a una dimensione più piccola (ad esempio 400x300)
+    QPixmap scaledPixmap = pixmap.scaled(800, 261, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+
     scene = new QGraphicsScene(this);
+    scene->addPixmap(scaledPixmap);
+
     ui->graphicsView->setScene(scene);
-    ui->graphicsView->setSceneRect(0, 0, 400, 300);
 
     roboter = new Roboter(50, 100);
     scene->addItem(roboter);
     xmlHandler SimulationManager ;
-
 
     SimulationManager.ladeXmlSimulation(":/data/resources/umgebung.xml", *simulation);
     for(auto it :simulation->gruppeFeuer){
@@ -36,11 +41,8 @@ MainWindow::MainWindow(QWidget *parent)
         scene->addItem(it);
     }
 
-
-
     double temperature = simulation->erzeugeTemperatur(roboter->getCenterPosition());
     qDebug() << "Temperatur am Roboter:" << temperature;
-
 }
 
 MainWindow::~MainWindow()

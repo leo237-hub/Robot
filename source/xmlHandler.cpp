@@ -23,8 +23,9 @@ void xmlHandler::ladeSteine(QDomNodeList steineKnoten, Simulation& simulation) {
         if (!stoneElement.isNull()) {
             float x = stoneElement.attribute("x").toFloat();
             float y = stoneElement.attribute("y").toFloat();
+            float r = stoneElement.attribute("r").toFloat();
             // Create a new Position object and add it to the simulation
-            simulationElement * newStone = new simulationElement(x, y, Qt::black, true, 20.0);
+            simulationElement * newStone = new simulationElement(x, y, Qt::black, true, r);
             simulation.addiereSteineUmgebung(newStone);
         }
     }
@@ -35,9 +36,10 @@ void xmlHandler::ladeFeuers(QDomNodeList feuerKnoten,Simulation& simulation) {
         if (!fireElement.isNull()) {
             float x = fireElement.attribute("x").toFloat();
             float y = fireElement.attribute("y").toFloat();
+            float r = fireElement.attribute("r").toFloat();
             float temperature = fireElement.attribute("temperature").toFloat();
             // Create a new Fire object and add it to the simulation
-            Feuer* newFire = new Feuer(x, y,Qt::red, false,15,temperature);
+            Feuer* newFire = new Feuer(x, y,Qt::red, false,r,temperature);
             simulation.addiereFeuerUmgebung(newFire);
         }
 
