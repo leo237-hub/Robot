@@ -4,6 +4,7 @@
 #include <iostream>
 #include "feuer.h"
 #include <vector>
+#include <QgraphicsScene>
 using namespace  std;
 /*
 Zweck und Verhalten der Simulationsklasse: 
@@ -21,11 +22,13 @@ public:
 
     vector<Feuer*> gruppeFeuer;
     vector<simulationElement*> Steine; 
-
+    vector<simulationElement*> Personen;
+    
     explicit Simulation(QObject* parent = nullptr);
     void addiereFeuerUmgebung(Feuer * addiereMich);
     void addiereSteineUmgebung(simulationElement * addiereMich); 
-
+    void addierePersonUmgebung(simulationElement * addiereMich);
+    void addiereElementeScene(QGraphicsScene * scene);
     float erzeugeTemperatur(const QPointF& objPosition); // temperatur sensor
     void aktualisierePosition(const QPointF& objPosition); // gps sensor
 

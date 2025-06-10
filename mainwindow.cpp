@@ -34,12 +34,8 @@ MainWindow::MainWindow(QWidget *parent)
     xmlHandler SimulationManager ;
 
     SimulationManager.ladeXmlSimulation(":/data/resources/umgebung.xml", *simulation);
-    for(auto it :simulation->gruppeFeuer){
-        scene->addItem(it);
-    }
-    for(auto it :simulation->Steine){
-        scene->addItem(it);
-    }
+    simulation->addiereElementeScene(scene);
+
 
     double temperature = simulation->erzeugeTemperatur(roboter->getCenterPosition());
     qDebug() << "Temperatur am Roboter:" << temperature;

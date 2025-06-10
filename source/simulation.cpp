@@ -51,5 +51,19 @@ void Simulation::addiereSteineUmgebung(simulationElement *addiereMich){
     this->Steine.push_back(addiereMich);
 }
 
+void Simulation::addierePersonUmgebung(simulationElement *addiereMich){
+    this->Personen.push_back(addiereMich);
+}
 
+void Simulation::addiereElementeScene(QGraphicsScene *scene) {
+    for (auto& feuer : this->gruppeFeuer) {
+        scene->addItem(feuer);
+    }
+    for (auto& stein : this->Steine) {
+        scene->addItem(stein);
+    }
+    for (auto& person : this->Personen) {
+        scene->addItem(person);
+    }
+}
 

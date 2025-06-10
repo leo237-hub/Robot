@@ -12,6 +12,15 @@
         <stein id="1" x="355" y="200" r="20"/>
         <stein id="1" x="650" y="220" r="13"/>
         <stein id="1" x="675" y="225" r="13"/>
+        <stein id="1" x="518" y="48" r="13"/>
+        <stein id="1" x="495" y="43" r="10"/>
     </steine>
+    <personen>
+        <person id="1" x="115" y="150" r="12"/>
+        <person id="1" x="250" y="100" r="12"/>
+        <person id="1" x="450" y="170" r="12"/>
+        <person id="1" x="550" y="190" r="12"/>
+        <person id="1" x="700" y="145" r="12"/>
+    </personen>
 </simulation>
 

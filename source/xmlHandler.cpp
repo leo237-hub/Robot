@@ -19,14 +19,14 @@ Der Rückgabewert gibt an, ob das Laden erfolgreich war oder nicht.
 */
 void xmlHandler::ladeSteine(QDomNodeList steineKnoten, Simulation& simulation) {
     for(auto i = 0; i < steineKnoten.count(); ++i) {
-        QDomElement stoneElement = steineKnoten.at(i).toElement();
-        if (!stoneElement.isNull()) {
-            float x = stoneElement.attribute("x").toFloat();
-            float y = stoneElement.attribute("y").toFloat();
-            float r = stoneElement.attribute("r").toFloat();
+        QDomElement steinElement = steineKnoten.at(i).toElement();
+        if (!steinElement.isNull()) {
+            float x = steinElement.attribute("x").toFloat();
+            float y = steinElement.attribute("y").toFloat();
+            float r = steinElement.attribute("r").toFloat();
             // Create a new Position object and add it to the simulation
-            simulationElement * newStone = new simulationElement(x, y, Qt::black, true, r);
-            simulation.addiereSteineUmgebung(newStone);
+            simulationElement * neuerStein = new simulationElement(x, y, Qt::black, true, r);
+            simulation.addiereSteineUmgebung(neuerStein);
         }
     }
 }
@@ -46,6 +46,20 @@ void xmlHandler::ladeFeuers(QDomNodeList feuerKnoten,Simulation& simulation) {
     }
   
 }
+void xmlHandler::ladePersonen(QDomNodeList personKnoten, Simulation& simulation) {
+    for(auto i = 0; i < personKnoten.count(); ++i) {
+        QDomElement personElement = personKnoten.at(i).toElement();
+        if (!personElement.isNull()) {
+            float x = personElement.attribute("x").toFloat();
+            float y = personElement.attribute("y").toFloat();
+            float r = personElement.attribute("r").toFloat();
+            // Create a new Position object and add it to the simulation
+            simulationElement * neuePerson = new simulationElement(x, y, Qt::white, true, r);
+            simulation.addierePersonUmgebung(neuePerson);
+        }
+    }
+}
+
 bool xmlHandler::ladeXmlSimulation(const QString& filePath, Simulation& simulation) {
     vector<Feuer> Feuers;
     QFile file(filePath);
@@ -56,6 +70,8 @@ bool xmlHandler::ladeXmlSimulation(const QString& filePath, Simulation& simulati
     if (!doc.setContent(&file)) return false;
     QDomNodeList feuerKnoten = doc.elementsByTagName("feuer");
     QDomNodeList steineKnoten = doc.elementsByTagName("stein");
+    QDomNodeList personKnoten = doc.elementsByTagName("person");
+    ladePersonen(personKnoten,simulation);
     ladeFeuers(feuerKnoten, simulation);
     ladeSteine(steineKnoten, simulation);
 
