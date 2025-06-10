@@ -1,12 +1,6 @@
 #pragma once
-
-// Hier können Sie notwendige Standardbibliotheken einfügen
 #include <iostream>
 
-
-// Weitere notwendige Includes hier
-
-// Beginn der Klassendefinition
 class Lautsprecher  { // Vererbung von Aktoren
 
 private:

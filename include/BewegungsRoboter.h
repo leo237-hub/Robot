@@ -1,6 +1,6 @@
 #pragma once
 #include "dcmotor.h"
-#include "../SignalTyp.h"
+#include "SignalTyp.h"
 
 class BewegungsRoboter {
 private:

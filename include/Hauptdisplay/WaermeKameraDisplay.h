@@ -1,11 +1,6 @@
 #pragma once
-
-// Hier können Sie notwendige Standardbibliotheken einfügen
 #include <iostream>
 
-// Weitere notwendige Includes hier
-
-// Beginn der Klassendefinition
 class WaermekameraDisplay {  // Vererbung von Hauptdisplay
 
 private:

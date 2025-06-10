@@ -4,7 +4,7 @@
 #include "aktoren.h"
 class Lampe : public Aktoren {
 private:
-    //an? aus?
+   
     bool Status ;
     int Helligkeit;
 

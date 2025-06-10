@@ -1,11 +1,8 @@
 #pragma once
-// Hier können Sie notwendige Standardbibliotheken einfügen
 #include <iostream>
 #include <cstdint>
 using namespace std;
-//testtest
 
-// Beginn der Klassendefinition
 class WaermeKamera {
 
 private:

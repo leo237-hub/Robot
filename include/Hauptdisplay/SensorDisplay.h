@@ -1,11 +1,5 @@
 #pragma once
-
-// Hier können Sie notwendige Standardbibliotheken einfügen
 using namespace std;
-
-// Weitere notwendige Includes hier
-
-// Beginn der Klassendefinition
 class SensorDisplay {
 
 private:

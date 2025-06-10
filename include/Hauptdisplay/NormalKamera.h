@@ -1,11 +1,6 @@
 #pragma once
-// Hier können Sie notwendige Standardbibliotheken einfügen
 #include <iostream>
 using namespace std;
-
-// Weitere notwendige Includes hier
-
-// Beginn der Klassendefinition
 class NormalKamera {
 
 private:
