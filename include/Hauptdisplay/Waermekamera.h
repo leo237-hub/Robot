@@ -2,8 +2,8 @@
 // Hier können Sie notwendige Standardbibliotheken einfügen
 #include <iostream>
 #include <cstdint>
-using namespace std; 
- //testtest  
+using namespace std;
+//testtest
 
 // Beginn der Klassendefinition
 class WaermeKamera {
@@ -21,9 +21,9 @@ public:
     uint8_t* fotoMachen(uint8_t bild) const;
 
     float temperaturLesen();
-    // Getter und Setter nach Bedarf  
-    //int getValue() const;  
-    //void setValue(int value);  
+    // Getter und Setter nach Bedarf
+    //int getValue() const;
+    //void setValue(int value);
 
     // Kopierkonstruktor und Zuweisungsoperator
     //MyClass(const MyClass& other); // Kopierkonstruktor

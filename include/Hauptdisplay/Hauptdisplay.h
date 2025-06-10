@@ -1,12 +1,9 @@
 #pragma once
-// Hier können Sie notwendige Standardbibliotheken einfügen
 #include <cstdint>
 #include <string>
 using namespace std;
 
-// Weitere notwendige Includes hier
 
-// Beginn der Klassendefinition
 class HauptDisplay {
 private:
     int helligkeit;
@@ -15,7 +12,7 @@ private:
     bool istAn;  // ob die Oberfläche an oder aus
 public:
     HauptDisplay();
-        // Constructor
+    // Constructor
     virtual ~HauptDisplay();      // Destructor
 
     void einschalten();          // Display anschalten

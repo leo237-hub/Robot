@@ -24,7 +24,6 @@ void xmlHandler::ladeSteine(QDomNodeList steineKnoten, Simulation& simulation) {
             float x = steinElement.attribute("x").toFloat();
             float y = steinElement.attribute("y").toFloat();
             float r = steinElement.attribute("r").toFloat();
-            // Create a new Position object and add it to the simulation
             simulationElement * neuerStein = new simulationElement(x, y, Qt::black, true, r);
             simulation.addiereSteineUmgebung(neuerStein);
         }
@@ -38,13 +37,12 @@ void xmlHandler::ladeFeuers(QDomNodeList feuerKnoten,Simulation& simulation) {
             float y = fireElement.attribute("y").toFloat();
             float r = fireElement.attribute("r").toFloat();
             float temperature = fireElement.attribute("temperature").toFloat();
-            // Create a new Fire object and add it to the simulation
             Feuer* newFire = new Feuer(x, y,Qt::red, false,r,temperature);
             simulation.addiereFeuerUmgebung(newFire);
         }
 
     }
-  
+
 }
 void xmlHandler::ladePersonen(QDomNodeList personKnoten, Simulation& simulation) {
     for(auto i = 0; i < personKnoten.count(); ++i) {
@@ -53,7 +51,6 @@ void xmlHandler::ladePersonen(QDomNodeList personKnoten, Simulation& simulation)
             float x = personElement.attribute("x").toFloat();
             float y = personElement.attribute("y").toFloat();
             float r = personElement.attribute("r").toFloat();
-            // Create a new Position object and add it to the simulation
             simulationElement * neuePerson = new simulationElement(x, y, Qt::white, true, r);
             simulation.addierePersonUmgebung(neuePerson);
         }
@@ -75,7 +72,5 @@ bool xmlHandler::ladeXmlSimulation(const QString& filePath, Simulation& simulati
     ladeFeuers(feuerKnoten, simulation);
     ladeSteine(steineKnoten, simulation);
 
-
-
-return true;
+    return true;
 }

@@ -9,7 +9,7 @@
 
 Position::Position(double x, double y, double radius)
     : QGraphicsEllipseItem(-radius, -radius, 2 * radius, 2 * radius),
-    internePosition(x, y)
+      internePosition(x, y)
 {
     setBrush(Qt::blue);
     setPos(internePosition);

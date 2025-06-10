@@ -4,10 +4,10 @@
 #define PI 3.14159265f
 using namespace std;
 BewegungsRoboter::BewegungsRoboter(float startx, float starty, float startwinkel)
-    :x(startx), y(starty), Winkel(startwinkel){}
+    :x(startx), y(starty), Winkel(startwinkel) {}
 
-void BewegungsRoboter::Empfangeignal(signaltyp Signal){
-    switch(Signal){
+void BewegungsRoboter::Empfangeignal(signaltyp Signal) {
+    switch(Signal) {
     case signaltyp::Vorvaerts:
         vorwaerts(1.0f);
         break;
@@ -34,7 +34,7 @@ void BewegungsRoboter::Empfangeignal(signaltyp Signal){
  * Drehung: Dreheffekt, Wenn rechts > links → der Roboter dreht sich nach links.Umgekehrt → nach rechts.
  * Der Winkel (Richtung des Roboters) wird um die Drehung pro Zeit aktualisiert.
 */
-void BewegungsRoboter::Aktualisiereposition(float deltazeit){
+void BewegungsRoboter::Aktualisiereposition(float deltazeit) {
     float effektiveLeistungLinks = motorlinks.getLeistung() * motorlinks.getRichtung();
     float effektiveLeistungRechts = motorrechts.getLeistung() * motorrechts.getRichtung();
 
@@ -50,33 +50,39 @@ void BewegungsRoboter::Aktualisiereposition(float deltazeit){
     y += std::sin(rad) * geschwindigkeit * deltazeit;
 }
 
-void BewegungsRoboter::vorwaerts(float leistung){
+void BewegungsRoboter::vorwaerts(float leistung) {
     motorlinks.drehen(leistung,1);
     motorrechts.drehen(leistung,1);
 }
 
-void BewegungsRoboter::rueckwaerts(float leistung){
+void BewegungsRoboter::rueckwaerts(float leistung) {
     motorlinks.drehen(leistung,-1);
     motorrechts.drehen(leistung,-1);
 }
 
-void BewegungsRoboter::drehenlinks(float leistung){
+void BewegungsRoboter::drehenlinks(float leistung) {
     motorlinks.drehen(leistung,-1);
     motorrechts.drehen(leistung,1);
 }
-void BewegungsRoboter::drehenrechts(float leistung){
+void BewegungsRoboter::drehenrechts(float leistung) {
     motorlinks.drehen(leistung,1);
     motorrechts.drehen(leistung,-1);
 }
 
-void BewegungsRoboter::stoppen(){
+void BewegungsRoboter::stoppen() {
     motorlinks.stoppen();
     motorrechts.stoppen();
 }
 
-float BewegungsRoboter::getx() const { return x; }
-float BewegungsRoboter::gety() const { return y; }
-float BewegungsRoboter::getrichtung() const { return Winkel; }
+float BewegungsRoboter::getx() const {
+    return x;
+}
+float BewegungsRoboter::gety() const {
+    return y;
+}
+float BewegungsRoboter::getrichtung() const {
+    return Winkel;
+}
 
 
 

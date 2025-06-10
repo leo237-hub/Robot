@@ -2,11 +2,11 @@
 #include "dcmotor.h"
 #include "../SignalTyp.h"
 
-class BewegungsRoboter{
+class BewegungsRoboter {
 private:
     dcMotor motorlinks;
     dcMotor motorrechts;
-    float x , y;
+    float x, y;
     float Winkel;
     void vorwaerts(float leistung = 1.0f);
     void rueckwaerts(float leistung = 1.0f);

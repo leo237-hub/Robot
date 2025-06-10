@@ -36,6 +36,6 @@ void HauptDisplay::helligkeitAnpassen(int neueHelligkeit) {
     helligkeit = neueHelligkeit;
     qDebug() << "Helligkeit wurde auf" << helligkeit << "gesetzt.";
 }
-bool HauptDisplay::isEingeschaltet() const{
+bool HauptDisplay::isEingeschaltet() const {
     return istAn;
 }

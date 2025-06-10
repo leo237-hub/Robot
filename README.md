@@ -16,22 +16,22 @@ Diese Richtlinien werden dynamisch aktualisiert.
 Die folgenden Praktiken sollten niemals ohne triftigen Grund verwendet werden.
 
 - **GOTO-Anweisungen**: Führen zu unlesbarem, fehleranfälligem Spaghetti-Code
-- **Nicht überprüfen von Rückgabewerten**: Das Nicht-Überprüfen von Rückgabewerten bei Nicht-Void-Funktionen führt zu unerwartetem/fehleranfälligem Verhalten.
-- **Nicht initialisierte Variablen**: Unvorhersehbares Verhalten, besonders bei der Verwendung von Rohzeigern.
+    - **Nicht überprüfen von Rückgabewerten**: Das Nicht-Überprüfen von Rückgabewerten bei Nicht-Void-Funktionen führt zu unerwartetem/fehleranfälligem Verhalten.
+    - **Nicht initialisierte Variablen**: Unvorhersehbares Verhalten, besonders bei der Verwendung von Rohzeigern.
 
 ## 2. Funktionsgröße
-Die Größe des Geltungsbereichs von Funktionen und Klassen sollte ein bestimmtes Limit nicht überschreiten, um die Lesbarkeit zu erhalten.
-1. Die Größe von Funktionen sollte generell unter **35 Codezeilen** gehalten werden, um nicht gegen das **Single-Responsibility-Prinzip** zu verstoßen. Dies ist keine harte Grenze, Ausnahmen können vorkommen, sollten aber die **Ausnahme** sein.
-2. Die Größe von Klassen (dies bezieht sich nur auf die Header-Deklaration, nicht auf die Implementierung) sollte **70 Codezeilen** nicht überschreiten. Dies ist eine großzügige Grenze, was bedeutet, dass das Ziel sein sollte, tatsächlich weit unter 70 zu bleiben. Wir wollen keine monolithischen Klassen.
+    Die Größe des Geltungsbereichs von Funktionen und Klassen sollte ein bestimmtes Limit nicht überschreiten, um die Lesbarkeit zu erhalten.
+    1. Die Größe von Funktionen sollte generell unter **35 Codezeilen** gehalten werden, um nicht gegen das **Single-Responsibility-Prinzip** zu verstoßen. Dies ist keine harte Grenze, Ausnahmen können vorkommen, sollten aber die **Ausnahme** sein.
+    2. Die Größe von Klassen (dies bezieht sich nur auf die Header-Deklaration, nicht auf die Implementierung) sollte **70 Codezeilen** nicht überschreiten. Dies ist eine großzügige Grenze, was bedeutet, dass das Ziel sein sollte, tatsächlich weit unter 70 zu bleiben. Wir wollen keine monolithischen Klassen.
 
 ## 3. Verschachtelung
-Bei der Arbeit mit Schleifen/if-Anweisungen/case-Anweisungen sollte es eine harte Grenze geben, wie tief die Verschachtelung erlaubt ist.
-Verschachtelung macht den Code **exponentiell** unleserlich.
-Die Grenze für Verschachtelung ist 2, das bedeutet Folgendes:
+    Bei der Arbeit mit Schleifen/if-Anweisungen/case-Anweisungen sollte es eine harte Grenze geben, wie tief die Verschachtelung erlaubt ist.
+        Verschachtelung macht den Code **exponentiell** unleserlich.
+        Die Grenze für Verschachtelung ist 2, das bedeutet Folgendes:
 
 ```
-if(condition){
-    if(anotherCondition){
+if(condition) {
+    if(anotherCondition) {
         // Keine weiteren if-Anweisungen!
     }
 }
@@ -47,7 +47,7 @@ Code tut, kommentiere nicht Zeile für Zeile.
 */
 
 int userInput = convertInput(userStringInput);
-if(userInput == 5){
+if(userInput == 5) {
     cout << "User inputted 5 << endl;
 }
 ```
@@ -63,21 +63,22 @@ Bei der Verwendung von konstanten, wiederkehrenden Variablen, die als Referenzwe
 
 ## 7. Namenskonvention
 Um einen kohärenten Stil zu bewahren und die Lesbarkeit zu erhalten, ist die Namenskonvention für Klassen und Variablen camelCase.
-Zur Referenz: [https://en.wikipedia.org/wiki/Camel_case](url)
-In diesem Projekt beginnt die Konvention mit Kleinbuchstaben, das heißt, wir verwenden nicht CamelCase, sondern **camelCase**.
+Zur Referenz:
+[https://en.wikipedia.org/wiki/Camel_case](url)
+ In diesem Projekt beginnt die Konvention mit Kleinbuchstaben, das heißt, wir verwenden nicht CamelCase, sondern **camelCase**.
 
 ## 8. Commits
-Commits sollten mit einem kohärenten Stück Code durchgeführt werden, das heißt, keine halbfertigen Funktionen hochladen. Die Commit-Nachricht sollte explizit erklären, was geändert wurde und ob eine neue Funktion getestet wurde.
+ Commits sollten mit einem kohärenten Stück Code durchgeführt werden, das heißt, keine halbfertigen Funktionen hochladen. Die Commit-Nachricht sollte explizit erklären, was geändert wurde und ob eine neue Funktion getestet wurde.
 #### **Bitte bevor ein Commit gepushed wird, den commit nochmal ueberpruefen**
 
 ## 9. Ausnahmen und Fehler
 
-Eine ordnungsgemäße Ausnahme- und Fehlerbehandlung stellt sicher, dass die Anwendung robust, debuggbar ist und nicht unerwartet abstürzt. Die folgenden Richtlinien gelten:
+ Eine ordnungsgemäße Ausnahme- und Fehlerbehandlung stellt sicher, dass die Anwendung robust, debuggbar ist und nicht unerwartet abstürzt. Die folgenden Richtlinien gelten:
 
-- **Immer bekannte Ausnahmen abfangen**: Behandle alle bekannten Ausnahmetypen elegant. Verwende keine leeren `catch(...)` Blöcke.
+ - **Immer bekannte Ausnahmen abfangen**: Behandle alle bekannten Ausnahmetypen elegant. Verwende keine leeren `catch(...)` Blöcke.
 
-```cpp
-try {
+ ```cpp
+ try {
     doSomething();
 } catch (const std::runtime_error& e) {
     logError(e.what());
@@ -85,7 +86,7 @@ try {
 ```
 
 ### 10. Form
-Bei Header Definition , ist **#pragma** once zu benutzen und **using namespace std;**
+Bei Header Definition, ist **#pragma** once zu benutzen und **using namespace std;**
 
-Die Einrueckungen und Position dieser Klammer **{}** ist mit den Befehl astyle zu vereinheitlichen.
+Die Einrueckungen und Position dieser Klammer ** {}** ist mit den Befehl astyle zu vereinheitlichen.
 Abweichung von der Form sind **nicht akzeptiert**.

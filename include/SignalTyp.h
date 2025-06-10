@@ -1,5 +1,5 @@
 #pragma once
-enum class signaltyp{
+enum class signaltyp {
     keine,
     Vorvaerts,
     Rueckwaerts,

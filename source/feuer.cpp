@@ -6,7 +6,7 @@ Feuer::Feuer(double x, double y,Qt::GlobalColor color,bool solidStatus, double r
     : simulationElement(x, y, color,solidStatus,radius), Temperatur(temperatur) {}
 
 
-float Feuer::holeTemperatur(){
+float Feuer::holeTemperatur() {
     return this->Temperatur;
 }
 

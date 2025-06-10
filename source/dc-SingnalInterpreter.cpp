@@ -1,5 +1,5 @@
 #include "../include/Dc-SignalInterpreter.h"
-signaltyp Dc_SignalInterpreter::EingabeInterpretieren(const std::string &Eingabe){
+signaltyp Dc_SignalInterpreter::EingabeInterpretieren(const std::string &Eingabe) {
     if(Eingabe == "w" || Eingabe == "W")
         return signaltyp::Vorvaerts;
     else if(Eingabe == "s" || Eingabe == "S")
