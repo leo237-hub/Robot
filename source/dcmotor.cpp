@@ -18,7 +18,6 @@ void dcMotor:: drehen(float leistung, int richtung ) {
     else if(richtung > 1) {
         richtung = 1;
     }
-
     //sicherstellen, das die Leistung nur  0.0 bis 1.0
     if(leistung < 0.0f) {
         leistung = 0.0f;
@@ -28,23 +27,19 @@ void dcMotor:: drehen(float leistung, int richtung ) {
     }
     Leistung = leistung;
     Richtung = richtung;
-
-<<<<<<< Updated upstream
-    //Ausgabe zur kontrolle
+    //Ausgabe zur kontrole
     std::cout<< "Drehen aktiviert:\n";
     std::cout<<"        Leistung = " << leistung << "\n";
     std::cout<<"        Richtung = ";
-    if(richtung == 1) {
-=======
     if(richtung == 1){
->>>>>>> Stashed changes
         std::cout<< "Vorwaerts\n";
     }
-    else if(richtung == -1) {
+    else if(richtung == -1){
         std::cout<< " Rueckwert\n";
     }
     else
         std::cout<< " Stopp\n";
+
 }
 
 void dcMotor:: stoppen() {

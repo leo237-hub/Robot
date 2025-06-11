@@ -35,16 +35,11 @@ void BewegungsRoboter::Empfangeignal(signaltyp Signal) {
  * Drehung: Dreheffekt, Wenn rechts > links → der Roboter dreht sich nach links.Umgekehrt → nach rechts.
  * Der Winkel (Richtung des Roboters) wird um die Drehung pro Zeit aktualisiert.
 */
-<<<<<<< Updated upstream
-void BewegungsRoboter::Aktualisiereposition(float deltazeit) {
-=======
 
 //Diese Methode soll in die Simulationsumgebung sein!!!
 void BewegungsRoboter::Aktualisiereposition(float deltazeit){
->>>>>>> Stashed changes
-    float effektiveLeistungLinks = motorlinks.getLeistung() * motorlinks.getRichtung();
     float effektiveLeistungRechts = motorrechts.getLeistung() * motorrechts.getRichtung();
-
+    float effektiveLeistungLinks = motorlinks.getLeistung()  * motorlinks.getRichtung();
     float geschwindigkeit = (effektiveLeistungLinks + effektiveLeistungRechts) / 2.0f;
     float drehung = (effektiveLeistungRechts - effektiveLeistungLinks) * 50.0f;
     //Winkel aktualisiesren
@@ -71,13 +66,8 @@ void BewegungsRoboter::drehenlinks(float leistung) {
     motorlinks.drehen(leistung,-1);
     motorrechts.drehen(leistung,1);
 }
-<<<<<<< Updated upstream
-void BewegungsRoboter::drehenrechts(float leistung) {
-=======
 
 void BewegungsRoboter::drehenrechts(float leistung){
->>>>>>> Stashed changes
-    motorlinks.drehen(leistung,1);
     motorrechts.drehen(leistung,-1);
 }
 
@@ -85,22 +75,18 @@ void BewegungsRoboter::stoppen() {
     motorlinks.stoppen();
     motorrechts.stoppen();
 }
-<<<<<<< Updated upstream
+
+float BewegungsRoboter::gety() const {
+    return y;
+}
 
 float BewegungsRoboter::getx() const {
     return x;
 }
-float BewegungsRoboter::gety() const {
-    return y;
-}
+
 float BewegungsRoboter::getrichtung() const {
     return Winkel;
 }
-=======
-float BewegungsRoboter::getx() const { return x; }
-float BewegungsRoboter::gety() const { return y; }
-float BewegungsRoboter::getrichtung() const { return Winkel; }
->>>>>>> Stashed changes
 
 
 

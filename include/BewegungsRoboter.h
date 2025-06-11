@@ -1,12 +1,7 @@
 #pragma once
 #include "dcmotor.h"
 #include "SignalTyp.h"
-<<<<<<< Updated upstream
-
-class BewegungsRoboter {
-=======
 class BewegungsRoboter{
->>>>>>> Stashed changes
 private:
     dcMotor motorlinks;
     dcMotor motorrechts;
