@@ -13,7 +13,9 @@ CONFIG += moc
 
 SOURCES += \
     source/BewegungsRoboter.cpp \
+    source/NormalKamera.cpp \
     source/SimulationRoboter.cpp \
+    source/WearmeKamera.cpp \
     source/aktoren.cpp \
     source/antenne.cpp \
     source/dc-SingnalInterpreter.cpp \

@@ -1,25 +1,15 @@
 #pragma once
-#include <iostream>
 
-class Lautsprecher  { // Vererbung von Aktoren
-
+class Lautsprecher  {
 private:
-// Membervariablen
     int Lautstaerke;
-    bool Starus; //bolean ist nicht definiert
+    bool Starus;
     float TonFrequenz;
 
-
-    // Weitere Hilfsmethoden oder Membervariablen
 public:
-    // Konstruktoren
-    Lautsprecher(); // Standardkonstruktor
-    // Destruktor
+    Lautsprecher();
     virtual ~Lautsprecher();
-
-
-    // Methoden
-    void spracheAusgeben() const; // Beispiel für eine Methode
+    void spracheAusgeben() const;
     void lautStaerkeAnpassen() const;
 
 };
