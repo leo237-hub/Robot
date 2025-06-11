@@ -1,25 +1,17 @@
 #pragma once
 #include <iostream>
 
-class WaermekameraDisplay {  // Vererbung von Hauptdisplay
+class WaermekameraDisplay {
 
 private:
-// Membervariablen
     float WaermeBild;
     float MaximaleTemperatur;
     float MinimaleTemperatur;
-
-
-    // Weitere Hilfsmethoden oder Membervariablen
 public:
-    // Konstruktoren
-    WaermekameraDisplay(); // Standardkonstruktor
-    // Destruktor
+    WaermekameraDisplay();
     virtual ~WaermekameraDisplay();
 
-
-    // Methoden
-    void waermeBildAnzeigen() const; // Beispiel für eine Methode
+    void waermeBildAnzeigen() const;
     void bildQualitätAnpassen() const;
 
 };

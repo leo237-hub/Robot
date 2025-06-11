@@ -1,5 +1,4 @@
-#ifndef AKTOREN_H
-#define AKTOREN_H
+#pragma once
 #include "Fernbedienung.h"
 #include <vector>
 class Aktoren {
@@ -12,4 +11,4 @@ public:
     void Anschalten();
     void ausschalten();
 };
-#endif // AKTOREN_H
+

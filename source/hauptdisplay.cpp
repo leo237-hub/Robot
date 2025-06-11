@@ -1,5 +1,5 @@
 #include "Hauptdisplay.h"
-#include <QDebug>// qDebug statt std::
+#include <QDebug>   //qDebug statt std::
 #include <cstdint>
 #include <string>
 
@@ -10,7 +10,7 @@ HauptDisplay::HauptDisplay() {
     aufloesung= "1920x1080"; // start werte
 }
 
-HauptDisplay::~HauptDisplay() { //deskrektor
+HauptDisplay::~HauptDisplay() {
 }
 
 void HauptDisplay::einschalten() {

@@ -7,16 +7,15 @@ using namespace std;
 class HauptDisplay {
 private:
     int helligkeit;
-    uint8_t bild;  // uint8_t statt byte
+    uint8_t bild;
     string aufloesung;
-    bool istAn;  // ob die Oberfläche an oder aus
+    bool istAn;
 public:
     HauptDisplay();
-    // Constructor
-    virtual ~HauptDisplay();      // Destructor
+    virtual ~HauptDisplay();
 
-    void einschalten();          // Display anschalten
-    void ausschalten();          // Display ausschalten
+    void einschalten();
+    void ausschalten();
     void anzeigeAktualiesieren(uint8_t neuesBild) ;
     void helligkeitAnpassen(int neueHelligkeit);
     bool isEingeschaltet() const ;

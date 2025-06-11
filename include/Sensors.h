@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-
 #include "Gassensor.h"
 #include "TemperaturSensor.h"
 #include "Feuchtigkeitssensor.h"
@@ -8,8 +7,6 @@
 #include "Kettesensor.h"
 #include "GpsSensor.h"
 #include "Wassersensor.h"
-
-
 using namespace std;
 class Sensor {
 private:

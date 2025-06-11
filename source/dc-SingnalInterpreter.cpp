@@ -1,5 +1,13 @@
+<<<<<<< Updated upstream
 #include "../include/Dc-SignalInterpreter.h"
 signaltyp Dc_SignalInterpreter::EingabeInterpretieren(const std::string &Eingabe) {
+=======
+#include<QDebug>
+#include "Dc-SignalInterpreter.h"
+
+signaltyp Dc_SignalInterpreter::EingabeInterpretieren(const std::string &Eingabe){
+    qDebug() << "Eingabe erhalten:" << QString::fromStdString(Eingabe);
+>>>>>>> Stashed changes
     if(Eingabe == "w" || Eingabe == "W")
         return signaltyp::Vorvaerts;
     else if(Eingabe == "s" || Eingabe == "S")

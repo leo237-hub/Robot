@@ -1,11 +1,10 @@
 #pragma once
 #include <QGraphicsEllipseItem>
 #include <string>
+#include <QKeyEvent>
 #include "dcmotor.h"
 #include "BewegungsRoboter.h"
 #include "dcmotor.h"
-
-
 class Roboter : public QGraphicsEllipseItem {
 private:
     BewegungsRoboter bewegungslogik;
@@ -14,17 +13,17 @@ private:
     float x;
     float y;
     float winkel;
-
 public:
     Roboter(double x = 0.0, double y = 0.0, double radius = 20.0);
     ~Roboter();
 
-    void vorwaerts(float leistung);
+   /* void vorwaerts(float leistung);
     void rueckwaerts(float leistung);
     void drehenLinks(float leistung);
     void drehenRechts(float leistung);
-    void stoppen();
+    void stoppen(); */
     void aktualisierePosition(float deltaZeit);
+    void keyPressEvent(QKeyEvent *event);
     void bewegungtesten();
     void statusausgeben();
 
@@ -36,3 +35,9 @@ public:
     QPointF getCenterPosition() const;
 };
 
+<<<<<<< Updated upstream
+=======
+
+
+
+>>>>>>> Stashed changes

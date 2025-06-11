@@ -29,11 +29,15 @@ void dcMotor:: drehen(float leistung, int richtung ) {
     Leistung = leistung;
     Richtung = richtung;
 
+<<<<<<< Updated upstream
     //Ausgabe zur kontrolle
     std::cout<< "Drehen aktiviert:\n";
     std::cout<<"        Leistung = " << leistung << "\n";
     std::cout<<"        Richtung = ";
     if(richtung == 1) {
+=======
+    if(richtung == 1){
+>>>>>>> Stashed changes
         std::cout<< "Vorwaerts\n";
     }
     else if(richtung == -1) {
