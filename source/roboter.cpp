@@ -1,9 +1,19 @@
 #include <QBrush>
 #include <iostream>
 #include <cmath>
+<<<<<<< Updated upstream
 #include "roboter.h"
 #include "dcmotor.h"
 #include <QBrush>
+=======
+#include <QString>
+#include <QDebug>
+#include <string>
+#include <QKeyEvent>
+#include "roboter.h"
+#include "dcmotor.h"
+#include "Dc-SignalInterpreter.h"
+>>>>>>> Stashed changes
 #define PI 3.14159265f
 using namespace std;
 
@@ -15,11 +25,19 @@ Roboter::Roboter(double x, double y, double radius)
     setTransformOriginPoint(rect().center());
     //Startposition
     setPos(x, y);
+    setFlag(QGraphicsItem::ItemIsFocusable);
+    setFocus();
 }
 
+<<<<<<< Updated upstream
 Roboter::~Roboter() {}
 
 void Roboter::vorwaerts(float leistung) {
+=======
+Roboter::~Roboter(){}
+/*
+void Roboter::vorwaerts(float leistung){
+>>>>>>> Stashed changes
     motorLinks.drehen(leistung, 1);
     motorRechts.drehen(leistung, 1);
 }
@@ -43,7 +61,7 @@ void Roboter::stoppen() {
     motorLinks.stoppen();
     motorRechts.stoppen();
 }
-
+*/
 /* Die methode implementiert die bewegung und Drehung eines Motors.
  * EffektivLeistung: Motor vorwärt läuft (Richtung = 1), bleibt der Wert +
  * wenn Rückwärts(-1), ist die Leeistung - =>zeigt dass sich der Motor in entgegengesetzte Richtung dreht.
@@ -51,7 +69,12 @@ void Roboter::stoppen() {
  * Drehung: Dreheffekt, Wenn rechts > links → der Roboter dreht sich nach links.Umgekehrt → nach rechts.
  * Der Winkel (Richtung des Roboters) wird um die Drehung pro Zeit aktualisiert.
 */
+<<<<<<< Updated upstream
 void Roboter::aktualisierePosition(float deltaZeit) {
+=======
+
+void Roboter::aktualisierePosition(float deltaZeit){
+>>>>>>> Stashed changes
     float effektiveLeistungLinks = motorLinks.getLeistung() * motorLinks.getRichtung();
     float effektiveLeistungRechts = motorRechts.getLeistung() * motorRechts.getRichtung();
 
@@ -76,6 +99,7 @@ QPointF Roboter::getCenterPosition() const {
     return scenePos() + rect().center();
 }
 
+<<<<<<< Updated upstream
 float Roboter::getX() const {
     return pos().x();
 }
@@ -98,17 +122,38 @@ void Roboter::bewegungtesten() {
         std::getline(std::cin, Eingabe);
         if(Eingabe == "q" || Eingabe == "Q") {
             std::cout << "Bewegung Beendet.\n";
+=======
+void Roboter::keyPressEvent(QKeyEvent *event){
+    signaltyp Signal;
+    Dc_SignalInterpreter Interpreter;
+    switch(event->key()){
+        case Qt::Key_W:
+            Signal = Interpreter.EingabeInterpretieren("w");
+>>>>>>> Stashed changes
             break;
-        }
-        signaltyp Signal = Interpreter.EingabeInterpretieren(Eingabe);
-        bewegungslogik.Empfangeignal(Signal);
-        bewegungslogik.Aktualisiereposition(1.0f);
-        statusausgeben();
+        case Qt::Key_A:
+            Signal = Interpreter.EingabeInterpretieren("a");
+            break;
+        case Qt::Key_S:
+            Signal = Interpreter.EingabeInterpretieren("s");
+            break;
+        case Qt::Key_D:
+            Signal = Interpreter.EingabeInterpretieren("d");
+            break;
+        case Qt::Key_Q:
+            qDebug() << "Bewegung Beendet.";
+            return;
+        default:
+            qDebug() << "Unbekannte Taste.";
+            return;
     }
+    bewegungslogik.Empfangeignal(Signal);
+   // bewegungslogik.Aktualisiereposition(1.0f);
+    statusausgeben();
 }
 
 void Roboter::statusausgeben() {
     std::cout << "→ Position: (" << bewegungslogik.getx() << ", "
               << bewegungslogik.gety() << "), Richtung: "
-              << bewegungslogik.getrichtung() << "°\n";
+              << bewegungslogik.getrichtung() << "° \n";
 }

@@ -1,6 +1,4 @@
-#ifndef ANTENNE_H
-#define ANTENNE_H
-
+#pragma once
 #include "aktoren.h"
 #include <iostream>
 /*class Antenne : public Aktoren {
@@ -14,4 +12,3 @@ public:
     float FrequnezWechseln(float);
 
 };*/
-#endif // ANTENNE_H
