@@ -2,13 +2,12 @@
 #include <QApplication>
 #include <QDebug>
 #include <QCoreApplication>
+#include "feuer.h"
+#include "roboter.h"
 
-#include "include/simulation/feuer.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
     QApplication a(argc, argv);
-
     MainWindow w;
     w.show();
     return a.exec();

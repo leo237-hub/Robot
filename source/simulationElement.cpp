@@ -11,6 +11,7 @@ simulationElement::simulationElement(double x, double y, Qt::GlobalColor color,b
     : Position(x, y, radius) {
     setSolid(solidStatus);
     setBrush(QBrush(color));
+    this->radius = radius;
 }
 double simulationElement::holeRadius() const {
     return this->radius;

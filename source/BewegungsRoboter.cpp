@@ -1,4 +1,5 @@
-#include "../include/BewegungsRoboter.h"
+#include "BewegungsRoboter.h"
+#include"roboter.h"
 #include <iostream>
 #include <cmath>
 #define PI 3.14159265f
@@ -34,7 +35,13 @@ void BewegungsRoboter::Empfangeignal(signaltyp Signal) {
  * Drehung: Dreheffekt, Wenn rechts > links → der Roboter dreht sich nach links.Umgekehrt → nach rechts.
  * Der Winkel (Richtung des Roboters) wird um die Drehung pro Zeit aktualisiert.
 */
+<<<<<<< Updated upstream
 void BewegungsRoboter::Aktualisiereposition(float deltazeit) {
+=======
+
+//Diese Methode soll in die Simulationsumgebung sein!!!
+void BewegungsRoboter::Aktualisiereposition(float deltazeit){
+>>>>>>> Stashed changes
     float effektiveLeistungLinks = motorlinks.getLeistung() * motorlinks.getRichtung();
     float effektiveLeistungRechts = motorrechts.getLeistung() * motorrechts.getRichtung();
 
@@ -44,7 +51,7 @@ void BewegungsRoboter::Aktualisiereposition(float deltazeit) {
     Winkel += drehung * deltazeit;
     if (Winkel >= 360.0f) Winkel -= 360.0f;
     if (Winkel < 0.0f)    Winkel += 360.0f;
-    // Bewegung entlang der Aktuellen Richtung
+    // Bewegung entlang der Aktuellen Richtung muss in Simulation sein
     float rad = Winkel * PI / 180.0f;
     x += std::cos(rad) * geschwindigkeit * deltazeit;
     y += std::sin(rad) * geschwindigkeit * deltazeit;
@@ -64,7 +71,12 @@ void BewegungsRoboter::drehenlinks(float leistung) {
     motorlinks.drehen(leistung,-1);
     motorrechts.drehen(leistung,1);
 }
+<<<<<<< Updated upstream
 void BewegungsRoboter::drehenrechts(float leistung) {
+=======
+
+void BewegungsRoboter::drehenrechts(float leistung){
+>>>>>>> Stashed changes
     motorlinks.drehen(leistung,1);
     motorrechts.drehen(leistung,-1);
 }
@@ -73,6 +85,7 @@ void BewegungsRoboter::stoppen() {
     motorlinks.stoppen();
     motorrechts.stoppen();
 }
+<<<<<<< Updated upstream
 
 float BewegungsRoboter::getx() const {
     return x;
@@ -83,6 +96,11 @@ float BewegungsRoboter::gety() const {
 float BewegungsRoboter::getrichtung() const {
     return Winkel;
 }
+=======
+float BewegungsRoboter::getx() const { return x; }
+float BewegungsRoboter::gety() const { return y; }
+float BewegungsRoboter::getrichtung() const { return Winkel; }
+>>>>>>> Stashed changes
 
 
 
