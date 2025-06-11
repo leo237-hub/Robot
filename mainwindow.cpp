@@ -9,7 +9,7 @@
 #include "xmlHandler.h"
 #include "qpixmap.h"
 #include "QFile"
-
+#include "TemperaturSensor.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -36,9 +36,24 @@ MainWindow::MainWindow(QWidget *parent)
     SimulationManager.ladeXmlSimulation(":/data/resources/umgebung.xml", *simulation);
     simulation->addiereElementeScene(scene);
 
+    //TEST temperatur SENSOR
+    QPointF sensorPos(50, 100);
 
-    double temperature = simulation->erzeugeTemperatur(roboter->getCenterPosition());
-    qDebug() << "Temperatur am Roboter:" << temperature;
+    sensor.setTemperaturQuelle([simulation, sensorPos]() {
+        return simulation->erzeugeTemperatur(sensorPos);
+    });
+
+    sensor.starten();
+
+    // Anfangswert (noch Standard)
+    qDebug() << "Temperatur Sensor Startwert:" << sensor.getLetzteMessung();
+
+    // 10ms später: richtiger Sensorwert
+    QTimer::singleShot(10, this, [this]() {
+        qDebug() << "Temperatur Sensor (nach 10ms):" << sensor.getLetzteMessung();
+    });
+    //END TEST
+
 }
 
 MainWindow::~MainWindow()

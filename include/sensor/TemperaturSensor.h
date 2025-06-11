@@ -1,14 +1,26 @@
 #pragma once
+#include <functional>
+#include <thread>
+using namespace std;
 
 class TemperaturSensor {
+public:
+    TemperaturSensor();
+    ~TemperaturSensor();
+
+    void setTemperaturQuelle(std::function<float()> quelle);
+    void starten();
+    void stoppen();
+    float getLetzteMessung() const;
+
 private:
-    float maxTemperatur;
-    float minTemperatur;
+    function<float()> temperaturQuelle;
     float letzteMessung;
 
-public:
-    TemperaturSensor(float minTemp, float maxTemp);
-    float temperatureMessen(float T_wert);
-    void alarmWennNichtNormal() const;
-};
+    bool aktiv;
+    // Zum Timer-Ersatz
+    thread messThread;
+    atomic<bool> stopFlag;
 
+    void messungLoop();
+};

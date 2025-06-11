@@ -27,6 +27,7 @@ private:
     Roboter* roboter;
     Feuer* feuer;
     HauptDisplay hauptDisplay;
+    TemperaturSensor sensor;
 
 private slots:
     void on_pushButtonEinschalten_clicked();
