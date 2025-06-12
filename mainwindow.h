@@ -30,6 +30,7 @@ private:
     NormalKamera kamera;
     QTimer* timer;
     bool DisAktiv = false;
+    TemperaturSensor sensor;
 
 private slots:
     void on_pushButtonEinschalten_clicked();
