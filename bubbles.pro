@@ -31,6 +31,7 @@ SOURCES += \
     source/simulation.cpp \
     source/position.cpp \
     source/xmlHandler.cpp \
+    source/TemperaturSensor.cpp\
     source/simulationElement.cpp \
     main.cpp \
     mainwindow.cpp
