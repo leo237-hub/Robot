@@ -42,11 +42,13 @@ MainWindow::MainWindow(QWidget *parent)
     //TEST temperatur SENSOR
     QPointF sensorPos(50, 100);
 
-    sensor.setTemperaturQuelle([simulation, sensorPos]() {
+   /*
+     sensor::setTemperaturQuelle([simulation, sensorPos]() {
         return simulation->erzeugeTemperatur(sensorPos);
     });
 
     sensor.starten();
+
 
     // Anfangswert (noch Standard)
     qDebug() << "Temperatur Sensor Startwert:" << sensor.getLetzteMessung();
@@ -56,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
         qDebug() << "Temperatur Sensor (nach 10ms):" << sensor.getLetzteMessung();
     });
     //END TEST
-
+   */
 }
 
 MainWindow::~MainWindow()

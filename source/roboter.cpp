@@ -77,9 +77,7 @@ void Roboter::aktualisierePosition(float deltaZeit){
     setPos(x, y);
     //QGraphics-Rotation
     setRotation(winkel);
-    //std::cout << "[Roboter] neue Position: (" <<pos().x() << ", " << pos().y() << "), Richtung: " << winkel << "°\n";
 }
-
 QPointF Roboter::getCenterPosition() const {
     return scenePos() + rect().center();
 }
@@ -125,7 +123,7 @@ void Roboter::keyPressEvent(QKeyEvent *event){
 }
 
 void Roboter::statusausgeben() {
-    std::cout << "→ Position: (" << bewegungslogik.getx() << ", "
+     qDebug() << "→ Position: (" << bewegungslogik.getx() << ", "
               << bewegungslogik.gety() << "), Richtung: "
               << bewegungslogik.getrichtung() << "° \n";
 }
