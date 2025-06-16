@@ -32,9 +32,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->graphicsView->setScene(scene);
 
-    roboter = new Roboter(50, 100);
+    roboter = new Roboter(50, 100, 40);
     scene->addItem(roboter);
+    roboter->setFocus();
     xmlHandler SimulationManager ;
+    ctrl = new SimRoboter(this);
+    ctrl ->setRoboter(roboter);
 
     SimulationManager.ladeXmlSimulation(":/data/resources/umgebung.xml", *simulation);
     simulation->addiereElementeScene(scene);

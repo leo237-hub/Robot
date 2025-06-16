@@ -2,6 +2,7 @@
 #include"roboter.h"
 #include <iostream>
 #include <cmath>
+#include<QDebug>
 #define PI 3.14159265f
 using namespace std;
 BewegungsRoboter::BewegungsRoboter(float startx, float starty, float startwinkel)
@@ -65,10 +66,13 @@ void BewegungsRoboter::rueckwaerts(float leistung) {
 void BewegungsRoboter::drehenlinks(float leistung) {
     motorlinks.drehen(leistung,-1);
     motorrechts.drehen(leistung,1);
+    qDebug() << " Links \n";
 }
 
 void BewegungsRoboter::drehenrechts(float leistung){
     motorrechts.drehen(leistung,-1);
+    motorlinks.drehen(leistung,1);
+    qDebug() << "Recht \n";
 }
 
 void BewegungsRoboter::stoppen() {

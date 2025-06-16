@@ -1,7 +1,5 @@
 #pragma once
-#include<QObject>
-#include<QTimer>
-#include<iostream>
+#include <QObject>
 #include "roboter.h"
 using namespace std;
 
@@ -9,15 +7,17 @@ class SimRoboter: public QObject {
     Q_OBJECT
 private:
     Roboter* roboter = nullptr;
-    QTimer timer;
+    void refreshView();
 private slots:
-    void update();
+    void vorwaerts();
+    void rueckwaerts();
+    void Links();
+    void Rechts();
+    void stoppen();
 public:
     explicit SimRoboter(QObject *parent = nullptr);
     void setRoboter(Roboter* rob);
-    void startBewegung(float leistung);
-    void stoppen();
-    virtual ~SimRoboter();
+   virtual ~SimRoboter();
 };
 
 

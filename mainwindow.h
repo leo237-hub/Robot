@@ -6,7 +6,7 @@
 #include "include/Hauptdisplay/Hauptdisplay.h"
 #include "include/simulation/SimulationRoboter.h"
 #include "NormalKamera.h"
-
+#include <QShortcut>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -29,6 +29,7 @@ private:
     HauptDisplay hauptDisplay;
     NormalKamera kamera;
     QTimer* timer;
+    SimRoboter *ctrl {nullptr};
     bool DisAktiv = false;
     TemperaturSensor sensor;
 
