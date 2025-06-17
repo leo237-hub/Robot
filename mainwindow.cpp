@@ -24,7 +24,6 @@ MainWindow::MainWindow(QWidget *parent)
     Simulation  * simulation = new Simulation();
     QPixmap pixmap(":/data/resources/umgebung.png");
 
-    // Ridimensiona l'immagine a una dimensione più piccola (ad esempio 400x300)
     QPixmap scaledPixmap = pixmap.scaled(800, 261, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
     scene = new QGraphicsScene(this);
@@ -45,23 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
     //TEST temperatur SENSOR
     QPointF sensorPos(50, 100);
 
-   /*
-     sensor::setTemperaturQuelle([simulation, sensorPos]() {
-        return simulation->erzeugeTemperatur(sensorPos);
-    });
 
-    sensor.starten();
-
-
-    // Anfangswert (noch Standard)
-    qDebug() << "Temperatur Sensor Startwert:" << sensor.getLetzteMessung();
-
-    // 10ms später: richtiger Sensorwert
-    QTimer::singleShot(10, this, [this]() {
-        qDebug() << "Temperatur Sensor (nach 10ms):" << sensor.getLetzteMessung();
-    });
-    //END TEST
-   */
 }
 
 MainWindow::~MainWindow()
@@ -86,28 +69,7 @@ void MainWindow::on_pushButtonAusschalten_clicked() {
     ui->NormalKamera->clear();
     ui->NormalAnAus->setChecked(false);
 
-    /*QLabel = grau
-    QPalette pal = ui->labelAnzeige->palette();
-    pal.setColor(QPalette::Window, QColor(Qt::gray));
-    ui->labelAnzeige->setAutoFillBackground(true);
-    ui->labelAnzeige->setPalette(pal);
-    ui->labelAnzeige->update();
-
-}*/
-/*void MainWindow::on_verticalSliderHelligkeit_valueChanged(int value)
-{
-    if (hauptDisplay.isEingeschaltet()) {
-        hauptDisplay.helligkeitAnpassen(value);    // Ferbe ändern je nach der Werte, je höher desto heller
-        int grauWert = 255 * value / 100;          // grau
-        QColor farbe(grauWert, grauWert, grauWert);
-        QPalette pal = ui->labelAnzeige->palette();
-        pal.setColor(QPalette::Window, farbe);
-        ui->labelAnzeige->setAutoFillBackground(true);
-        ui->labelAnzeige->setPalette(pal);
-        ui->labelAnzeige->update();
-    }
-}
-*/
+   
 }
 void MainWindow::on_NormalAnAus_toggled(bool checked)
 {
