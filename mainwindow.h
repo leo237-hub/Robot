@@ -8,7 +8,7 @@
 #include "Hauptdisplay.h"
 #include "SimulationRoboter.h"
 #include "NormalKamera.h"
-
+#include <QShortcut>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -34,6 +34,7 @@ private:
     WaermekameraDisplay *waermekameraDisplay;
     QTimer* timer;
     QTimer* waermeTimer;
+    SimRoboter *ctrl {nullptr};
     bool DisAktiv = false;
     TemperaturSensor sensor;
     bool waermekameraIstAktiv = false;

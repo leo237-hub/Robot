@@ -5,7 +5,8 @@
 
 Feuer::Feuer(double x, double y,Qt::GlobalColor color,bool solidStatus, double radius,float temperatur)
     : simulationElement(x, y, color,solidStatus,radius), Temperatur(temperatur) {
-    setRect(0, 0, radius, radius);
+    
+    setRect(0, 0, 1.5*radius, 1.5*radius);
     setBrush(Qt::red);
     setPos(x, y);
     this->Temperatur = temperatur;

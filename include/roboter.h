@@ -1,38 +1,21 @@
 #pragma once
 #include <QGraphicsEllipseItem>
-#include <string>
 #include <QKeyEvent>
-#include "dcmotor.h"
 #include "BewegungsRoboter.h"
-#include "dcmotor.h"
+#include "Dc-SignalInterpreter.h"
+
 class Roboter : public QGraphicsEllipseItem {
 private:
-    BewegungsRoboter bewegungslogik;
-    dcMotor motorLinks;
-    dcMotor motorRechts;
-    float x;
-    float y;
-    float winkel;
+    BewegungsRoboter bewegung;
+
 public:
     Roboter(double x = 0.0, double y = 0.0, double radius = 20.0);
-    ~Roboter();
-
-   void vorwaerts(float leistung);
-    void rueckwaerts(float leistung);
-    void drehenLinks(float leistung);
-    void drehenRechts(float leistung);
-    void stoppen();
-    void aktualisierePosition(float deltaZeit);
-    void keyPressEvent(QKeyEvent *event);
-    void bewegungtesten();
-    void statusausgeben();
-
-    // basiert auf QGraphicsItem::pos()
-    float getX() const;
-    float getY() const;
-    float getRichtung() const;
-
-    QPointF getCenterPosition() const;
+    ~Roboter() = default;
+    void empfangesignal(signaltyp);
+    void updateLogic(float dt);
+    void syncGraphics();
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
 };
 
 

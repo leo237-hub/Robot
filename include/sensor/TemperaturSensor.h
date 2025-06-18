@@ -2,9 +2,7 @@
 #include <functional>
 #include <thread>
 #include <atomic>
-
 using namespace std;
-
 class TemperaturSensor {
 public:
     TemperaturSensor();

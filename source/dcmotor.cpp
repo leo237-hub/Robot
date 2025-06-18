@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<QDebug>
 #include "dcmotor.h"
 #include "aktoren.h"
 #include "ReturnHome.h"
@@ -28,17 +29,17 @@ void dcMotor:: drehen(float leistung, int richtung ) {
     Leistung = leistung;
     Richtung = richtung;
     //Ausgabe zur kontrole
-    std::cout<< "Drehen aktiviert:\n";
-    std::cout<<"        Leistung = " << leistung << "\n";
-    std::cout<<"        Richtung = ";
+    qDebug()<< "Drehen aktiviert:\n";
+    qDebug()<<"Leistung = " << leistung << "\n";
+    qDebug()<<"Richtung = ";
     if(richtung == 1){
-        std::cout<< "Vorwaerts\n";
+        qDebug() << "Vorwaerts\n";
     }
     else if(richtung == -1){
-        std::cout<< " Rueckwert\n";
+        qDebug() << " Rueckwert\n";
     }
     else
-        std::cout<< " Stopp\n";
+        qDebug() << " Stopp\n";
 
 }
 

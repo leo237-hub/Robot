@@ -30,7 +30,6 @@ MainWindow::MainWindow(QWidget *parent)
     Simulation  * simulation = new Simulation();
     QPixmap pixmap(":/data/resources/umgebung.png");
 
-    // Ridimensiona l'immagine a una dimensione più piccola (ad esempio 400x300)
     QPixmap scaledPixmap = pixmap.scaled(800, 261, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
     scene = new QGraphicsScene(this);
@@ -38,9 +37,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->graphicsView->setScene(scene);
 
-    roboter = new Roboter(50, 100);
+    roboter = new Roboter(50, 100, 40);
     scene->addItem(roboter);
+    roboter->setFocus();
     xmlHandler SimulationManager ;
+    ctrl = new SimRoboter(this);
+    ctrl ->setRoboter(roboter);
 
     SimulationManager.ladeXmlSimulation(":/data/resources/umgebung.xml", *simulation);
     simulation->addiereElementeScene(scene);
@@ -48,20 +50,6 @@ MainWindow::MainWindow(QWidget *parent)
     //TEST temperatur SENSOR
     QPointF sensorPos(50, 100);
 
-    sensor.setTemperaturQuelle([simulation, sensorPos]() {
-        return simulation->erzeugeTemperatur(sensorPos);
-    });
-
-    sensor.starten();
-
-    // Anfangswert (noch Standard)
-    qDebug() << "Temperatur Sensor Startwert:" << sensor.getLetzteMessung();
-
-    // 10ms später: richtiger Sensorwert
-    QTimer::singleShot(10, this, [this]() {
-        qDebug() << "Temperatur Sensor (nach 10ms):" << sensor.getLetzteMessung();
-    });
-    //END TEST
 
 }
 
@@ -82,6 +70,9 @@ void MainWindow::on_pushButtonAusschalten_clicked() {
     //ui->NormalAnAus->setChecked(false);
     ui->WaermeKamera->clear();
     //ui->WarmAnAus->setChecked(false);
+    ui->NormalAnAus->setChecked(false);
+
+   
 }
 
 void MainWindow::on_NormalAnAus_toggled(bool checked)

@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <string>
 #include <QKeyEvent>
+#include <QGraphicsScene>
 #include "roboter.h"
 #include "dcmotor.h"
 #include "Dc-SignalInterpreter.h"
@@ -13,7 +14,7 @@
 using namespace std;
 
 Roboter::Roboter(double x, double y, double radius)
-    : x(x), y(y), winkel(30.0f) {
+    :bewegung(x, y, 30.0f){
     setRect(0, 0, radius, radius);
     setBrush(Qt::blue);
     //Drehung um Mittelpunkt
@@ -23,109 +24,49 @@ Roboter::Roboter(double x, double y, double radius)
     setFlag(QGraphicsItem::ItemIsFocusable);
     setFocus();
 }
-Roboter::~Roboter(){}
-
-void Roboter::vorwaerts(float leistung){
-    motorLinks.drehen(leistung, 1);
-    motorRechts.drehen(leistung, 1);
+void Roboter::empfangesignal(signaltyp s){
+    bewegung.Empfangesignal(s);
 }
 
-void Roboter::rueckwaerts(float leistung) {
-    motorLinks.drehen(leistung, -1);
-    motorRechts.drehen(leistung, -1);
+void Roboter::updateLogic(float dt){
+    bewegung.Aktualisiereposition(dt);
 }
 
-void Roboter::drehenLinks(float leistung) {
-    motorLinks.drehen(leistung, -1);
-    motorRechts.drehen(leistung, 1);
-}
-
-void Roboter::drehenRechts(float leistung) {
-    motorLinks.drehen(leistung, 1);
-    motorRechts.drehen(leistung, -1);
-}
-
-void Roboter::stoppen() {
-    motorLinks.stoppen();
-    motorRechts.stoppen();
-}
-
-/* Die methode implementiert die bewegung und Drehung eines Motors.
- * EffektivLeistung: Motor vorwärt läuft (Richtung = 1), bleibt der Wert +
- * wenn Rückwärts(-1), ist die Leeistung - =>zeigt dass sich der Motor in entgegengesetzte Richtung dreht.
- * Geschwindigkeit : Wenn beide gleich sind → fährt der Roboter geradeaus,Wenn unterschiedlich → er dreht.
- * Drehung: Dreheffekt, Wenn rechts > links → der Roboter dreht sich nach links.Umgekehrt → nach rechts.
- * Der Winkel (Richtung des Roboters) wird um die Drehung pro Zeit aktualisiert.
-*/
-
-
-void Roboter::aktualisierePosition(float deltaZeit){
-    float effektiveLeistungLinks = motorLinks.getLeistung() * motorLinks.getRichtung();
-    float effektiveLeistungRechts = motorRechts.getLeistung() * motorRechts.getRichtung();
-
-    float geschwindigkeit = (effektiveLeistungLinks + effektiveLeistungRechts) / 2.0f;
-    float drehung = (effektiveLeistungRechts - effektiveLeistungLinks) * 50.0f;
-    //Winkel aktualisiesren
-    winkel += drehung * deltaZeit;
-    if (winkel >= 360.0f) winkel -= 360.0f;
-    if (winkel < 0.0f)    winkel += 360.0f;
-    // Bewegung entlang der Aktuellen Richtung
-    float rad = winkel * PI / 180.0f;
-    x += std::cos(rad) * geschwindigkeit * deltaZeit;
-    y += std::sin(rad) * geschwindigkeit * deltaZeit;
-    //Neue Position auf Szeneebene
-    setPos(x, y);
-    //QGraphics-Rotation
-    setRotation(winkel);
-    //std::cout << "[Roboter] neue Position: (" <<pos().x() << ", " << pos().y() << "), Richtung: " << winkel << "°\n";
-}
-
-QPointF Roboter::getCenterPosition() const {
-    return scenePos() + rect().center();
-}
-
-float Roboter::getX() const {
-    return pos().x();
-}
-
-float Roboter::getY() const {
-    return pos().y();
-}
-
-float Roboter::getRichtung() const {
-    return winkel;
+void Roboter::syncGraphics(){
+    setPos(bewegung.getx(), bewegung.gety());
+    setRotation(bewegung.getrichtung());
+    if (scene()) scene()->update();
 }
 
 void Roboter::keyPressEvent(QKeyEvent *event){
     signaltyp Signal;
     Dc_SignalInterpreter Interpreter;
     switch(event->key()){
-        case Qt::Key_W:
-            Signal = Interpreter.EingabeInterpretieren("w");
-            break;
-        case Qt::Key_A:
-            Signal = Interpreter.EingabeInterpretieren("a");
-            break;
-        case Qt::Key_S:
-            Signal = Interpreter.EingabeInterpretieren("s");
-            break;
-        case Qt::Key_D:
-            Signal = Interpreter.EingabeInterpretieren("d");
-            break;
-        case Qt::Key_Q:
-            qDebug() << "Bewegung Beendet.";
-            return;
-        default:
-            qDebug() << "Unbekannte Taste.";
-            return;
+    case Qt::Key_W:
+    case Qt::Key_Up:
+        Signal = Interpreter.EingabeInterpretieren("w");
+        break;
+    case Qt::Key_A:
+    case Qt::Key_Left:
+        Signal = Interpreter.EingabeInterpretieren("a");
+        break;
+    case Qt::Key_S:
+    case Qt::Key_Down:
+        Signal = Interpreter.EingabeInterpretieren("s");
+        break;
+    case Qt::Key_D:
+    case Qt::Key_Right:
+        Signal = Interpreter.EingabeInterpretieren("d");
+        break;
+    case Qt::Key_Q:
+        qDebug() << "Bewegung Beendet.";
+        return;
+    default:
+        qDebug() << "Unbekannte Taste.";
+        return;
     }
-    bewegungslogik.Empfangeignal(Signal);
-   // bewegungslogik.Aktualisiereposition(1.0f);
-    statusausgeben();
-}
-
-void Roboter::statusausgeben() {
-    std::cout << "→ Position: (" << bewegungslogik.getx() << ", "
-              << bewegungslogik.gety() << "), Richtung: "
-              << bewegungslogik.getrichtung() << "° \n";
+    empfangesignal(Signal);
+    updateLogic(0.5f);
+    syncGraphics();
+    event ->accept();
 }
