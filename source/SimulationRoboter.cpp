@@ -11,35 +11,35 @@ void SimRoboter::setRoboter(Roboter *rob) {
 
 void SimRoboter::vorwaerts() {
     if (!roboter) return;
-    roboter->empfangeSignal(signaltyp::Vorvaerts);
+    roboter->empfangesignal(signaltyp::Vorvaerts);
     roboter->updateLogic(0.5f);
     refreshView();
 }
 
 void SimRoboter::rueckwaerts() {
     if (!roboter) return;
-    roboter->empfangeSignal(signaltyp::Rueckwaerts);
+    roboter->empfangesignal(signaltyp::Rueckwaerts);
     roboter->updateLogic(0.1f);
     refreshView();
 }
 
 void SimRoboter::Links() {
     if (!roboter) return;
-    roboter->empfangeSignal(signaltyp::Links);
+    roboter->empfangesignal(signaltyp::Links);
     roboter->updateLogic(0.1f);
     refreshView();
 }
 
 void SimRoboter::Rechts() {
     if (!roboter) return;
-    roboter->empfangeSignal(signaltyp::Rechts);
+    roboter->empfangesignal(signaltyp::Rechts);
     roboter->updateLogic(0.1f);
     refreshView();
 }
 
 void SimRoboter::stoppen() {
     if (!roboter) return;
-    roboter->empfangeSignal(signaltyp::keine);
+    roboter->empfangesignal(signaltyp::keine);
     refreshView();
 }
 

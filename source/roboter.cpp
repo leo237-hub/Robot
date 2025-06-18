@@ -24,8 +24,8 @@ Roboter::Roboter(double x, double y, double radius)
     setFlag(QGraphicsItem::ItemIsFocusable);
     setFocus();
 }
-void Roboter::empfangeSignal(signaltyp s){
-    bewegung.Empfangeignal(s);
+void Roboter::empfangesignal(signaltyp s){
+    bewegung.Empfangesignal(s);
 }
 
 void Roboter::updateLogic(float dt){
@@ -65,7 +65,7 @@ void Roboter::keyPressEvent(QKeyEvent *event){
         qDebug() << "Unbekannte Taste.";
         return;
     }
-    empfangeSignal(Signal);
+    empfangesignal(Signal);
     updateLogic(0.5f);
     syncGraphics();
     event ->accept();

@@ -11,12 +11,11 @@ private:
 public:
     Roboter(double x = 0.0, double y = 0.0, double radius = 20.0);
     ~Roboter() = default;
-
-    /* passerelles */
-    void empfangeSignal(signaltyp);
+    void empfangesignal(signaltyp);
     void updateLogic(float dt);
     void syncGraphics();
-
 protected:
-    void keyPressEvent(QKeyEvent *event) override;   // ← on garde
+    void keyPressEvent(QKeyEvent *event) override;
 };
+
+

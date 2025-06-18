@@ -8,7 +8,7 @@ using namespace std;
 BewegungsRoboter::BewegungsRoboter(float startx, float starty, float startwinkel)
     :x(startx), y(starty), Winkel(startwinkel) {}
 
-void BewegungsRoboter::Empfangeignal(signaltyp Signal) {
+void BewegungsRoboter::Empfangesignal(signaltyp Signal) {
     switch(Signal) {
     case signaltyp::Vorvaerts:
         vorwaerts(1.0f);
