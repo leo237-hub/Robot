@@ -1,18 +1,16 @@
 #pragma once
-#include <iostream>
 
-class WaermekameraDisplay {
+#include <QObject>
+#include <QLabel>
+#include <cstdint>
+
+class WaermekameraDisplay : public QObject {
+    Q_OBJECT
+
+public:
+    explicit WaermekameraDisplay(QLabel* anzeigeLabel, QObject* parent = nullptr);
+    void waermeBildAnzeigen(uint8_t* data);
 
 private:
-    float WaermeBild;
-    float MaximaleTemperatur;
-    float MinimaleTemperatur;
-public:
-    WaermekameraDisplay();
-    virtual ~WaermekameraDisplay();
-
-    void waermeBildAnzeigen() const;
-    void bildQualitätAnpassen() const;
-
+    QLabel* label;
 };
-

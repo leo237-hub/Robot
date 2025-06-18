@@ -1,10 +1,12 @@
 #pragma once
 #include <QMainWindow>
 #include <QGraphicsScene>
-#include "include/simulation/feuer.h"
-#include "include/roboter.h"
-#include "include/Hauptdisplay/Hauptdisplay.h"
-#include "include/simulation/SimulationRoboter.h"
+#include "WaermeKameraDisplay.h"
+#include "Waermekamera.h"
+#include "simulation/feuer.h"
+#include "roboter.h"
+#include "Hauptdisplay.h"
+#include "SimulationRoboter.h"
 #include "NormalKamera.h"
 
 QT_BEGIN_NAMESPACE
@@ -28,16 +30,24 @@ private:
     Feuer* feuer;
     HauptDisplay hauptDisplay;
     NormalKamera kamera;
+    WaermeKamera waermekamera;
+    WaermekameraDisplay *waermekameraDisplay;
     QTimer* timer;
+    QTimer* waermeTimer;
     bool DisAktiv = false;
     TemperaturSensor sensor;
+    bool waermekameraIstAktiv = false;
+
 
 private slots:
     void on_pushButtonEinschalten_clicked();
     void on_pushButtonAusschalten_clicked();
     void zeigeBild();
+    void zeigeWaermeBild();
     void on_NormalAnAus_toggled(bool checked);
-    //   void on_verticalSliderHelligkeit_valueChanged(int value);
+    void on_WarmAnAus_clicked();
+    void on_NormalAnAus_clicked();
+
 };
 
 

@@ -30,12 +30,6 @@ void HauptDisplay::anzeigeAktualiesieren(uint8_t neuesBild)  {
 
 }
 
-void HauptDisplay::helligkeitAnpassen(int neueHelligkeit) {
-    if (neueHelligkeit < 0) neueHelligkeit = 0;
-    if (neueHelligkeit > 100) neueHelligkeit = 100;
-    helligkeit = neueHelligkeit;
-    qDebug() << "Helligkeit wurde auf" << helligkeit << "gesetzt.";
-}
 bool HauptDisplay::isEingeschaltet() const {
     return istAn;
 }

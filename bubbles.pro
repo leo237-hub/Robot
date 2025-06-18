@@ -16,6 +16,7 @@ SOURCES += \
     source/BewegungsRoboter.cpp \
     source/NormalKamera.cpp \
     source/SimulationRoboter.cpp \
+    source/WaermeKameraDisplay.cpp \
     source/WearmeKamera.cpp \
     source/aktoren.cpp \
     source/antenne.cpp \

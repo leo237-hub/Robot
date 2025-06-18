@@ -3,7 +3,6 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include "simulation.h"
-#include "SimulationRoboter.h"
 #include <QRandomGenerator>
 #include <QGraphicsView>
 #include "Hauptdisplay.h"
@@ -11,6 +10,9 @@
 #include "qpixmap.h"
 #include "QFile"
 #include "TemperaturSensor.h"
+#include <cstdint>
+#include "WaermeKameraDisplay.h"
+#include "Waermekamera.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -18,8 +20,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    waermekameraIstAktiv = false;
+    waermekameraDisplay = new WaermekameraDisplay(ui->WaermeKamera);
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::zeigeBild);
+    waermeTimer = new QTimer(this);
+    connect(waermeTimer, &QTimer::timeout, this, &MainWindow::zeigeWaermeBild);
 
     Simulation  * simulation = new Simulation();
     QPixmap pixmap(":/data/resources/umgebung.png");
@@ -62,48 +68,22 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-
 }
+
 void MainWindow::on_pushButtonEinschalten_clicked() {
     DisAktiv = true;
     hauptDisplay.einschalten();
-    timer->stop();
-    kamera.setAktiv(false);
-    ui->NormalKamera->clear();
-    ui->NormalAnAus->setChecked(false);
-
 }
-
 void MainWindow::on_pushButtonAusschalten_clicked() {
     DisAktiv = false;
     timer->stop();
     kamera.setAktiv(false);
     ui->NormalKamera->clear();
-    ui->NormalAnAus->setChecked(false);
-
-    /*QLabel = grau
-    QPalette pal = ui->labelAnzeige->palette();
-    pal.setColor(QPalette::Window, QColor(Qt::gray));
-    ui->labelAnzeige->setAutoFillBackground(true);
-    ui->labelAnzeige->setPalette(pal);
-    ui->labelAnzeige->update();
-
-}*/
-/*void MainWindow::on_verticalSliderHelligkeit_valueChanged(int value)
-{
-    if (hauptDisplay.isEingeschaltet()) {
-        hauptDisplay.helligkeitAnpassen(value);    // Ferbe ändern je nach der Werte, je höher desto heller
-        int grauWert = 255 * value / 100;          // grau
-        QColor farbe(grauWert, grauWert, grauWert);
-        QPalette pal = ui->labelAnzeige->palette();
-        pal.setColor(QPalette::Window, farbe);
-        ui->labelAnzeige->setAutoFillBackground(true);
-        ui->labelAnzeige->setPalette(pal);
-        ui->labelAnzeige->update();
-    }
+    //ui->NormalAnAus->setChecked(false);
+    ui->WaermeKamera->clear();
+    //ui->WarmAnAus->setChecked(false);
 }
-*/
-}
+
 void MainWindow::on_NormalAnAus_toggled(bool checked)
 {
     bool Aktiv = kamera.schalten();
@@ -121,17 +101,47 @@ void MainWindow::on_NormalAnAus_toggled(bool checked)
     }
 }
 
-
 void MainWindow::zeigeBild()
 {
     uint8_t* rawData = kamera.fotoMachen(0);
-
     QImage image(rawData, 640, 480, QImage::Format_RGB888);
     QPixmap pixmap = QPixmap::fromImage(image);
-
     ui->NormalKamera->setPixmap(pixmap);
-
     delete[] rawData;
 }
 
+void MainWindow::on_WarmAnAus_clicked()
+{
+    if (!DisAktiv){
+        ui->WarmAnAus->setChecked(false);
+        ui->WaermeKamera->clear();
+        return;
+    }
+    static bool istAn = false;
+    istAn = !istAn;
+    if (istAn) {
+        waermekamera.wSchalten();
+        waermeTimer->start(100);
+        uint8_t* bild = waermekamera.fotoMachen(0);
+        waermekameraDisplay->waermeBildAnzeigen(bild);
+        delete[] bild;
+    } else {
+        waermeTimer->stop();
+;
+    }
+}
+void MainWindow::zeigeWaermeBild() {
 
+    bool Aktiv = waermekamera.wSchalten();
+    if (Aktiv) {
+        waermeTimer->start(100);
+        qDebug()<< "wKamera ist eingeschaltet";
+    }else{
+        waermeTimer->stop();
+        qDebug()<< "wKamera ist ausgeschaltet";
+    }
+    uint8_t* data = waermekamera.fotoMachen(0);
+    if (!data ) return;
+    waermekameraDisplay->waermeBildAnzeigen(data);
+    delete[] data;
+}
