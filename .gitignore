@@ -174,4 +174,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+build/
+debug/
+release/
+out/
+cmake-build-*/
 # End of https://www.toptal.com/developers/gitignore/api/c++,qt,qtcreator,windows,macos
