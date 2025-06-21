@@ -83,7 +83,7 @@ HEADERS += \
     include/simulation/xmlHandler.h \
     include/simulation/simulationElement.h \
     include/SignalTyp.h \
-    mainwindow.h
+    include/mainwindow.h
 INCLUDEPATH += $$PWD/include/
 INCLUDEPATH += $$PWD/include/Hauptdisplay/
 INCLUDEPATH += $$PWD/include/sensor/
