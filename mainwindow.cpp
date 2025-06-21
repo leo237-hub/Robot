@@ -9,7 +9,6 @@
 #include "xmlHandler.h"
 #include "qpixmap.h"
 #include "QFile"
-#include "TemperaturSensor.h"
 #include <cstdint>
 #include "WaermeKameraDisplay.h"
 #include "Waermekamera.h"
@@ -75,7 +74,7 @@ void MainWindow::on_pushButtonAusschalten_clicked() {
    
 }
 
-void MainWindow::on_NormalAnAus_toggled(bool checked)
+void MainWindow::on_NormalAnAus_toggled()
 {
     bool Aktiv = kamera.schalten();
 

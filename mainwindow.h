@@ -45,9 +45,8 @@ private slots:
     void on_pushButtonAusschalten_clicked();
     void zeigeBild();
     void zeigeWaermeBild();
-    void on_NormalAnAus_toggled(bool checked);
+    void on_NormalAnAus_toggled();
     void on_WarmAnAus_clicked();
-    void on_NormalAnAus_clicked();
 
 };
 
