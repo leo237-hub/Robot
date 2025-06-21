@@ -37,8 +37,8 @@ SOURCES += \
     source/xmlHandler.cpp \
     source/TemperaturSensor.cpp\
     source/simulationElement.cpp \
-    main.cpp \
-    mainwindow.cpp
+    source/main.cpp \
+    source/mainwindow.cpp
 
 HEADERS += \
     include/BewegungsRoboter.h \
