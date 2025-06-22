@@ -1,4 +1,7 @@
 TEMPLATE = subdirs
 SUBDIRS += \
-    ../app \
+    ../app\
     ../unitTests
+
+unitTests.depends = app
+CONFIG += ordered
