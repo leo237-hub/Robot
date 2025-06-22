@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(waermeTimer, &QTimer::timeout, this, &MainWindow::zeigeWaermeBild);
 
     Simulation  * simulation = new Simulation();
-    QPixmap pixmap(":/data/resources/umgebung.png");
+    QPixmap pixmap(":/data/umgebung.png");
 
     QPixmap scaledPixmap = pixmap.scaled(800, 261, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
@@ -43,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
     ctrl = new SimRoboter(this);
     ctrl ->setRoboter(roboter);
 
-    SimulationManager.ladeXmlSimulation(":/data/resources/umgebung.xml", *simulation);
+    SimulationManager.ladeXmlSimulation(":/data/umgebung.xml", *simulation);
     simulation->addiereElementeScene(scene);
 
     //TEST temperatur SENSOR

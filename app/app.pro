@@ -73,7 +73,6 @@ HEADERS += \
     include/aktoren.h \
     include/antenne.h \
     include/dcmotor.h \
-    include/Kettesensor.h \
     include/simulation/SimulationRoboter.h \
     include/simulation/feuer.h \
     include/simulation/position.h \
@@ -87,7 +86,8 @@ INCLUDEPATH += $$PWD/include/Hauptdisplay/
 INCLUDEPATH += $$PWD/include/sensor/
 INCLUDEPATH += $$PWD/include/simulation/
 
-RESOURCES += resources.qrc
+RESOURCES += \
+    resources/resources.qrc
 
 FORMS += \
     mainwindow.ui

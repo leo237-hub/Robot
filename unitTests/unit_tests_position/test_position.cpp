@@ -144,4 +144,4 @@ void TestPosition::testTransformationMitSkalierung()
     QVERIFY(testPosition->holePosition() != urspruenglichePosition);
 }
 
-
+QTEST_APPLESS_MAIN(TestPosition);

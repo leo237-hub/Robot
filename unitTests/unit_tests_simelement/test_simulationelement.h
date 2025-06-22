@@ -29,8 +29,6 @@ private slots:
     
     void testRadiusAbfragen();
     void testRadiusVerschiedeneWerte();
-    
-
 
 private:
     simulationElement* standardElement;

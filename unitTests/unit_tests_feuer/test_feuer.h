@@ -30,7 +30,6 @@ private slots:
     void testTemperaturNullWert();
     void testStandardFeuerEigenschaften();
 
-
 private:
     Feuer* standardFeuer;
     Feuer* testFeuer;

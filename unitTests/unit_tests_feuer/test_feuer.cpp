@@ -100,8 +100,6 @@ void TestFeuer::testTemperaturNullWert()
     QCOMPARE(nullFeuer.holeTemperatur(), 0.0f);
 }
 
-
-
 /*
 Test für Standard Feuer Eigenschaften
 */
@@ -120,4 +118,4 @@ void TestFeuer::testStandardFeuerEigenschaften()
     QCOMPARE(standardFeuer.holeTemperatur(), 100.0f);
 }
 
-
+QTEST_APPLESS_MAIN(TestFeuer);

@@ -96,5 +96,4 @@ void TestSimulationElement::testRadiusVerschiedeneWerte()
     QCOMPARE(grossesElement.holeRadius(), 100.0);
 }
 
-
-
+QTEST_APPLESS_MAIN(TestSimulationElement);
