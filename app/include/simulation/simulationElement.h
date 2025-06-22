@@ -1,6 +1,6 @@
 #pragma once
-#include "Position.h"
-#include <QgraphicsEllipseItem>
+#include "position.h"
+#include <QGraphicsEllipseItem>
 #include <QBrush>
 
 /*

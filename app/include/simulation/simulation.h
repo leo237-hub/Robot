@@ -4,7 +4,7 @@
 #include <iostream>
 #include "feuer.h"
 #include <vector>
-#include <QgraphicsScene>
+#include <QGraphicsScene>
 using namespace  std;
 /*
 Zweck und Verhalten der Simulationsklasse:
