@@ -26,16 +26,18 @@ MainWindow::MainWindow(QWidget *parent)
     waermeTimer = new QTimer(this);
     connect(waermeTimer, &QTimer::timeout, this, &MainWindow::zeigeWaermeBild);
 
-      // Sensor starten (wenn notwendig)
-        tempSensor.starten();
+    tempSensor.starten();
 
-        // Temperaturanzeige regelmäßig aktualisieren
-        QTimer *tempTimer = new QTimer(this);
-        connect(tempTimer, &QTimer::timeout, this, &MainWindow::zeigeTemp);
-        tempTimer->start(1000);  // alle 1000 ms (1 Sekunde)
+     // Temperaturanzeige regelmäßig aktualisieren
+     QTimer *tempTimer = new QTimer(this);
+     connect(tempTimer, &QTimer::timeout, this, &MainWindow::zeigeTemp);
+     tempTimer->start(1000);  // alle 1000 ms (1 Sekunde)
+    zeigeTemp(); //optional
 
-        // Optional: erste Anzeige sofort
-        zeigeTemp();
+    QTimer *gpsTimer = new QTimer(this);
+    connect(gpsTimer, &QTimer::timeout, this, &MainWindow::zeigeGPS);
+    gpsTimer->start(1000);
+    zeigeGPS();
 
     Simulation  * simulation = new Simulation();
     QPixmap pixmap(":/data/umgebung.png");
@@ -47,7 +49,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->graphicsView->setScene(scene);
 
-    roboter = new Roboter(50, 100, 40);
+    gpsSensor = new GPSSensor();
+    roboter = new Roboter(50, 100, 40, gpsSensor);
     scene->addItem(roboter);
     roboter->setFocus();
     xmlHandler SimulationManager ;
@@ -115,6 +118,17 @@ void MainWindow::zeigeTemp() {
         ui->Temperatur->setText(QString::number(temperatur, 'f', 2) + " °C");
     }
 }
+
+void MainWindow::zeigeGPS() {
+    if (!gpsSensor) return;
+
+    double x = gpsSensor->getX();
+    double y = gpsSensor->getY();
+
+    QString text = QString("x: %1, y: %2").arg(x, 0, 'f', 1).arg(y, 0, 'f', 1);
+    ui->label_2->setText(text);
+}
+
 
 void MainWindow::on_WarmAnAus_clicked()
 {

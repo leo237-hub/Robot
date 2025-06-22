@@ -1,16 +1,14 @@
 #pragma once
 #include <array>
 #include <cmath>
-
 class GPSSensor {
 private:
-    float longitude;
-    float latitude;
-    float altitude;
+    double x;
+    double y;
 
 public:
-    GPSSensor(float lon, float lat, float alt);
-    std::array<float, 3> koordinatenHolen() const;
-    float EntfernungBerechnen(float zielLongitude, float zielLatitude, float zielAltitude) const;
+    GPSSensor();
+    void setPosition(double x, double y);
+    double getX() const;
+    double getY() const;
 };
-

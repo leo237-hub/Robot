@@ -36,7 +36,8 @@ SOURCES += \
     source/TemperaturSensor.cpp\
     source/simulationElement.cpp \
     source/main.cpp \
-    source/mainwindow.cpp
+    source/mainwindow.cpp \
+    source/GpsSensor.cpp
 
 HEADERS += \
     include/BewegungsRoboter.h \

@@ -13,8 +13,8 @@
 #define PI 3.14159265f
 using namespace std;
 
-Roboter::Roboter(double x, double y, double radius)
-    :bewegung(x, y, 30.0f){
+Roboter::Roboter(double x, double y, double radius, GPSSensor* gps)
+    :bewegung(x, y, 30.0f),  gpsSensor(gps){
     setRect(0, 0, radius, radius);
     setBrush(Qt::blue);
     //Drehung um Mittelpunkt
@@ -32,9 +32,17 @@ void Roboter::updateLogic(float dt){
     bewegung.Aktualisiereposition(dt);
 }
 
-void Roboter::syncGraphics(){
-    setPos(bewegung.getx(), bewegung.gety());
+void Roboter::syncGraphics() {
+    float x = bewegung.getx();
+    float y = bewegung.gety();
+
+    setPos(x, y);
     setRotation(bewegung.getrichtung());
+
+    if (gpsSensor) {
+        gpsSensor->setPosition(x, y);
+    }
+
     if (scene()) scene()->update();
 }
 

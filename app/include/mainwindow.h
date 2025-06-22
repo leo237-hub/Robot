@@ -41,7 +41,7 @@ private:
     bool DisAktiv = false;
     TemperaturSensor tempSensor;
     bool waermekameraIstAktiv = false;
-
+    GPSSensor* gpsSensor;
 
 private slots:
     void on_pushButtonEinschalten_clicked();
@@ -51,7 +51,7 @@ private slots:
     void on_NormalAnAus_toggled();
     void on_WarmAnAus_clicked();
     void zeigeTemp();
-
+    void zeigeGPS();
 };
 
 
