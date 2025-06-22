@@ -9,6 +9,9 @@
 #include "SimulationRoboter.h"
 #include "NormalKamera.h"
 #include <QShortcut>
+#include "GpsSensor.h"
+#include "TemperaturSensor.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -36,7 +39,7 @@ private:
     QTimer* waermeTimer;
     SimRoboter *ctrl {nullptr};
     bool DisAktiv = false;
-    TemperaturSensor sensor;
+    TemperaturSensor tempSensor;
     bool waermekameraIstAktiv = false;
 
 
@@ -47,6 +50,7 @@ private slots:
     void zeigeWaermeBild();
     void on_NormalAnAus_toggled();
     void on_WarmAnAus_clicked();
+    void zeigeTemp();
 
 };
 

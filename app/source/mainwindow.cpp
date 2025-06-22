@@ -26,6 +26,17 @@ MainWindow::MainWindow(QWidget *parent)
     waermeTimer = new QTimer(this);
     connect(waermeTimer, &QTimer::timeout, this, &MainWindow::zeigeWaermeBild);
 
+      // Sensor starten (wenn notwendig)
+        tempSensor.starten();
+
+        // Temperaturanzeige regelmäßig aktualisieren
+        QTimer *tempTimer = new QTimer(this);
+        connect(tempTimer, &QTimer::timeout, this, &MainWindow::zeigeTemp);
+        tempTimer->start(1000);  // alle 1000 ms (1 Sekunde)
+
+        // Optional: erste Anzeige sofort
+        zeigeTemp();
+
     Simulation  * simulation = new Simulation();
     QPixmap pixmap(":/data/umgebung.png");
 
@@ -45,11 +56,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     SimulationManager.ladeXmlSimulation(":/data/umgebung.xml", *simulation);
     simulation->addiereElementeScene(scene);
-
-    //TEST temperatur SENSOR
-    QPointF sensorPos(50, 100);
-
-
 }
 
 MainWindow::~MainWindow()
@@ -98,6 +104,16 @@ void MainWindow::zeigeBild()
     QPixmap pixmap = QPixmap::fromImage(image);
     ui->NormalKamera->setPixmap(pixmap);
     delete[] rawData;
+}
+
+void MainWindow::zeigeTemp() {
+    tempSensor.starten();
+
+    float temperatur = tempSensor.getLetzteMessung();
+
+    if (ui->Temperatur) {
+        ui->Temperatur->setText(QString::number(temperatur, 'f', 2) + " °C");
+    }
 }
 
 void MainWindow::on_WarmAnAus_clicked()
