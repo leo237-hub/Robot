@@ -12,14 +12,19 @@
 #include "BewegungsRoboter.h"
 #define PI 3.14159265f
 using namespace std;
-
 Roboter::Roboter(double x, double y, double radius, GPSSensor* gps)
-    :bewegung(x, y, 30.0f),  gpsSensor(gps){
+    :bewegung(x, y, 30.0f), gpsSensor(gps){
+    
     setRect(0, 0, radius, radius);
-    setBrush(Qt::blue);
-    //Drehung um Mittelpunkt
+    
+    QRadialGradient gradient(radius * 0.8, radius/2, radius * 0.3); 
+    gradient.setColorAt(0, Qt::red);       
+    gradient.setColorAt(0.5, Qt::blue);    
+    gradient.setColorAt(1, Qt::blue);       
+    
+    setBrush(gradient);
+    
     setTransformOriginPoint(rect().center());
-    //Startposition
     setPos(x, y);
     setFlag(QGraphicsItem::ItemIsFocusable);
     setFocus();

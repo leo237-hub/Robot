@@ -18,7 +18,7 @@ SOURCES += \
     source/NormalKamera.cpp \
     source/SimulationRoboter.cpp \
     source/WaermeKameraDisplay.cpp \
-    source/WearmeKamera.cpp \
+    source/WaermeKamera.cpp \
     source/aktoren.cpp \
     source/antenne.cpp \
     source/dc-SingnalInterpreter.cpp \
