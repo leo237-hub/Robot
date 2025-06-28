@@ -1,19 +1,28 @@
-#ifndef PAKETFACH_H
-#define PAKETFACH_H
-#include<string>
-#include <iostream>
-#include "SignalWandler.h"
+#pragma once
+#include <string>
 
 using namespace std;
+
+/*
+Zweck und Verhalten der PaketFach-Klasse:
+
+Zweck: Verwaltung des Paketfachs für die Lieferung von Hilfspaketen (Erste-Hilfe-Kit, Wasser, Gasmaske etc.) 
+
+
+Verhalten: Das Paketfach kann geöffnet und geschlossen werden. Es verwaltet seinen aktuellen Zustand 
+(OFFEN/GESCHLOSSEN).
+*/
 class PaketFach {
 private:
-    float flaesche;
-    string Zustand;
+    string zustand;
+
 public:
     PaketFach();
     ~PaketFach();
+    
     void Oeffnen();
     void Schliessen();
-};
+    
+    string holeZustand() const;
 
-#endif // PAKETFACH_H
+};

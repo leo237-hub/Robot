@@ -1,5 +1,4 @@
-#ifndef SELFCHECK_H
-#define SELFCHECK_H
+#pragma once
 #include<string.h>
 #include<iostream>
 #include"Sensors.h"
@@ -25,4 +24,3 @@ public:
     string DCMotorPruefen();
     string KetteSensPruefen();
 };
-#endif // SELFCHECK_H

@@ -1,5 +1,4 @@
-#ifndef LAMPE_H
-#define LAMPE_H
+#pragma once 
 #include <iostream>
 #include "aktoren.h"
 class Lampe : public Aktoren {
@@ -13,4 +12,4 @@ public:
     ~Lampe() override;
     float HelligkeitAnpassen(float);
 };
-#endif // LAMPE_H
+

@@ -10,7 +10,6 @@ private:
     GPSSensor Strecke;
 
 public:
-    string ZurueckZurStation(GPSSensor Strecke);
-
+    string zurueckZurStation(GPSSensor Strecke);
 
 };

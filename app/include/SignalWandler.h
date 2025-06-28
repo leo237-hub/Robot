@@ -1,16 +1,33 @@
 #pragma once
 #include <string>
-#include "paketfach.h"
+
 using namespace std;
+
+/*
+Zweck und Verhalten der SignalWandler-Klasse:
+
+Zweck: Übersetzung und Weiterleitung von Befehlen zwischen Fernbedienung und Roboterkomponenten.
+Fungiert als Kommunikationsschnittstelle zwischen verschiedenen Systemteilen.
+
+Verhalten: Die Klasse empfängt Befehle von der Fernbedienung, interpretiert diese und leitet sie
+an die entsprechenden Komponenten weiter. Sie verwaltet auch den Zustand bestimmter Komponenten
+(z.B. Paketfach offen/geschlossen) und sendet Statusinformationen zurück an die Fernbedienung.
+*/
 class SignalWandler {
 private:
     string sensorsignal;
-    string Fernbedienungsbefehl;
+    string fernbedienungsbefehl;
+    bool paketfachOffen;
+    
+    void behandlePaketfachBefehl();
 
 public:
-
+    SignalWandler();
+    ~SignalWandler() = default;
+    
     string EmpfangeBefehlFernBedienung(int gedrucktesKnopf);
     string SendeStatusAnFernBedienung();
     float SendeSensordatenAnFernbedienung();
-
+    
+    bool istPaketfachOffen() const;
 };
