@@ -11,6 +11,7 @@
 #include <QShortcut>
 #include "GpsSensor.h"
 #include "TemperaturSensor.h"
+#include "LEDPanel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,6 +26,13 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    
+    // Roboter-Fokus wiederherstellen
+    void roboterFokusWiederherstellen();
+
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
 
 private:
     Ui::MainWindow *ui;
@@ -42,16 +50,21 @@ private:
     TemperaturSensor tempSensor;
     bool waermekameraIstAktiv = false;
     GPSSensor* gpsSensor;
+    LEDPanel* ledPanel;
+    
+    // Variabili per tenere traccia dello stato reale delle camere
+    bool normalKameraIstAktiv = false;
+    bool waermeKameraIstAktiv = false;
 
 private slots:
     void on_pushButtonEinschalten_clicked();
-    void on_pushButtonAusschalten_clicked();
     void zeigeBild();
     void zeigeWaermeBild();
     void on_NormalAnAus_toggled();
     void on_WarmAnAus_clicked();
     void zeigeTemp();
     void zeigeGPS();
+    void updateMotorLEDs();
 };
 
 

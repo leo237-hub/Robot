@@ -10,6 +10,12 @@ BewegungsRoboter::BewegungsRoboter(float startx, float starty, float startwinkel
     :x(startx), y(starty), Winkel(startwinkel) {}
 
 void BewegungsRoboter::Empfangesignal(signaltyp Signal) {
+    if (!roboterAktiv) {
+        // Roboter ignoriert Signale wenn inaktiv
+        stoppen();
+        return;
+    }
+    
     switch(Signal) {
     case signaltyp::Vorvaerts:
         vorwaerts(0.8f);
@@ -82,6 +88,17 @@ int BewegungsRoboter::getMotorLinksRichtung() const {
 
 int BewegungsRoboter::getMotorRechtsRichtung() const {
     return motorrechts.getRichtung();
+}
+
+void BewegungsRoboter::setzeAktiv(bool aktiv) {
+    roboterAktiv = aktiv;
+    
+    if (!aktiv) {
+        // Roboter stoppen wenn deaktiviert
+        stoppen();
+    }
+    
+    std::cout << "BewegungsRoboter Status: " << (aktiv ? "Aktiv" : "Inaktiv") << std::endl;
 }
 
 

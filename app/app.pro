@@ -31,14 +31,14 @@ SOURCES += \
     source/logik/DreheSignalinterpreter.cpp \
     source/logik/SignalWandler.cpp \
     source/logik/selfcheck.cpp \
+    source/logik/NormalKamera.cpp \
+    source/logik/GpsSensor.cpp \
+    source/logik/TemperaturSensor.cpp \
     source/simulation/BewegungsSimulation.cpp \
     source/simulation/simulation.cpp \
     source/simulation/SimulationRoboter.cpp \
     source/simulation/WaermeKamera.cpp \
-    source/simulation/NormalKamera.cpp \
-    source/simulation/GpsSensor.cpp \
     source/simulation/feuer.cpp \
-    source/simulation/TemperaturSensor.cpp \
     source/simulation/simulationElement.cpp \
     source/simulation/xmlHandler.cpp \
     source/simulation/position.cpp \
@@ -47,7 +47,8 @@ SOURCES += \
     source/grafik/mainwindow.cpp \
     source/grafik/main.cpp \
     source/grafik/hauptdisplay.cpp \
-    source/grafik/WaermeKameraDisplay.cpp
+    source/grafik/WaermeKameraDisplay.cpp \
+    source/grafik/LEDPanel.cpp
 
 HEADERS += \
     include/logik/BewegungsRoboter.h \
@@ -69,6 +70,14 @@ HEADERS += \
     include/logik/selfcheck.h \
     include/logik/ReturnHome.h \
     include/logik/SignalTyp.h \
+    include/logik/NormalKamera.h \
+    include/logik/Feuchtigkeitssensor.h \
+    include/logik/Gassensor.h \
+    include/logik/GpsSensor.h \
+    include/logik/Kettesensor.h \
+    include/logik/Lidarsensor.h \
+    include/logik/TemperaturSensor.h \
+    include/logik/Wassersensor.h \
     include/simulation/BewegungsSimulation.h \
     include/simulation/SimulationRoboter.h \
     include/simulation/feuer.h \
@@ -79,19 +88,12 @@ HEADERS += \
     include/grafik/GraphischesRoboter.h \
     include/grafik/RoboterVisualization.h \
     include/grafik/mainwindow.h \
+    include/grafik/LEDPanel.h \
     include/Hauptdisplay/Hauptdisplay.h \
     include/Hauptdisplay/Lautsprecher.h \
-    include/Hauptdisplay/NormalKamera.h \
     include/Hauptdisplay/SensorDisplay.h \
     include/Hauptdisplay/WaermeKameraDisplay.h \
-    include/Hauptdisplay/Waermekamera.h \
-    include/sensor/Feuchtigkeitssensor.h \
-    include/sensor/Gassensor.h \
-    include/sensor/GpsSensor.h \
-    include/sensor/Kettesensor.h \
-    include/sensor/Lidarsensor.h \
-    include/sensor/TemperaturSensor.h \
-    include/sensor/Wassersensor.h
+    include/Hauptdisplay/Waermekamera.h
 
 # Absolute include paths - makes it easy to use absolute includes in code
 INCLUDEPATH += $$PWD/include
@@ -99,7 +101,6 @@ INCLUDEPATH += $$PWD/include/logik
 INCLUDEPATH += $$PWD/include/simulation
 INCLUDEPATH += $$PWD/include/grafik
 INCLUDEPATH += $$PWD/include/Hauptdisplay
-INCLUDEPATH += $$PWD/include/sensor
 
 RESOURCES += \
     resources/resources.qrc

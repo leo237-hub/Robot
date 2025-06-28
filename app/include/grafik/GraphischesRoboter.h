@@ -17,7 +17,7 @@ private:
     GPSSensor* gpsSensor;
     QTimer* movementTimer;
     signaltyp currentSignal;
-    bool isMoving;
+    bool moving;
 
 public:
     GraphischesRoboter(double x = 0.0, double y = 0.0, double radius = 20.0);
@@ -25,8 +25,16 @@ public:
     void empfangesignal(signaltyp);
     void updateLogic(float dt);
     void syncGraphics();
+    bool isMoving() const { return moving; }
 
     GraphischesRoboter(double x, double y, double radius, GPSSensor* gps = nullptr);
+    
+    // Öffentliche Methoden für Tastatur-Events
+    void handleKeyPress(QKeyEvent *event);
+    void handleKeyRelease(QKeyEvent *event);
+    
+    // Methode für Roboter-Status
+    void setzeRoboterAktiv(bool aktiv);
     
 private slots:
     void updateMovement();

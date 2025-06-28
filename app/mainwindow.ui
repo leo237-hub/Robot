@@ -37,7 +37,7 @@
    <widget class="QPushButton" name="pushButtonEinschalten">
     <property name="geometry">
      <rect>
-      <x>680</x>
+      <x>580</x>
       <y>570</y>
       <width>93</width>
       <height>29</height>
@@ -47,25 +47,13 @@
      <string>Einschalten</string>
     </property>
     <property name="checkable">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="checked">
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButtonAusschalten">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>570</y>
-      <width>93</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Ausschalten</string>
-    </property>
-   </widget>
+   <!-- Pulsante Ausschalten rimosso - ora Einschalten è toggle -->
    <widget class="QLabel" name="WaermeKamera">
     <property name="geometry">
      <rect>

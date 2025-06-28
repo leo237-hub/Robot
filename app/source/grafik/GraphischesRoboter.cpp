@@ -6,6 +6,7 @@
 #include <QKeyEvent>
 #include <QGraphicsScene>
 #include <QTimer>
+#include <QDebug>
 #include "GraphischesRoboter.h"
 #include "dcmotor.h"
 #include "Dc-SignalInterpreter.h"
@@ -16,7 +17,7 @@
 using namespace std;
 
 GraphischesRoboter::GraphischesRoboter(double x, double y, double radius)
-    : QObject(), QGraphicsEllipseItem(), bewegung(x, y, 30.0f), gpsSensor(nullptr), currentSignal(signaltyp::keine), isMoving(false){
+    : QObject(), QGraphicsEllipseItem(), bewegung(x, y, 0.0f), gpsSensor(nullptr), currentSignal(signaltyp::keine), moving(false){
     
     setRect(0, 0, radius, radius);
     
@@ -34,7 +35,7 @@ GraphischesRoboter::GraphischesRoboter(double x, double y, double radius)
     
     // Erstelle BewegungsSimulation
     bewegungsSimulation = new BewegungsSimulation(&bewegung);
-    bewegungsSimulation->setzePosition(x, y, 30.0f);
+    bewegungsSimulation->setzePosition(x, y, 0.0f);
     
     // Timer für kontinuierliche Bewegung - langsamer für kontrolliertere Bewegung
     movementTimer = new QTimer(this);
@@ -43,7 +44,7 @@ GraphischesRoboter::GraphischesRoboter(double x, double y, double radius)
 }
 
 GraphischesRoboter::GraphischesRoboter(double x, double y, double radius, GPSSensor* gps)
-    : QObject(), QGraphicsEllipseItem(), bewegung(x, y, 30.0f), gpsSensor(gps), currentSignal(signaltyp::keine), isMoving(false){
+    : QObject(), QGraphicsEllipseItem(), bewegung(x, y, 0.0f), gpsSensor(gps), currentSignal(signaltyp::keine), moving(false){
     
     setRect(0, 0, radius, radius);
     
@@ -61,7 +62,7 @@ GraphischesRoboter::GraphischesRoboter(double x, double y, double radius, GPSSen
     
     // Erstelle BewegungsSimulation
     bewegungsSimulation = new BewegungsSimulation(&bewegung);
-    bewegungsSimulation->setzePosition(x, y, 30.0f);
+    bewegungsSimulation->setzePosition(x, y, 0.0f);
     
     // Timer für kontinuierliche Bewegung - langsamer für kontrolliertere Bewegung
     movementTimer = new QTimer(this);
@@ -102,7 +103,7 @@ void GraphischesRoboter::syncGraphics() {
 }
 
 void GraphischesRoboter::updateMovement() {
-    if (isMoving) {
+    if (moving) {
         // Kontinuierliche Bewegung während Taste gedrückt ist
         empfangesignal(currentSignal);
         updateLogic(0.05f); // 50ms = 20 FPS für kontrolliertere Bewegung
@@ -111,7 +112,7 @@ void GraphischesRoboter::updateMovement() {
 }
 
 void GraphischesRoboter::keyPressEvent(QKeyEvent *event){
-    if (isMoving) return; // Ignoriere wenn bereits in Bewegung
+    if (moving) return; // Ignoriere wenn bereits in Bewegung
     
     signaltyp Signal;
     Dc_SignalInterpreter Interpreter;
@@ -141,7 +142,7 @@ void GraphischesRoboter::keyPressEvent(QKeyEvent *event){
     
     // Starte kontinuierliche Bewegung
     currentSignal = Signal;
-    isMoving = true;
+    moving = true;
     
     // Erste Bewegung sofort ausführen
     empfangesignal(Signal);
@@ -162,7 +163,7 @@ void GraphischesRoboter::keyReleaseEvent(QKeyEvent *event) {
     case Qt::Key_D:
     case Qt::Key_Right:
         // Stoppe Bewegung
-        isMoving = false;
+        moving = false;
         currentSignal = signaltyp::keine;
         empfangesignal(signaltyp::keine);
         updateLogic(0.05f);
@@ -173,4 +174,16 @@ void GraphischesRoboter::keyReleaseEvent(QKeyEvent *event) {
     }
     
     event->accept();
+}
+
+void GraphischesRoboter::handleKeyPress(QKeyEvent *event) {
+    keyPressEvent(event);
+}
+
+void GraphischesRoboter::handleKeyRelease(QKeyEvent *event) {
+    keyReleaseEvent(event);
+}
+
+void GraphischesRoboter::setzeRoboterAktiv(bool aktiv) {
+    bewegung.setzeAktiv(aktiv);
 } 

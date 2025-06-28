@@ -10,8 +10,7 @@ INCLUDEPATH += $$PWD/../../app/include \
                $$PWD/../../app/include/logik \
                $$PWD/../../app/include/simulation \
                $$PWD/../../app/include/grafik \
-               $$PWD/../../app/include/Hauptdisplay \
-               $$PWD/../../app/include/sensor
+               $$PWD/../../app/include/Hauptdisplay
 
 # Test files
 SOURCES += test_feuer.cpp \
