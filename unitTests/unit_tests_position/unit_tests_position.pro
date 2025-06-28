@@ -5,18 +5,15 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-# Include paths
+# Include paths for new structure
 INCLUDEPATH += $$PWD/../../app/include \
                $$PWD/../../app/include/simulation
 
 # Test files
-SOURCES += test_position.cpp
+SOURCES += test_position.cpp \
+           ../../app/source/simulation/position.cpp
 
-HEADERS += test_position.h
-
-# Source files under test
-SOURCES += ../../app/source/position.cpp
-
-HEADERS += ../../app/include/simulation/position.h
+HEADERS += test_position.h \
+           ../../app/include/simulation/position.h
 
 TARGET = test_position

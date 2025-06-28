@@ -1,0 +1,178 @@
+#include "mainwindow.h"
+#include "NormalKamera.h"
+#include "ui_mainwindow.h"
+#include <QDebug>
+#include "simulation.h"
+#include <QRandomGenerator>
+#include <QGraphicsView>
+#include "Hauptdisplay.h"
+#include "xmlHandler.h"
+#include "qpixmap.h"
+#include "QFile"
+#include <cstdint>
+#include "WaermeKameraDisplay.h"
+#include "Waermekamera.h"
+#include "GraphischesRoboter.h"
+#include "SimulationRoboter.h"
+#include "TemperaturSensor.h"
+#include "GpsSensor.h"
+
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    waermekameraIstAktiv = false;
+    waermekameraDisplay = new WaermekameraDisplay(ui->WaermeKamera);
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &MainWindow::zeigeBild);
+    waermeTimer = new QTimer(this);
+    connect(waermeTimer, &QTimer::timeout, this, &MainWindow::zeigeWaermeBild);
+
+    Simulation* simulation = new Simulation();
+    QPixmap pixmap(":/data/umgebung.png");
+
+    QPixmap scaledPixmap = pixmap.scaled(800, 261, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+
+    scene = new QGraphicsScene(this);
+    scene->addPixmap(scaledPixmap);
+
+    ui->graphicsView->setScene(scene);
+
+    gpsSensor = new GPSSensor();
+    roboter = new GraphischesRoboter(50, 100, 40, gpsSensor);
+    scene->addItem(roboter);
+    roboter->setFocus();
+    xmlHandler SimulationManager;
+    ctrl = new SimRoboter(this);
+    ctrl->setRoboter(roboter);
+
+    SimulationManager.ladeXmlSimulation(":/data/umgebung.xml", *simulation);
+    simulation->addiereElementeScene(scene);
+
+    // Verbinde TemperaturSensor mit der Simulation
+    tempSensor.setTemperaturQuelle([this, simulation]() {
+        if (!gpsSensor) return 20.0f;
+        QPointF robotPosition(gpsSensor->getX(), gpsSensor->getY());
+        return simulation->erzeugeTemperatur(robotPosition);
+    });
+
+    tempSensor.starten();
+
+    // Temperaturanzeige regelmäßig aktualisieren
+    QTimer *tempTimer = new QTimer(this);
+    connect(tempTimer, &QTimer::timeout, this, &MainWindow::zeigeTemp);
+    tempTimer->start(1000);  // alle 1000 ms (1 Sekunde)
+    zeigeTemp(); //optional
+
+    QTimer *gpsTimer = new QTimer(this);
+    connect(gpsTimer, &QTimer::timeout, this, &MainWindow::zeigeGPS);
+    gpsTimer->start(1000);
+    zeigeGPS();
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::on_pushButtonEinschalten_clicked() {
+    DisAktiv = true;
+    hauptDisplay.einschalten();
+}
+void MainWindow::on_pushButtonAusschalten_clicked() {
+    DisAktiv = false;
+    timer->stop();
+    kamera.setAktiv(false);
+    ui->NormalKamera->clear();
+    //ui->NormalAnAus->setChecked(false);
+    ui->WaermeKamera->clear();
+    //ui->WarmAnAus->setChecked(false);
+    ui->NormalAnAus->setChecked(false);
+
+   
+}
+
+void MainWindow::on_NormalAnAus_toggled()
+{
+    bool Aktiv = kamera.schalten();
+
+    if (!DisAktiv){
+        ui->NormalAnAus->setChecked(false);
+        return;
+    }
+    if (Aktiv) {
+        timer->start(100);
+        qDebug()<< "Kamera ist eingeschaltet";
+    }else{
+        timer->stop();
+        qDebug()<< "Kamera ist ausgeschaltet";
+    }
+}
+
+void MainWindow::zeigeBild()
+{
+    uint8_t* rawData = kamera.fotoMachen(0);
+    QImage image(rawData, 640, 480, QImage::Format_RGB888);
+    QPixmap pixmap = QPixmap::fromImage(image);
+    ui->NormalKamera->setPixmap(pixmap);
+    delete[] rawData;
+}
+
+void MainWindow::zeigeTemp() {
+    tempSensor.starten();
+
+    float temperatur = tempSensor.getLetzteMessung();
+
+    if (ui->Temperatur) {
+        ui->Temperatur->setText(QString::number(temperatur, 'f', 2) + " °C");
+    }
+}
+
+void MainWindow::zeigeGPS() {
+    if (!gpsSensor) return;
+
+    double x = gpsSensor->getX();
+    double y = gpsSensor->getY();
+
+    QString text = QString("x: %1, y: %2").arg(x, 0, 'f', 1).arg(y, 0, 'f', 1);
+    ui->label_2->setText(text);
+}
+
+
+void MainWindow::on_WarmAnAus_clicked()
+{
+    if (!DisAktiv){
+        ui->WarmAnAus->setChecked(false);
+        ui->WaermeKamera->clear();
+        return;
+    }
+    static bool istAn = false;
+    istAn = !istAn;
+    if (istAn) {
+        waermekamera.wSchalten();
+        waermeTimer->start(100);
+        uint8_t* bild = waermekamera.fotoMachen(0);
+        waermekameraDisplay->waermeBildAnzeigen(bild);
+        delete[] bild;
+    } else {
+        waermeTimer->stop();
+;
+    }
+}
+void MainWindow::zeigeWaermeBild() {
+
+    bool Aktiv = waermekamera.wSchalten();
+    if (Aktiv) {
+        waermeTimer->start(100);
+        qDebug()<< "wKamera ist eingeschaltet";
+    }else{
+        waermeTimer->stop();
+        qDebug()<< "wKamera ist ausgeschaltet";
+    }
+    uint8_t* data = waermekamera.fotoMachen(0);
+    if (!data ) return;
+    waermekameraDisplay->waermeBildAnzeigen(data);
+    delete[] data;
+}

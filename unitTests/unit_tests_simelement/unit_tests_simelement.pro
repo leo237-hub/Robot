@@ -7,18 +7,19 @@ TEMPLATE = app
 
 # Include paths
 INCLUDEPATH += $$PWD/../../app/include \
-               $$PWD/../../app/include/simulation
+               $$PWD/../../app/include/logik \
+               $$PWD/../../app/include/simulation \
+               $$PWD/../../app/include/grafik \
+               $$PWD/../../app/include/Hauptdisplay \
+               $$PWD/../../app/include/sensor
 
 # Test files
-SOURCES += test_simulationelement.cpp
+SOURCES += test_simulationelement.cpp \
+           ../../app/source/simulation/simulationElement.cpp \
+           ../../app/source/simulation/position.cpp
 
-HEADERS += test_simulationelement.h
-
-# Source files under test
-SOURCES += ../../app/source/simulationElement.cpp \
-           ../../app/source/position.cpp
-
-HEADERS += ../../app/include/simulation/simulationElement.h \
+HEADERS += test_simulationelement.h \
+           ../../app/include/simulation/simulationElement.h \
            ../../app/include/simulation/position.h
 
 TARGET = test_simulationelement

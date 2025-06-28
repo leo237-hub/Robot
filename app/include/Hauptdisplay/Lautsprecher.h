@@ -1,16 +1,24 @@
 #pragma once
+#include "aktoren.h"
 
-class Lautsprecher  {
+/*
+Zweck und Verhalten der Lautsprecher-Klasse:
+
+Zweck: Steuerung der Audio-Ausgabe des ResQ-Roboters für Sprachausgabe und akustische Signale.
+
+Verhalten: Die Lautsprecher-Klasse erbt von Aktoren und verwaltet den Ein/Aus-Zustand der Audio-Ausgabe.
+Sie kann über die Fernbedienung gesteuert werden und bietet eine einfache Schnittstelle zum
+Ein- und Ausschalten der Lautsprecher.
+*/
+class Lautsprecher : public Aktoren {
 private:
-    int Lautstaerke;
-    bool Starus;
-    float TonFrequenz;
+    bool istAn;
 
 public:
     Lautsprecher();
-    virtual ~Lautsprecher();
-    void spracheAusgeben() const;
-    void lautStaerkeAnpassen() const;
-
+    ~Lautsprecher() override;
+    void einschalten();
+    void ausschalten();
+    bool istEingeschaltet() const;
 };
 

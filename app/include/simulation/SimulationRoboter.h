@@ -1,12 +1,15 @@
 #pragma once
+#include "GraphischesRoboter.h"
 #include <QObject>
-#include "roboter.h"
+#include <QTimer>
 using namespace std;
 
 class SimRoboter: public QObject {
     Q_OBJECT
 private:
-    Roboter* roboter = nullptr;
+    GraphischesRoboter* roboter = nullptr;
+    QTimer* timer;
+    bool isActive;
     void refreshView();
 private slots:
     void vorwaerts();
@@ -16,8 +19,11 @@ private slots:
     void stoppen();
 public:
     explicit SimRoboter(QObject *parent = nullptr);
-    void setRoboter(Roboter* rob);
-   virtual ~SimRoboter();
+    void setRoboter(GraphischesRoboter* rob);
+    virtual ~SimRoboter();
+
+public slots:
+    void updateSimulation();
 };
 
 

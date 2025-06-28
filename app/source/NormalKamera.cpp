@@ -18,7 +18,7 @@ uint8_t* NormalKamera::videoAufnehmen(uint8_t bild) const{
 //void NormalKamera::anzeigeAktualiesieren(uint8_t* bild)const{}
 
 
-uint8_t*  NormalKamera::fotoMachen(uint8_t bild)const{
+uint8_t*  NormalKamera::fotoMachen(uint8_t bild [[maybe_unused]])const{
     int width = 640;
     int height = 480;
     int size = height * width *3;

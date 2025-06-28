@@ -14,78 +14,92 @@ CONFIG -= bubbles
 
 
 SOURCES += \
-    source/BewegungsRoboter.cpp \
-    source/NormalKamera.cpp \
-    source/SimulationRoboter.cpp \
-    source/WaermeKameraDisplay.cpp \
-    source/WaermeKamera.cpp \
-    source/aktoren.cpp \
-    source/antenne.cpp \
-    source/dc-SingnalInterpreter.cpp \
-    source/dcmotor.cpp \
-    source/drehmotor.cpp \
-    source/hauptdisplay.cpp \
-    source/lampe.cpp \
-    source/paketfach.cpp \
-    source/roboter.cpp \
-    source/selfcheck.cpp \
-    source/feuer.cpp \
-    source/simulation.cpp \
-    source/position.cpp \
-    source/xmlHandler.cpp \
-    source/TemperaturSensor.cpp\
-    source/simulationElement.cpp \
-    source/main.cpp \
-    source/mainwindow.cpp \
-    source/GpsSensor.cpp
+    source/logik/BewegungsRoboter.cpp \
+    source/logik/dcmotor.cpp \
+    source/logik/drehmotor.cpp \
+    source/logik/aktoren.cpp \
+    source/logik/lampe.cpp \
+    source/logik/lautsprecher.cpp \
+    source/logik/antenne.cpp \
+    source/logik/knopf.cpp \
+    source/logik/joystick.cpp \
+    source/logik/joystick2.cpp \
+    source/logik/paketfach.cpp \
+    source/logik/Fernbedienung.cpp \
+    source/logik/FernbedienungInterpreter.cpp \
+    source/logik/dc-SingnalInterpreter.cpp \
+    source/logik/DreheSignalinterpreter.cpp \
+    source/logik/SignalWandler.cpp \
+    source/logik/selfcheck.cpp \
+    source/simulation/BewegungsSimulation.cpp \
+    source/simulation/simulation.cpp \
+    source/simulation/SimulationRoboter.cpp \
+    source/simulation/WaermeKamera.cpp \
+    source/simulation/NormalKamera.cpp \
+    source/simulation/GpsSensor.cpp \
+    source/simulation/feuer.cpp \
+    source/simulation/TemperaturSensor.cpp \
+    source/simulation/simulationElement.cpp \
+    source/simulation/xmlHandler.cpp \
+    source/simulation/position.cpp \
+    source/grafik/GraphischesRoboter.cpp \
+    source/grafik/RoboterVisualization.cpp \
+    source/grafik/mainwindow.cpp \
+    source/grafik/main.cpp \
+    source/grafik/hauptdisplay.cpp \
+    source/grafik/WaermeKameraDisplay.cpp
 
 HEADERS += \
-    include/BewegungsRoboter.h \
-    include/Dc-SignalInterpreter.h \
-    include/DreheSignalinterpreter.h \
-    include/Fernbedienung-Interpreter.h \
-    include/Fernbedienung.h \
-    include/Hauptdisplay/Hauptdisplay.h \
-    include/Hauptdisplay/Lautsprecher.h \
-    include/Hauptdisplay/NormalKamera.h \
-    include/Hauptdisplay/SensorDisplay.h \
-    include/Hauptdisplay/WaermeKameraDisplay.h \
-    include/Hauptdisplay/Waermekamera.h \
-    include/ReturnHome.h \
-    include/Sensors.h \
-    include/SignalWandler.h \
-    include/drehmotor.h \
-    include/joystick.h \
-    include/joystick2.h \
-    include/knopf.h \
-    include/paketfach.h \
-    include/roboter.h \
-    include/sensor/Feuchtigkeitssensor.h \
-    include/sensor/Gassensor.h \
-    include/sensor/GpsSensor.h \
-    include/sensor/Kettesensor.h \
-    include/sensor/Lidarsensor.h \
-    include/sensor/TemperaturSensor.h \
-    include/sensor/Wassersensor.h \
-    include/drehmotor.h \
-    include/selfcheck.h \
-    include/antenne.h \
-    include/lampe.h \
-    include/aktoren.h \
-    include/antenne.h \
-    include/dcmotor.h \
+    include/logik/BewegungsRoboter.h \
+    include/logik/dcmotor.h \
+    include/logik/drehmotor.h \
+    include/logik/aktoren.h \
+    include/logik/lampe.h \
+    include/logik/lautsprecher.h \
+    include/logik/antenne.h \
+    include/logik/knopf.h \
+    include/logik/joystick.h \
+    include/logik/joystick2.h \
+    include/logik/paketfach.h \
+    include/logik/Fernbedienung.h \
+    include/logik/FernbedienungInterpreter.h \
+    include/logik/Dc-SignalInterpreter.h \
+    include/logik/DreheSignalinterpreter.h \
+    include/logik/SignalWandler.h \
+    include/logik/selfcheck.h \
+    include/logik/ReturnHome.h \
+    include/logik/SignalTyp.h \
+    include/simulation/BewegungsSimulation.h \
     include/simulation/SimulationRoboter.h \
     include/simulation/feuer.h \
     include/simulation/position.h \
     include/simulation/simulation.h \
     include/simulation/xmlHandler.h \
     include/simulation/simulationElement.h \
-    include/SignalTyp.h \
-    include/mainwindow.h
-INCLUDEPATH += $$PWD/include/
-INCLUDEPATH += $$PWD/include/Hauptdisplay/
-INCLUDEPATH += $$PWD/include/sensor/
-INCLUDEPATH += $$PWD/include/simulation/
+    include/grafik/GraphischesRoboter.h \
+    include/grafik/RoboterVisualization.h \
+    include/grafik/mainwindow.h \
+    include/Hauptdisplay/Hauptdisplay.h \
+    include/Hauptdisplay/Lautsprecher.h \
+    include/Hauptdisplay/NormalKamera.h \
+    include/Hauptdisplay/SensorDisplay.h \
+    include/Hauptdisplay/WaermeKameraDisplay.h \
+    include/Hauptdisplay/Waermekamera.h \
+    include/sensor/Feuchtigkeitssensor.h \
+    include/sensor/Gassensor.h \
+    include/sensor/GpsSensor.h \
+    include/sensor/Kettesensor.h \
+    include/sensor/Lidarsensor.h \
+    include/sensor/TemperaturSensor.h \
+    include/sensor/Wassersensor.h
+
+# Absolute include paths - makes it easy to use absolute includes in code
+INCLUDEPATH += $$PWD/include
+INCLUDEPATH += $$PWD/include/logik
+INCLUDEPATH += $$PWD/include/simulation
+INCLUDEPATH += $$PWD/include/grafik
+INCLUDEPATH += $$PWD/include/Hauptdisplay
+INCLUDEPATH += $$PWD/include/sensor
 
 RESOURCES += \
     resources/resources.qrc

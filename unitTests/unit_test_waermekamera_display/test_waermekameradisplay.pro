@@ -5,18 +5,16 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-# Include paths
+# Include paths for new structure
 INCLUDEPATH += $$PWD/../../app/include \
+               $$PWD/../../app/include/grafik \
                $$PWD/../../app/include/Hauptdisplay
 
 # Test files
-SOURCES += test_waermekameradisplay.cpp
+SOURCES += test_waermekameradisplay.cpp \
+           ../../app/source/grafik/WaermeKameraDisplay.cpp
 
-HEADERS += test_waermekameradisplay.h
-
-# Source files under test
-SOURCES += ../../app/source/WaermekameraDisplay.cpp
-
-HEADERS += ../../app/include/Hauptdisplay/WaermekameraDisplay.h
+HEADERS += test_waermekameradisplay.h \
+           ../../app/include/Hauptdisplay/WaermekameraDisplay.h
 
 TARGET = test_waermekameradisplay

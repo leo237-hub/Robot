@@ -5,18 +5,16 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-# Include paths
-INCLUDEPATH += $$PWD/../../app/include
+# Include paths for new structure
+INCLUDEPATH += $$PWD/../../app/include \
+                $$PWD/../../app/include/logik
 
 # Test files
-SOURCES += test_dc_signalinterpreter.cpp
+SOURCES += test_dc_signalinterpreter.cpp \
+           ../../app/source/logik/dc-SingnalInterpreter.cpp
 
-HEADERS += test_dc_signalinterpreter.h
-
-# Source files under test
-SOURCES += ../../app/source/dc-SingnalInterpreter.cpp
-
-HEADERS += ../../app/include/Dc-SignalInterpreter.h \
-           ../../app/include/SignalTyp.h
+HEADERS += test_dc_signalinterpreter.h \
+           ../../app/include/logik/Dc-SignalInterpreter.h \
+           ../../app/include/logik/SignalTyp.h
 
 TARGET = unit_test_dc_signalinterpreter
