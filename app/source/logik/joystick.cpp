@@ -11,7 +11,7 @@ joystick::joystick()
 void joystick::Fahren() {
     // Bewegungslogik basierend auf Winkel und Intensität
     // Hier würde die Kommunikation mit den Motoren erfolgen
-    interpretiereBewegung(); // Call the method but don't store the result
+    interpretiereBewegung();
     // Weitergabe an Dc_SignalInterpreter für Motorsteuerung
 }
 

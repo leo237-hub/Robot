@@ -19,7 +19,6 @@
 #include "GpsSensor.h"
 #include "LEDPanel.h"
 #include "Gassensor.h"
-#include <random>
 #include <algorithm>
 
 using namespace std;
@@ -343,9 +342,6 @@ void MainWindow::on_WarmAnAus_clicked()
         waermeTimer->start(100);
         ledPanel->setzeWaermeKameraStatus(true);
         waermeKameraIstAktiv = true;
-        uint8_t* bild = waermekamera.fotoMachen(0);
-        waermekameraDisplay->waermeBildAnzeigen(bild);
-        delete[] bild;
         qDebug() << "Wärmekamera ist eingeschaltet";
     } else if (!buttonChecked && waermeKameraIstAktiv) {
         /* Wärmekamera ausschalten */
@@ -358,17 +354,11 @@ void MainWindow::on_WarmAnAus_clicked()
     }
 }
 void MainWindow::zeigeWaermeBild() {
-
-    bool Aktiv = waermekamera.wSchalten();
-    if (Aktiv) {
-        waermeTimer->start(100);
-        qDebug()<< "wKamera ist eingeschaltet";
-    }else{
-        waermeTimer->stop();
-        qDebug()<< "wKamera ist ausgeschaltet";
-    }
+    if (!waermeKameraIstAktiv) return;
+    
     uint8_t* data = waermekamera.fotoMachen(0);
-    if (!data ) return;
+    if (!data) return;
+    
     waermekameraDisplay->waermeBildAnzeigen(data);
     delete[] data;
 }

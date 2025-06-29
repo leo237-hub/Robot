@@ -1,6 +1,5 @@
 #pragma once
 #include "Hauptdisplay.h"
-#include <string>
 #include "FernbedienungInterpreter.h"
 #include "joystick.h"
 #include "joystick2.h"

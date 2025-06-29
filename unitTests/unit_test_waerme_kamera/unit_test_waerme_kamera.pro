@@ -9,13 +9,14 @@ TEMPLATE = app
 INCLUDEPATH += $$PWD/../../app/include \
                $$PWD/../../app/include/simulation \
                $$PWD/../../app/include/Hauptdisplay \
-               $$PWD/../../app/
+               $$PWD/../../app/ \
+               $$PWD/../../app/include/logik
 
 # Test files
 SOURCES += test_waermekamera.cpp \
-           ../../app/source/simulation/WaermeKamera.cpp
+           ../../app/source/logik/WaermeKamera.cpp
 
 HEADERS += test_waermekamera.h \
-           ../../app/include/Hauptdisplay/Waermekamera.h
+           ../../app/include/logik/Waermekamera.h
 
 TARGET = test_waerme_kamera

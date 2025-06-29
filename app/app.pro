@@ -36,10 +36,11 @@ SOURCES += \
     source/logik/TemperaturSensor.cpp \
     source/logik/Gassensor.cpp \
     source/logik/Wassersensor.cpp \
+    source/logik/hauptdisplay.cpp \
+    source/logik/WaermeKamera.cpp \
     source/simulation/BewegungsSimulation.cpp \
     source/simulation/simulation.cpp \
     source/simulation/SimulationRoboter.cpp \
-    source/simulation/WaermeKamera.cpp \
     source/simulation/feuer.cpp \
     source/simulation/gasSimulationElement.cpp \
     source/simulation/wasserSimulationElement.cpp \
@@ -50,7 +51,6 @@ SOURCES += \
     source/grafik/RoboterVisualization.cpp \
     source/grafik/mainwindow.cpp \
     source/grafik/main.cpp \
-    source/grafik/hauptdisplay.cpp \
     source/grafik/WaermeKameraDisplay.cpp \
     source/grafik/LEDPanel.cpp
 
@@ -82,6 +82,11 @@ HEADERS += \
     include/logik/Lidarsensor.h \
     include/logik/TemperaturSensor.h \
     include/logik/Wassersensor.h \
+    include/logik/Sensors.h \
+    include/logik/Hauptdisplay.h \
+    include/logik/Waermekamera.h \
+    include/logik/Lautsprecher.h \
+    include/logik/SensorDisplay.h \
     include/simulation/BewegungsSimulation.h \
     include/simulation/SimulationRoboter.h \
     include/simulation/feuer.h \
@@ -95,18 +100,13 @@ HEADERS += \
     include/grafik/RoboterVisualization.h \
     include/grafik/mainwindow.h \
     include/grafik/LEDPanel.h \
-    include/Hauptdisplay/Hauptdisplay.h \
-    include/Hauptdisplay/Lautsprecher.h \
-    include/Hauptdisplay/SensorDisplay.h \
-    include/Hauptdisplay/WaermeKameraDisplay.h \
-    include/Hauptdisplay/Waermekamera.h
+    include/grafik/WaermeKameraDisplay.h
 
 # Absolute include paths - makes it easy to use absolute includes in code
 INCLUDEPATH += $$PWD/include
 INCLUDEPATH += $$PWD/include/logik
 INCLUDEPATH += $$PWD/include/simulation
 INCLUDEPATH += $$PWD/include/grafik
-INCLUDEPATH += $$PWD/include/Hauptdisplay
 
 RESOURCES += \
     resources/resources.qrc

@@ -24,12 +24,10 @@ public:
     RoboterVisualization(BewegungsRoboter* bewegung, double x = 0.0, double y = 0.0, double radius = 20.0);
     ~RoboterVisualization();
     
-    // Visualization methods only
     void visualisierungAktualisieren();
     void simulationAktivSetzen(bool active);
     bool istSimulationAktiv() const;
     
-    // Input simulation (for testing)
     void tastaturDruckSimulieren(const QString& key);
     void signalSimulieren(signaltyp signal);
 

@@ -2,10 +2,10 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include "WaermeKameraDisplay.h"
-#include "Waermekamera.h"
+#include "../logik/Waermekamera.h"
 #include "simulation/feuer.h"
 #include "GraphischesRoboter.h"
-#include "Hauptdisplay.h"
+#include "../logik/Hauptdisplay.h"
 #include "SimulationRoboter.h"
 #include "NormalKamera.h"
 #include <QShortcut>
@@ -29,7 +29,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     
-    // Roboter-Fokus wiederherstellen
     void roboterFokusWiederherstellen();
 
 protected:

@@ -15,6 +15,6 @@ SOURCES += test_waermekameradisplay.cpp \
            ../../app/source/grafik/WaermeKameraDisplay.cpp
 
 HEADERS += test_waermekameradisplay.h \
-           ../../app/include/Hauptdisplay/WaermekameraDisplay.h
+           ../../app/include/grafik/WaermeKameraDisplay.h
 
 TARGET = test_waermekameradisplay

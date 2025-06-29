@@ -18,4 +18,4 @@ public:
     float temperaturLesen();
     uint8_t* videoAufnehmen(uint8_t bild) const;
     bool istAktiv()const {return aktiv;}
-};
+}; 
