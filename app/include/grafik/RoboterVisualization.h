@@ -18,20 +18,20 @@ class RoboterVisualization : public QGraphicsEllipseItem {
 private:
     BewegungsRoboter* bewegungsRoboter;
     BewegungsSimulation* bewegungsSimulation;
-    bool isSimulationActive;
+    bool simulationIstAktiv;
 
 public:
     RoboterVisualization(BewegungsRoboter* bewegung, double x = 0.0, double y = 0.0, double radius = 20.0);
     ~RoboterVisualization();
     
     // Visualization methods only
-    void updateVisualization();
-    void setSimulationActive(bool active);
-    bool getSimulationActive() const;
+    void visualisierungAktualisieren();
+    void simulationAktivSetzen(bool active);
+    bool istSimulationAktiv() const;
     
     // Input simulation (for testing)
-    void simulateKeyPress(const QString& key);
-    void simulateSignal(signaltyp signal);
+    void tastaturDruckSimulieren(const QString& key);
+    void signalSimulieren(signaltyp signal);
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;

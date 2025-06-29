@@ -18,5 +18,5 @@ public:
     void ausschalten();
     void anzeigeAktualiesieren(uint8_t neuesBild) ;
     void helligkeitAnpassen(int neueHelligkeit);
-    bool isEingeschaltet() const ;
+    bool istEingeschaltet() const ;
 };

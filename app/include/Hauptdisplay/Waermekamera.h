@@ -6,7 +6,7 @@ class WaermeKamera {
 private:
 
     int IDNummer;
-    float Temperator;
+    float Temperatur;
     float Aufloesung;
     bool aktiv;
 public:
@@ -17,5 +17,5 @@ public:
     uint8_t* fotoMachen(uint8_t bild) const;
     float temperaturLesen();
     uint8_t* videoAufnehmen(uint8_t bild) const;
-    bool istAktive()const {return aktiv;}
+    bool istAktiv()const {return aktiv;}
 };

@@ -25,7 +25,7 @@ private slots:
     void testSchalten();
     void testSchaltungMehrfach();
     
-    void testIstAktive();
+    void testIstAktiv();
     void testFotoMachen();
     void testFotoMachenGroesse();
     void testFotoMachenNull();

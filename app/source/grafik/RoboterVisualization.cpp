@@ -8,15 +8,15 @@
 #include "BewegungsSimulation.h"
 
 RoboterVisualization::RoboterVisualization(BewegungsRoboter* bewegung, double x, double y, double radius)
-    : bewegungsRoboter(bewegung), isSimulationActive(true) {
+    : bewegungsRoboter(bewegung), simulationIstAktiv(true) {
     
-    // Create BewegungsSimulation
+    /* BewegungsSimulation erstellen */
     bewegungsSimulation = new BewegungsSimulation(bewegung);
     bewegungsSimulation->setzePosition(x, y, 0.0f);
     
     setRect(0, 0, radius, radius);
     
-    // Create visual appearance
+    /* Visuelles Erscheinungsbild erstellen */
     QRadialGradient gradient(radius * 0.8, radius/2, radius * 0.3); 
     gradient.setColorAt(0, Qt::red);       
     gradient.setColorAt(0.5, Qt::blue);    
@@ -35,10 +35,10 @@ RoboterVisualization::~RoboterVisualization() {
     }
 }
 
-void RoboterVisualization::updateVisualization() {
-    if (!bewegungsRoboter || !bewegungsSimulation || !isSimulationActive) return;
+void RoboterVisualization::visualisierungAktualisieren() {
+    if (!bewegungsRoboter || !bewegungsSimulation || !simulationIstAktiv) return;
     
-    // Update visual position based on simulation position
+    /* Visuelle Position basierend auf Simulationsposition aktualisieren */
     float x = bewegungsSimulation->getX();
     float y = bewegungsSimulation->getY();
     float direction = bewegungsSimulation->getWinkel();
@@ -46,22 +46,22 @@ void RoboterVisualization::updateVisualization() {
     setPos(x, y);
     setRotation(direction);
     
-    // Update scene if available
+    /* Szene aktualisieren falls verfügbar */
     if (scene()) {
         scene()->update();
     }
 }
 
-void RoboterVisualization::setSimulationActive(bool active) {
-    isSimulationActive = active;
+void RoboterVisualization::simulationAktivSetzen(bool active) {
+    simulationIstAktiv = active;
 }
 
-bool RoboterVisualization::getSimulationActive() const {
-    return isSimulationActive;
+bool RoboterVisualization::istSimulationAktiv() const {
+    return simulationIstAktiv;
 }
 
-void RoboterVisualization::simulateKeyPress(const QString& key) {
-    if (!bewegungsRoboter || !bewegungsSimulation || !isSimulationActive) return;
+void RoboterVisualization::tastaturDruckSimulieren(const QString& key) {
+    if (!bewegungsRoboter || !bewegungsSimulation || !simulationIstAktiv) return;
     
     Dc_SignalInterpreter interpreter;
     signaltyp signal;
@@ -75,25 +75,25 @@ void RoboterVisualization::simulateKeyPress(const QString& key) {
     } else if (key == "d" || key == "D") {
         signal = interpreter.EingabeInterpretieren("d");
     } else {
-        qDebug() << "Unknown key:" << key;
+        qDebug() << "Unbekannte Taste:" << key;
         return;
     }
     
     bewegungsRoboter->Empfangesignal(signal);
     bewegungsSimulation->aktualisierePosition(0.05f);
-    updateVisualization();
+    visualisierungAktualisieren();
 }
 
-void RoboterVisualization::simulateSignal(signaltyp signal) {
-    if (!bewegungsRoboter || !bewegungsSimulation || !isSimulationActive) return;
+void RoboterVisualization::signalSimulieren(signaltyp signal) {
+    if (!bewegungsRoboter || !bewegungsSimulation || !simulationIstAktiv) return;
     
     bewegungsRoboter->Empfangesignal(signal);
     bewegungsSimulation->aktualisierePosition(0.05f);
-    updateVisualization();
+    visualisierungAktualisieren();
 }
 
 void RoboterVisualization::keyPressEvent(QKeyEvent *event) {
-    if (!isSimulationActive) {
+    if (!simulationIstAktiv) {
         event->ignore();
         return;
     }
@@ -117,15 +117,15 @@ void RoboterVisualization::keyPressEvent(QKeyEvent *event) {
         key = "d";
         break;
     case Qt::Key_Q:
-        qDebug() << "Simulation ended.";
+        qDebug() << "Simulation beendet.";
         event->accept();
         return;
     default:
-        qDebug() << "Unknown key pressed.";
+        qDebug() << "Unbekannte Taste gedrückt.";
         event->ignore();
         return;
     }
     
-    simulateKeyPress(key);
+    tastaturDruckSimulieren(key);
     event->accept();
 } 

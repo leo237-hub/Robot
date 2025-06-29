@@ -7,7 +7,7 @@ HauptDisplay::HauptDisplay() {
     istAn =false;
     helligkeit=50;
     bild=0;
-    aufloesung= "1920x1080"; // start werte
+    aufloesung= "1920x1080"; // Startwerte
 }
 
 HauptDisplay::~HauptDisplay() {
@@ -26,10 +26,10 @@ void HauptDisplay::ausschalten() {
 void HauptDisplay::anzeigeAktualiesieren(uint8_t neuesBild)  {
     bild = neuesBild;
     qDebug() << "Anzeige wurde aktualisiert. Neues Bild:" << static_cast<int>(bild);
-    // unit8_t kann als Buchstabe geschrieben werden, deswegen schreiben wir static_cast<int> um ganzzahl zu bekommen "0_255"
+    // uint8_t kann als Buchstabe geschrieben werden, deswegen schreiben wir static_cast<int> um ganzzahl zu bekommen "0_255"
 
 }
 
-bool HauptDisplay::isEingeschaltet() const {
+bool HauptDisplay::istEingeschaltet() const {
     return istAn;
 }

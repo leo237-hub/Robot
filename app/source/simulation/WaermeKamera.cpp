@@ -13,15 +13,15 @@ bool WaermeKamera::wSchalten(){
     qDebug() << "WaermeKamera wurde geschaltet.";
 }
 uint8_t* WaermeKamera::fotoMachen(uint8_t) const {
-    const int width = 640;
-    const int height = 480;
-    const int size = width * height * 3;
+    const int breite = 640;
+    const int hoehe = 480;
+    const int groesse = breite * hoehe * 3;
 
-    if (width <= 0 || height <= 0) return nullptr;
+    if (breite <= 0 || hoehe <= 0) return nullptr;
 
-    uint8_t* data = new uint8_t[size];
+    uint8_t* data = new uint8_t[groesse];
 
-    for (int i = 0; i < size; i += 3) {
+    for (int i = 0; i < groesse; i += 3) {
         int temp = rand() % 256;
 
         data[i]     = temp;

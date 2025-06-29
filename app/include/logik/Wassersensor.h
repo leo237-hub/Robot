@@ -1,14 +1,29 @@
 #pragma once
+#include <functional>
+#include <thread>
+#include <atomic>
+using namespace std;
 
 class Wassersensor {
-private:
-    float WasserStand;
-    float schwellenwert;
-
 public:
-    Wassersensor(float initialSchwellenwert);
-    float wasserstandMessen(float neuerStand);
-    bool istUntergetaucht() const;
+    Wassersensor();
+    ~Wassersensor();
+
+    void setWasserQuelle(std::function<float()> quelle);
+    void starten();
+    void stoppen();
+    float getLetzteMessung() const;
+
+private:
+    function<float()> wasserQuelle;
+    float letzteMessung;
+
+    bool aktiv;
+    // Zum Timer-Ersatz
+    thread messThread;
+    atomic<bool> stopFlag;
+
+    void messungLoop();
 };
 
 

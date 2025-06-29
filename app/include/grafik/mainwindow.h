@@ -11,6 +11,8 @@
 #include <QShortcut>
 #include "GpsSensor.h"
 #include "TemperaturSensor.h"
+#include "Gassensor.h"
+#include "Wassersensor.h"
 #include "LEDPanel.h"
 
 QT_BEGIN_NAMESPACE
@@ -51,8 +53,10 @@ private:
     bool waermekameraIstAktiv = false;
     GPSSensor* gpsSensor;
     LEDPanel* ledPanel;
+    GasSensor gasSensor;
+    Wassersensor wasserSensor;
     
-    // Variabili per tenere traccia dello stato reale delle camere
+    // Variablen um den tatsächlichen Status der Kameras zu verfolgen
     bool normalKameraIstAktiv = false;
     bool waermeKameraIstAktiv = false;
 
@@ -64,7 +68,9 @@ private slots:
     void on_WarmAnAus_clicked();
     void zeigeTemp();
     void zeigeGPS();
-    void updateMotorLEDs();
+    void zeigeGas();
+    void zeigeWasser();
+    void motorLEDsAktualisieren();
 };
 
 

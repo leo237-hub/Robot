@@ -5,6 +5,15 @@
         <feuer id="2" x="290" y="170" temperature="520.5" r="15"/>
         <feuer id="3" x="591" y="130"  temperature="380.2" r="15"/>
     </feuers>
+    <gasQuellen>
+        <gasQuelle id="1" x="610" y="10" gasKonzentration="75.0" r="60"/>
+    </gasQuellen>
+    <wasserQuellen>
+        <wasserQuelle id="1" x="150" y="35" wasserKonzentration="85.0" r="50"/>
+        <wasserQuelle id="1" x="250" y="40" wasserKonzentration="85.0" r="15"/>
+        <wasserQuelle id="1" x="250" y="50" wasserKonzentration="85.0" r="15"/>
+        <wasserQuelle id="1" x="250" y="60" wasserKonzentration="85.0" r="15"/>
+    </wasserQuellen>
     <steine>
         <stein id="1" x="95" y="175" r="12"/>
         <stein id="1" x="120" y="172" r="12"/>

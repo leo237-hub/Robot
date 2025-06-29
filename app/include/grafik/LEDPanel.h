@@ -22,6 +22,8 @@ public:
     void setzeWaermeKameraStatus(bool aktiv);
     void setzeGPSStatus(bool aktiv);
     void setzeTemperaturSensorStatus(bool aktiv);
+    void setzeGassensorStatus(bool aktiv);
+    void setzeWassersensorStatus(bool aktiv);
 
 private:
     void erstelleLEDs();
@@ -35,6 +37,8 @@ private:
     QLabel* waermeKameraLED;
     QLabel* gpsLED;
     QLabel* temperaturSensorLED;
+    QLabel* gassensorLED;
+    QLabel* wassersensorLED;
     
     // Layout
     QVBoxLayout* hauptLayout;

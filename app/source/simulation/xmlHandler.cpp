@@ -3,6 +3,8 @@
 #include <QDomDocument>
 #include <vector>
 #include "feuer.h"
+#include "gasSimulationElement.h"
+#include "wasserSimulationElement.h"
 #include "simulationElement.h"
 #include "simulation.h"
 #include <QColor>
@@ -57,6 +59,34 @@ void xmlHandler::ladePersonen(QDomNodeList personKnoten, Simulation& simulation)
     }
 }
 
+void xmlHandler::ladeGasQuellen(QDomNodeList gasQuellenKnoten, Simulation& simulation) {
+    for(auto i = 0; i < gasQuellenKnoten.count(); ++i) {
+        QDomElement gasElement = gasQuellenKnoten.at(i).toElement();
+        if (!gasElement.isNull()) {
+            float x = gasElement.attribute("x").toFloat();
+            float y = gasElement.attribute("y").toFloat();
+            float r = gasElement.attribute("r").toFloat();
+            float gasKonzentration = gasElement.attribute("gasKonzentration").toFloat();
+            GasSimulationElement* newGasQuelle = new GasSimulationElement(x, y, Qt::yellow, false, r, gasKonzentration);
+            simulation.addiereGasQuelleUmgebung(newGasQuelle);
+        }
+    }
+}
+
+void xmlHandler::ladeWasserQuellen(QDomNodeList wasserQuellenKnoten, Simulation& simulation) {
+    for(auto i = 0; i < wasserQuellenKnoten.count(); ++i) {
+        QDomElement wasserElement = wasserQuellenKnoten.at(i).toElement();
+        if (!wasserElement.isNull()) {
+            float x = wasserElement.attribute("x").toFloat();
+            float y = wasserElement.attribute("y").toFloat();
+            float r = wasserElement.attribute("r").toFloat();
+            float wasserKonzentration = wasserElement.attribute("wasserKonzentration").toFloat();
+            WasserSimulationElement* newWasserQuelle = new WasserSimulationElement(x, y, Qt::blue, false, r, wasserKonzentration);
+            simulation.addiereWasserQuelleUmgebung(newWasserQuelle);
+        }
+    }
+}
+
 bool xmlHandler::ladeXmlSimulation(const QString& filePath, Simulation& simulation) {
     vector<Feuer> Feuers;
     QFile file(filePath);
@@ -68,9 +98,13 @@ bool xmlHandler::ladeXmlSimulation(const QString& filePath, Simulation& simulati
     QDomNodeList feuerKnoten = doc.elementsByTagName("feuer");
     QDomNodeList steineKnoten = doc.elementsByTagName("stein");
     QDomNodeList personKnoten = doc.elementsByTagName("person");
+    QDomNodeList gasQuellenKnoten = doc.elementsByTagName("gasQuelle");
+    QDomNodeList wasserQuellenKnoten = doc.elementsByTagName("wasserQuelle");
     ladePersonen(personKnoten,simulation);
     ladeFeuers(feuerKnoten, simulation);
     ladeSteine(steineKnoten, simulation);
+    ladeGasQuellen(gasQuellenKnoten, simulation);
+    ladeWasserQuellen(wasserQuellenKnoten, simulation);
 
     return true;
 }

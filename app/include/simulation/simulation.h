@@ -3,6 +3,8 @@
 #include <QTimer>
 #include <iostream>
 #include "feuer.h"
+#include "gasSimulationElement.h"
+#include "wasserSimulationElement.h"
 #include <vector>
 #include <QGraphicsScene>
 using namespace  std;
@@ -21,15 +23,21 @@ class Simulation : public QObject {
 public:
 
     vector<Feuer*> gruppeFeuer;
+    vector<GasSimulationElement*> gruppeGasQuellen;
+    vector<WasserSimulationElement*> gruppeWasserQuellen;
     vector<simulationElement*> Steine;
     vector<simulationElement*> Personen;
 
     explicit Simulation(QObject* parent = nullptr);
     void addiereFeuerUmgebung(Feuer * addiereMich);
+    void addiereGasQuelleUmgebung(GasSimulationElement * addiereMich);
+    void addiereWasserQuelleUmgebung(WasserSimulationElement * addiereMich);
     void addiereSteineUmgebung(simulationElement * addiereMich);
     void addierePersonUmgebung(simulationElement * addiereMich);
     void addiereElementeScene(QGraphicsScene * scene);
     float erzeugeTemperatur(const QPointF& objPosition); // temperatur sensor
+    float erzeugeGasKonzentration(const QPointF& objPosition); // gas sensor
+    float erzeugeWasserKonzentration(const QPointF& objPosition); // wasser sensor
     void aktualisierePosition(const QPointF& objPosition); // gps sensor
 
 };

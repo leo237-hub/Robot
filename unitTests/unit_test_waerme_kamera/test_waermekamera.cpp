@@ -18,7 +18,7 @@ void TestWaermeKamera::testKonstruktor()
     WaermeKamera testKamera;
     
     // Kamera sollte standardmäßig inaktiv sein
-    QVERIFY(!testKamera.istAktive());
+    QVERIFY(!testKamera.istAktiv());
 }
 
 /*
@@ -27,17 +27,17 @@ Test für Schalten der Kamera
 void TestWaermeKamera::testSchalten()
 {
     // Initial sollte Kamera inaktiv sein
-    QVERIFY(!kamera->istAktive());
+    QVERIFY(!kamera->istAktiv());
     
     // Nach dem ersten Schalten sollte sie aktiv sein
     bool ergebnis = kamera->wSchalten();
     QVERIFY(ergebnis);
-    QVERIFY(kamera->istAktive());
+    QVERIFY(kamera->istAktiv());
     
     // Nach dem zweiten Schalten sollte sie wieder inaktiv sein
     ergebnis = kamera->wSchalten();
     QVERIFY(!ergebnis);
-    QVERIFY(!kamera->istAktive());
+    QVERIFY(!kamera->istAktiv());
 }
 
 /*
@@ -51,25 +51,25 @@ void TestWaermeKamera::testSchaltungMehrfach()
         status = !status;
         bool ergebnis = kamera->wSchalten();
         QCOMPARE(ergebnis, status);
-        QCOMPARE(kamera->istAktive(), status);
+        QCOMPARE(kamera->istAktiv(), status);
     }
 }
 
 /*
 Test für Aktiv Status abfragen
 */
-void TestWaermeKamera::testIstAktive()
+void TestWaermeKamera::testIstAktiv()
 {
     // Initial inaktiv
-    QVERIFY(!kamera->istAktive());
+    QVERIFY(!kamera->istAktiv());
     
     // Nach Aktivierung aktiv
     kamera->wSchalten();
-    QVERIFY(kamera->istAktive());
+    QVERIFY(kamera->istAktiv());
     
     // Nach Deaktivierung wieder inaktiv
     kamera->wSchalten();
-    QVERIFY(!kamera->istAktive());
+    QVERIFY(!kamera->istAktiv());
 }
 
 /*

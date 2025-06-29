@@ -10,7 +10,7 @@ public:
     SensorDisplay();
     virtual ~ SensorDisplay();
     void kameraLiveStarten() const;
-    void kAmeraLiveStoppen() const;
+    void kameraLiveStoppen() const;
     void sensorInformationenAnzeigen() const;
     void gesamteDarstellungAktualisieren() const;
 };

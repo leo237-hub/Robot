@@ -34,11 +34,15 @@ SOURCES += \
     source/logik/NormalKamera.cpp \
     source/logik/GpsSensor.cpp \
     source/logik/TemperaturSensor.cpp \
+    source/logik/Gassensor.cpp \
+    source/logik/Wassersensor.cpp \
     source/simulation/BewegungsSimulation.cpp \
     source/simulation/simulation.cpp \
     source/simulation/SimulationRoboter.cpp \
     source/simulation/WaermeKamera.cpp \
     source/simulation/feuer.cpp \
+    source/simulation/gasSimulationElement.cpp \
+    source/simulation/wasserSimulationElement.cpp \
     source/simulation/simulationElement.cpp \
     source/simulation/xmlHandler.cpp \
     source/simulation/position.cpp \
@@ -81,6 +85,8 @@ HEADERS += \
     include/simulation/BewegungsSimulation.h \
     include/simulation/SimulationRoboter.h \
     include/simulation/feuer.h \
+    include/simulation/gasSimulationElement.h \
+    include/simulation/wasserSimulationElement.h \
     include/simulation/position.h \
     include/simulation/simulation.h \
     include/simulation/xmlHandler.h \
