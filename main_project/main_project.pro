@@ -8,7 +8,12 @@ SUBDIRS += \
     ../unitTests/unit_tests_simelement \
     ../unitTests/unit_tests_feuer \
     ../unitTests/unit_test_dc_signalinterpreter \
-
+    ../unitTests/unit_test_wassersensor/unit_test_wassersensor.pro \
+    ../unitTests/unit_test_gassensor/unit_test_gassensor.pro \
+    ../unitTests/unit_test_lampe/unit_test_lampe.pro \
+    ../unitTests/unit_test_paketfach/unit_test_paketfach.pro \
+    ../unitTests/unit_test_knopf/unit_test_knopf.pro \
+    ../unitTests/unit_test_gpssensor/unit_test_gpssensor.pro
 
 unitTests.depends = app
 CONFIG += ordered
