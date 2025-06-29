@@ -119,6 +119,15 @@ void LEDPanel::erstelleLEDs() {
     ledLayout->addWidget(wasserLabel, 8, 0);
     ledLayout->addWidget(wassersensorLED, 8, 1);
     
+    /* Lampe LED */
+    QLabel* lampeLabel = new QLabel("Lampe");
+    lampeLabel->setStyleSheet("QLabel { color: white; font-size: 10px; }");
+    lampeLED = new QLabel();
+    lampeLED->setFixedSize(20, 20);
+    lampeLED->setStyleSheet("QLabel { background-color: #ff0000; border: 2px solid #333333; border-radius: 10px; }");
+    ledLayout->addWidget(lampeLabel, 9, 0);
+    ledLayout->addWidget(lampeLED, 9, 1);
+    
     /* Alle LEDs als ausgeschaltet initialisieren */
     ledZustaende[roboterLED] = false;
     ledZustaende[motorLED] = false;
@@ -129,6 +138,7 @@ void LEDPanel::erstelleLEDs() {
     ledZustaende[temperaturSensorLED] = false;
     ledZustaende[gassensorLED] = false;
     ledZustaende[wassersensorLED] = false;
+    ledZustaende[lampeLED] = false;
 }
 
 void LEDPanel::aktualisiereLED(QLabel* led, bool aktiv) {
@@ -176,4 +186,8 @@ void LEDPanel::setzeGassensorStatus(bool aktiv) {
 
 void LEDPanel::setzeWassersensorStatus(bool aktiv) {
     aktualisiereLED(wassersensorLED, aktiv);
+}
+
+void LEDPanel::setzeLampeStatus(bool aktiv) {
+    aktualisiereLED(lampeLED, aktiv);
 } 

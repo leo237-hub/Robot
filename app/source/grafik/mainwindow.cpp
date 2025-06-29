@@ -189,6 +189,9 @@ void MainWindow::on_pushButtonEinschalten_clicked() {
     kamera.setAktiv(false);
         waermekamera.wSchalten(); /* Wärmekamera ausschalten */
         
+        /* Lampe ausschalten */
+        lampe.ausschalten();
+        
         /* Displays leeren */
     ui->NormalKamera->clear();
     ui->WaermeKamera->clear();
@@ -196,14 +199,17 @@ void MainWindow::on_pushButtonEinschalten_clicked() {
         /* Button-States zurücksetzen */
     ui->NormalAnAus->setChecked(false);
         ui->WarmAnAus->setChecked(false);
+        ui->LampeAnAus->setChecked(false);
         
         /* LED-Status zurücksetzen */
         ledPanel->setzeKameraStatus(false);
         ledPanel->setzeWaermeKameraStatus(false);
+        ledPanel->setzeLampeStatus(false);
         
         /* Kamera-Status-Variablen zurücksetzen */
         normalKameraIstAktiv = false;
         waermeKameraIstAktiv = false;
+        lampeIstAktiv = false;
         
         /* LED Status aktualisieren */
         ledPanel->setzeRoboterStatus(false);
@@ -353,6 +359,33 @@ void MainWindow::on_WarmAnAus_clicked()
         qDebug() << "Wärmekamera ist ausgeschaltet";
     }
 }
+
+void MainWindow::on_LampeAnAus_clicked()
+{
+    if (!DisAktiv){
+        ui->LampeAnAus->setChecked(false);
+        lampeIstAktiv = false;
+        return;
+    }
+    
+    /* Toggle basierend auf dem aktuellen Zustand des Buttons */
+    bool buttonChecked = ui->LampeAnAus->isChecked();
+    
+    if (buttonChecked && !lampeIstAktiv) {
+        /* Lampe einschalten */
+        lampe.einschalten();
+        ledPanel->setzeLampeStatus(true);
+        lampeIstAktiv = true;
+        qDebug() << "Lampe ist eingeschaltet";
+    } else if (!buttonChecked && lampeIstAktiv) {
+        /* Lampe ausschalten */
+        lampe.ausschalten();
+        ledPanel->setzeLampeStatus(false);
+        lampeIstAktiv = false;
+        qDebug() << "Lampe ist ausgeschaltet";
+    }
+}
+
 void MainWindow::zeigeWaermeBild() {
     if (!waermeKameraIstAktiv) return;
     

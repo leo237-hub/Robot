@@ -14,6 +14,7 @@
 #include "Gassensor.h"
 #include "Wassersensor.h"
 #include "LEDPanel.h"
+#include "lampe.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -54,10 +55,12 @@ private:
     LEDPanel* ledPanel;
     GasSensor gasSensor;
     Wassersensor wasserSensor;
+    Lampe lampe;
     
     // Variablen um den tatsächlichen Status der Kameras zu verfolgen
     bool normalKameraIstAktiv = false;
     bool waermeKameraIstAktiv = false;
+    bool lampeIstAktiv = false;
 
 private slots:
     void on_pushButtonEinschalten_clicked();
@@ -65,6 +68,7 @@ private slots:
     void zeigeWaermeBild();
     void on_NormalAnAus_toggled();
     void on_WarmAnAus_clicked();
+    void on_LampeAnAus_clicked();
     void zeigeTemp();
     void zeigeGPS();
     void zeigeGas();

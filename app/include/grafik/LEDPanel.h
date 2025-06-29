@@ -24,6 +24,7 @@ public:
     void setzeTemperaturSensorStatus(bool aktiv);
     void setzeGassensorStatus(bool aktiv);
     void setzeWassersensorStatus(bool aktiv);
+    void setzeLampeStatus(bool aktiv);
 
 private:
     void erstelleLEDs();
@@ -39,6 +40,7 @@ private:
     QLabel* temperaturSensorLED;
     QLabel* gassensorLED;
     QLabel* wassersensorLED;
+    QLabel* lampeLED;
     
     // Layout
     QVBoxLayout* hauptLayout;
