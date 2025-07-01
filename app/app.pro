@@ -38,6 +38,7 @@ SOURCES += \
     source/logik/Wassersensor.cpp \
     source/logik/hauptdisplay.cpp \
     source/logik/WaermeKamera.cpp \
+    source/logik/Lidarsensor.cpp
     source/simulation/BewegungsSimulation.cpp \
     source/simulation/simulation.cpp \
     source/simulation/SimulationRoboter.cpp \
