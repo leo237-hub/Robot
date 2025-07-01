@@ -15,6 +15,8 @@
 #include "Wassersensor.h"
 #include "LEDPanel.h"
 #include "lampe.h"
+#include "Lidarsensor.h"
+#include "simulation.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -56,6 +58,9 @@ private:
     GasSensor gasSensor;
     Wassersensor wasserSensor;
     Lampe lampe;
+    Simulation* simulation;
+    LidarSensor* lidarSensor;
+    void updateLidar();
     
     // Variablen um den tatsächlichen Status der Kameras zu verfolgen
     bool normalKameraIstAktiv = false;
