@@ -19,3 +19,15 @@ double simulationElement::holeRadius() const {
     return this->radius;
 }
 
+double simulationElement::getX() const {
+    return holePosition().x();  // Oder wie immer du X in Position bekommst
+}
+
+double simulationElement::getY() const {
+    return holePosition().y();
+}
+
+QPointF simulationElement::getPosition() const {
+    return QPointF(getX(), getY());
+}
+

@@ -14,6 +14,9 @@ private:
     double radius;
 
 public:
+    double getX() const;
+    double getY() const;
+    QPointF getPosition() const;
 
     simulationElement(double x, double y,Qt::GlobalColor color,bool solidStatus, double radius = 20.0);
     bool istSolid() const;

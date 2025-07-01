@@ -12,18 +12,21 @@ private:
     bool isActive;
     void refreshView();
 private slots:
-    void vorwaerts();
     void rueckwaerts();
-    void Links();
-    void Rechts();
-    void stoppen();
+
 public:
     explicit SimRoboter(QObject *parent = nullptr);
     void setRoboter(GraphischesRoboter* rob);
     virtual ~SimRoboter();
+    void Links();
+    void vorwaerts();
+    void Rechts();
+    bool istBlockiert = false;
+    bool ausweichenAktiv = false;
 
 public slots:
     void updateSimulation();
+    void stoppen();
 };
 
 

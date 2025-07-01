@@ -11,7 +11,11 @@ void SimRoboter::setRoboter(GraphischesRoboter *rob) {
 }
 
 void SimRoboter::vorwaerts() {
-    if (!roboter) return;
+       if (!roboter) return;
+        if (istBlockiert) {
+            stoppen();
+            return;
+        }
     roboter->empfangesignal(signaltyp::Vorvaerts);
     roboter->logikAktualisieren(0.05f);
     refreshView();
