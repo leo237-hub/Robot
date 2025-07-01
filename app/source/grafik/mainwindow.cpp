@@ -19,6 +19,8 @@
 #include "GpsSensor.h"
 #include "LEDPanel.h"
 #include "Gassensor.h"
+#include "Lidarsensor.h"
+#include "simulationElement.h"
 #include <algorithm>
 
 using namespace std;
@@ -60,6 +62,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setScene(scene);
 
     gpsSensor = new GPSSensor();
+    lidarSensor = new LidarSensor(gpsSensor, 100.0, 360);
     roboter = new GraphischesRoboter(50, 100, 40, gpsSensor);
     scene->addItem(roboter);
     roboter->setFocus();
@@ -141,11 +144,58 @@ MainWindow::MainWindow(QWidget *parent)
     QTimer *motorLEDTimer = new QTimer(this);
     connect(motorLEDTimer, &QTimer::timeout, this, &MainWindow::motorLEDsAktualisieren);
     motorLEDTimer->start(100); /* Alle 100ms aktualisieren */
+
+    QTimer* lidarTimer = new QTimer(this);
+    connect(lidarTimer, &QTimer::timeout, this, &MainWindow::updateLidar);
+    lidarTimer->start(100); // alle 100ms aktualisieren
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::updateLidar() {
+    if (!lidarSensor || !roboter || !scene || !ctrl) return;
+    QPointF roboterPos(gpsSensor->getX(), gpsSensor->getY());
+    auto items = scene->items();
+    qreal minAbstand = std::numeric_limits<qreal>::max();
+    simulationElement* naechsterStein = nullptr;
+
+    for (QGraphicsItem* item : items) {
+        simulationElement* element = dynamic_cast<simulationElement*>(item);
+        if (element) {
+            QPointF elementPos = element->holePosition();
+            qreal abstand = QLineF(roboterPos, elementPos).length();
+
+            if (abstand < minAbstand) {
+                minAbstand = abstand;
+                naechsterStein = element;
+            }
+        }
+    }
+
+    const qreal sicherheitsAbstand = 20.0;
+
+    if (naechsterStein && minAbstand < sicherheitsAbstand) {
+        ctrl->istBlockiert = true;
+        ctrl->stoppen();
+
+        if (!ctrl->ausweichenAktiv) {
+            ctrl->ausweichenAktiv = true;
+            if (rand() % 2 == 0) {
+                ctrl->Links();
+            } else {
+                ctrl->Rechts();
+            }
+        }
+
+    } else {
+        // Kein Stein oder weit genug weg
+        ctrl->istBlockiert = false;
+        ctrl->ausweichenAktiv = false;
+        ctrl->vorwaerts();
+    }
 }
 
 void MainWindow::on_pushButtonEinschalten_clicked() {
