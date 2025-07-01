@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/data">
-        <file>resources/umgebung.xml</file>
-        <file>resources/umgebung.png</file>
-        <file>resources/sos-morsecode-31731.mp3</file>
-    </qresource>
-</RCC>
