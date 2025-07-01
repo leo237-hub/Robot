@@ -1,21 +1,26 @@
 #pragma once
+
+using namespace  std;
 #include <vector>
+#include "GpsSensor.h"
+
+struct Obstacle {
+    double x;
+    double y;
+    double radius;
+};
 
 class LidarSensor {
-private:
-    float Bereich;       // Maximaler Messbereich in Metern
-    float Aufloesung;    // Auflösung in Grad oder Meter
-
-    std::vector<float> scanDaten;  // Gespeicherte Scan-Werte
-
 public:
-    // Konstruktor
-    LidarSensor(float bereich, float aufloesung);
+    LidarSensor(GPSSensor* gpsSensor, double maxRange, int numBeams);
+    void update(const std::vector<Obstacle>& obstacles);
+    const std::vector<double>& getDistances() const;
 
-    // Simuliert einen Umgebungsscan und speichert die Daten
-    void UmgebungScannen();
-
-    // Analysiert die gescannten Daten, um Hindernisse zu erkennen
-    bool HindernisseErkennen() const;
+private:
+    double measureBeam(int beamIndex, const std::vector<Obstacle>& obstacles);
+    GPSSensor* gps;
+    double maxRange;
+    int numBeams;
+    vector<double> distances;
 };
 
