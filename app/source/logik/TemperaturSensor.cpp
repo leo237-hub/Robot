@@ -39,6 +39,10 @@ float TemperaturSensor::getLetzteMessung() const {
     return letzteMessung;
 }
 
+void TemperaturSensor::setLetzteMessung(float value) {
+    letzteMessung = value;
+}
+
 void TemperaturSensor::messungLoop() {
     while(!stopFlag) {
         float nuovaTemp = temperaturQuelle();

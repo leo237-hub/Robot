@@ -20,7 +20,7 @@ double simulationElement::holeRadius() const {
 }
 
 double simulationElement::getX() const {
-    return holePosition().x();  // Oder wie immer du X in Position bekommst
+    return holePosition().x();  
 }
 
 double simulationElement::getY() const {

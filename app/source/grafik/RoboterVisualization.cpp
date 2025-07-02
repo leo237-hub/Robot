@@ -100,7 +100,6 @@ void RoboterVisualization::keyPressEvent(QKeyEvent *event) {
         return;
     }
 
-    // Gestione frecce sinistra/destra SOLO per la testa
     if (event->key() == Qt::Key_Left) {
         if (bewegungsRoboter)
             bewegungsRoboter->EmpfangeJoystick2(signaltyp::DrehenLinks);
@@ -113,7 +112,6 @@ void RoboterVisualization::keyPressEvent(QKeyEvent *event) {
         return;
     }
 
-    // Gestione WASD e frecce su/giù SOLO per il movimento
     QString key;
     switch(event->key()) {
     case Qt::Key_W:

@@ -11,10 +11,10 @@ Verwaltet die Interaktion zwischen Benutzer, Roboter und Sensoren, steuert die A
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include "WaermeKameraDisplay.h"
-#include "../logik/Waermekamera.h"
-#include "simulation/feuer.h"
+#include "Waermekamera.h"
+#include "feuer.h"
 #include "GraphischesRoboter.h"
-#include "../logik/Hauptdisplay.h"
+#include "Hauptdisplay.h"
 #include "SimulationRoboter.h"
 #include "NormalKamera.h"
 #include <QShortcut>
@@ -26,7 +26,7 @@ Verwaltet die Interaktion zwischen Benutzer, Roboter und Sensoren, steuert die A
 #include "lampe.h"
 #include "Lidarsensor.h"
 #include "simulation.h"
-#include "../logik/MittelWerter.h"
+#include "MittelWerter.h"
 #include "paketfach.h"
 
 QT_BEGIN_NAMESPACE
@@ -71,17 +71,16 @@ private:
     Lampe lampe;
     Simulation* simulation;
     LidarSensor* lidarSensor;
-    // Sensori ridondanti come membri
     TemperaturSensor* tempSensorArr[3];
-    // MittelWerter per la temperatura
+
     MittelWerter<TemperaturSensor>* mittelwertTemp = nullptr;
     MittelWerter<GasSensor>* mittelwertGas = nullptr;
     MittelWerter<Wassersensor>* mittelwertWasser = nullptr;
     MittelWerter<GPSSensor>* mittelwertGPS = nullptr;
+    
     PaketFach paketfach;
     void updateLidar();
     
-    // Variablen um den tatsächlichen Status der Kameras zu verfolgen
     bool normalKameraIstAktiv = false;
     bool waermeKameraIstAktiv = false;
     bool lampeIstAktiv = false;

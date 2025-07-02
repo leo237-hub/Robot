@@ -53,10 +53,8 @@ private:
     QLabel* lampeLED;
     QLabel* paketfachLED;
     
-    // Layout
     QVBoxLayout* hauptLayout;
     QGridLayout* ledLayout;
     
-    // LED Zustände
     QMap<QLabel*, bool> ledZustaende;
 }; 

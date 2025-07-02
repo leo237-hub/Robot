@@ -7,8 +7,8 @@ GasSimulationElement::GasSimulationElement(double x, double y, Qt::GlobalColor c
     : simulationElement(x, y, color, solidStatus, radius), gasKonzentration(gasKonzentration) {
     
     setRect(0, 0, 1.5*radius, 1.5*radius);
-    setBrush(Qt::transparent); // Rendere invisibile
-    setPen(QPen(Qt::transparent)); // Bordo trasparente
+    setBrush(Qt::transparent); 
+    setPen(QPen(Qt::transparent)); 
     setPos(x, y);
     this->gasKonzentration = gasKonzentration;
 }

@@ -32,7 +32,6 @@ uint8_t*  NormalKamera::fotoMachen(uint8_t bild [[maybe_unused]])const{
     }
     return data;
 }
-//int NormalKamera::datenSchicken(uint8_t bild){}
 
 void NormalKamera::setAktiv(bool status){
     istAn = status;

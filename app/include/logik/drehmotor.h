@@ -30,8 +30,8 @@ public:
     Drehmotor();
     ~Drehmotor() override;
     
-    float DrehWinkel(float Winkel); //BestimmtenWinkelUmdrehen
-    float DrehZahl(float Zahl);     //DrehzahlEinstellen
+    float DrehWinkel(float Winkel); 
+    float DrehZahl(float Zahl);     
     void Stoppen();
     
     // Getter-Methoden für Kommunikation mit DreheSignalInterpreter
@@ -45,4 +45,3 @@ public:
     void setzeLeistung(float neueLeistung);
     void setzeSignaltyp(signaltyp sig);
 };
-//Fehlt noch die Methode Ein-Ausschalten von der Klasse Aktoren

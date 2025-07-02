@@ -6,7 +6,7 @@
 using namespace std;
 
 Wassersensor::Wassersensor()
-    : wasserQuelle([](){ return 30.0f; }), // Standard Luftfeuchtigkeit 30% (abbassato da 50%)
+    : wasserQuelle([](){ return 30.0f; }), 
     letzteMessung(30.0f),
     aktiv(false),
     stopFlag(false)

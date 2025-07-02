@@ -39,7 +39,6 @@ private:
     bool blockVorwaerts = false;
     bool sensorenAktiv = false;
 
-    // Sensori ridondanti
     TemperaturSensor* tempSensor[3];
     LidarSensor* lidarSensor[3];
     GPSSensor* gpsSensorArr[3];
@@ -57,7 +56,6 @@ private:
 public:
     GraphischesRoboter(TemperaturSensor* t[3], LidarSensor* l[3], GPSSensor* g[3], GasSensor* gas[3], Wassersensor* w[3], Kettensensor* k[3], double x = 0.0, double y = 0.0, double radius = 20.0);
     ~GraphischesRoboter();
-    // void empfangesignal(signaltyp s);
     void empfangeJoystick1(signaltyp s);
     void empfangeJoystick2(signaltyp s);
     void logikAktualisieren(float dt);
@@ -66,11 +64,9 @@ public:
 
     GraphischesRoboter(double x, double y, double radius, GPSSensor* gps = nullptr);
     
-    // Öffentliche Methoden für Tastatur-Events
     void tastaturDruckBehandeln(QKeyEvent *event);
     void tastaturLoslassenBehandeln(QKeyEvent *event);
     
-    // Methode für Roboter-Status
     void setzeRoboterAktiv(bool aktiv);
     
     void setzeBlockVorwaerts(bool blockiert);

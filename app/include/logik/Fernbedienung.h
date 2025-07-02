@@ -42,7 +42,6 @@ public:
     void Anschalten();
     void verarbeiteEingabe(FernbedienungInterpreter& interpreter);
     
-    // Joystick Kommunikation
     void verarbeiteJoystick1Eingabe(float x, float y);
     void verarbeiteJoystick2Eingabe(float x, float y);
     

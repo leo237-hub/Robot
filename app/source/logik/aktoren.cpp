@@ -9,7 +9,7 @@ virtual Aktoren::~Aktoren(){}
 Aktoren::Aktoren()
     : active(false) {}
 
-Aktoren::~Aktoren() = default;  // virtuelle Destruktor-Implementierung
+Aktoren::~Aktoren() = default;  
 
 void Aktoren::Anschalten() {
     active = true;

@@ -4,33 +4,7 @@
 
 using namespace  std;
 
-/*
 
-string Selfcheck::TemperaturSensPruefen(){
-    return 0;
-}
-string Selfcheck::FeuchtigkeitSensPruefen(){
-    return 0;
-}
-string Selfcheck::LidarSensorPruefen(){
-    return 0;
-}
-string Selfcheck::WasserSensPruefen(){
-    return 0;
-}
-string Selfcheck::GPsSensorPruefen(){
-    return 0;
-}
-string Selfcheck::DCMotorPruefen(){
-    return 0;
-}
-string Selfcheck::KetteSensPruefen(){
-    return 0;
-}
-
-Selfcheck::Selfcheck() {}
-Selfcheck::~Selfcheck(){}
-*/
 
 Selfcheck::Selfcheck(TemperaturSensor* t[3], LidarSensor* l[3], GPSSensor* g[3], GasSensor* gas[3], Wassersensor* w[3], Kettensensor* k[3]) {
     for (int i = 0; i < 3; ++i) {

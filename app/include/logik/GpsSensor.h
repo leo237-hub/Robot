@@ -1,6 +1,7 @@
 #pragma once
 #include <array>
 #include <cmath>
+
 class GPSSensor {
 private:
     double x;

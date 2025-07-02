@@ -54,10 +54,9 @@ GraphischesRoboter::GraphischesRoboter(double x, double y, double radius, GPSSen
     connect(bewegungsTimer, &QTimer::timeout, this, &GraphischesRoboter::bewegungAktualisieren);
     bewegungsTimer->start(50); /* 50ms = 20 FPS für kontrolliertere Bewegung */
 
-    // Inizializza sensori ridondanti
     for (int i = 0; i < 3; ++i) {
         tempSensor[i] = new TemperaturSensor();
-        lidarSensor[i] = new LidarSensor(10.0, 10); // parametri dummy, KEIN nullptr mehr
+        lidarSensor[i] = new LidarSensor(10.0, 10); 
         gpsSensorArr[i] = new GPSSensor();
         gasSensor[i] = new GasSensor();
         wasserSensor[i] = new Wassersensor();
@@ -65,7 +64,6 @@ GraphischesRoboter::GraphischesRoboter(double x, double y, double radius, GPSSen
     }
     gpsSensor = gpsSensorArr[0];
     selfcheck = new Selfcheck(tempSensor, lidarSensor, gpsSensorArr, gasSensor, wasserSensor, ketteSensor);
-    // Timer per selfcheck periodico
     selfcheckTimer = new QTimer(this);
     connect(selfcheckTimer, &QTimer::timeout, this, [this]() {
         if (!ledPanel || !selfcheck) return;
@@ -85,7 +83,7 @@ GraphischesRoboter::GraphischesRoboter(double x, double y, double radius, GPSSen
         auto gpsRes = selfcheck->GPsSensorPruefen();
         ledPanel->setzeGPSStatus(gpsRes == "OK");
     });
-    selfcheckTimer->start(500); // ogni 500ms
+    selfcheckTimer->start(500); 
 }
 
 GraphischesRoboter::GraphischesRoboter(TemperaturSensor* t[3], LidarSensor* l[3], GPSSensor* g[3], GasSensor* gas[3], Wassersensor* w[3], Kettensensor* k[3], double x, double y, double radius)
@@ -105,7 +103,6 @@ GraphischesRoboter::GraphischesRoboter(TemperaturSensor* t[3], LidarSensor* l[3]
     bewegungsTimer = new QTimer(this);
     connect(bewegungsTimer, &QTimer::timeout, this, &GraphischesRoboter::bewegungAktualisieren);
     bewegungsTimer->start(50);
-    // Usa le istanze condivise
     for (int i = 0; i < 3; ++i) {
         tempSensor[i] = t[i];
         lidarSensor[i] = l[i];
@@ -176,7 +173,7 @@ void GraphischesRoboter::empfangeJoystick2(signaltyp s) {
     } else if (s == signaltyp::DrehenRechts) {
         drehInterpreter->drehenRechts();
     } else {
-        // Niente o stop
+        
         drehInterpreter->verarbeiteRotation(0.0f, 0.0f);
     }
 }

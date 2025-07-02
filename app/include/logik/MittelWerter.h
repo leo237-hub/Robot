@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
 #include <type_traits>
+#include "GpsSensor.h"
 
-// Classe template per calcolare la media delle letture di sensori
-// SensorType deve avere il metodo float getLetzteMessung() const;
+
 template<typename SensorType>
 class MittelWerter {
 public:

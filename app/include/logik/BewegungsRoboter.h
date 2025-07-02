@@ -19,7 +19,7 @@ private:
     dcMotor motorrechts;
     float x, y;
     float Winkel;
-    bool roboterAktiv = true; // Roboter ist standardmäßig aktiv
+    bool roboterAktiv = true; 
     bool blockVorwaerts = false;
     DreheSignalInterpreter* drehInterpreter = nullptr;
     void vorwaerts(float leistung = 1.0f);
@@ -36,13 +36,12 @@ public:
     float gety() const;
     float getrichtung() const;
     
-    // Motor state getters for simulation
+    
     float getMotorLinksLeistung() const;
     float getMotorRechtsLeistung() const;
     int getMotorLinksRichtung() const;
     int getMotorRechtsRichtung() const;
     
-    // Methoden für Roboter-Status
     void setzeAktiv(bool aktiv);
     bool istAktiv() const { return roboterAktiv; }
     void setzeBlockVorwaerts(bool blockiert);

@@ -43,7 +43,6 @@ void BewegungsRoboter::EmpfangeJoystick1(signaltyp Signal) {
 }
 
 void BewegungsRoboter::EmpfangeJoystick2(signaltyp Signal) {
-    qDebug() << "EmpfangeJoystick2 chiamato con segnale:" << static_cast<int>(Signal);
     if (!roboterAktiv) return;
     if (!drehInterpreter) return;
     if (Signal == signaltyp::DrehenLinks) {
@@ -92,7 +91,6 @@ float BewegungsRoboter::getrichtung() const {
     return Winkel;
 }
 
-// Motor state getters for simulation
 float BewegungsRoboter::getMotorLinksLeistung() const {
     return motorlinks.getLeistung();
 }
@@ -113,7 +111,6 @@ void BewegungsRoboter::setzeAktiv(bool aktiv) {
     roboterAktiv = aktiv;
     
     if (!aktiv) {
-        // Roboter stoppen wenn deaktiviert
         stoppen();
     }
     

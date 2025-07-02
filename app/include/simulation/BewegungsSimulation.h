@@ -17,20 +17,17 @@ private:
     float x, y;
     float winkel;
     
-    // Geschwindigkeitsmultiplikator für die Simulation
     const float GESCHWINDIGKEITS_MULTIPLIKATOR = 25.0f;
 
 public:
     BewegungsSimulation(BewegungsRoboter* robot);
     
-    // Position update method (moved from BewegungsRoboter)
     void aktualisierePosition(float deltazeit);
     
-    // Position getters
     float getX() const;
     float getY() const;
     float getWinkel() const;
     
-    // Set initial position
+   
     void setzePosition(float x, float y, float winkel);
 }; 

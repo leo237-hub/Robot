@@ -35,10 +35,10 @@ public:
     void addiereSteineUmgebung(simulationElement * addiereMich);
     void addierePersonUmgebung(simulationElement * addiereMich);
     void addiereElementeScene(QGraphicsScene * scene);
-    float erzeugeTemperatur(const QPointF& objPosition); // temperatur sensor
-    float erzeugeGasKonzentration(const QPointF& objPosition); // gas sensor
-    float erzeugeWasserKonzentration(const QPointF& objPosition); // wasser sensor
-    void aktualisierePosition(const QPointF& objPosition); // gps sensor
+    float erzeugeTemperatur(const QPointF& objPosition); 
+    float erzeugeGasKonzentration(const QPointF& objPosition); 
+    float erzeugeWasserKonzentration(const QPointF& objPosition);     
+    void aktualisierePosition(const QPointF& objPosition);
 
 };
 

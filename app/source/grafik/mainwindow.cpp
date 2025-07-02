@@ -22,7 +22,7 @@
 #include "Lidarsensor.h"
 #include "simulationElement.h"
 #include <algorithm>
-#include "../logik/MittelWerter.h"
+#include "MittelWerter.h"
 
 using namespace std;
 

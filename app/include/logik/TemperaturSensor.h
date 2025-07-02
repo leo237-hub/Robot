@@ -23,6 +23,7 @@ public:
     void starten();
     void stoppen();
     float getLetzteMessung() const;
+    void setLetzteMessung(float value);
 
 private:
     function<float()> temperaturQuelle;

@@ -21,9 +21,7 @@ Parameter: gedrucktesKnopf - Index des gedrückten Knopfes
 Rückgabe: String mit dem interpretierten Befehl
 */
 string SignalWandler::EmpfangeBefehlFernBedienung(int gedrucktesKnopf) {
-    // Esempio: supponiamo che 0 = vorwärts
     if (gedrucktesKnopf == 0 && lidar && roboter) {
-        // Soglia e angolo possono essere parametrizzati
         if (lidar->istHindernisVorne(30.0)) {
             roboter->setzeBlockVorwaerts(true);
             return "Blockiert: Hindernis vorne!";

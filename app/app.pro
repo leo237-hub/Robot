@@ -82,7 +82,6 @@ HEADERS += \
     include/logik/Lidarsensor.h \
     include/logik/TemperaturSensor.h \
     include/logik/Wassersensor.h \
-    include/logik/Sensors.h \
     include/logik/Hauptdisplay.h \
     include/logik/Waermekamera.h \
     include/logik/Lautsprecher.h \
