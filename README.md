@@ -94,7 +94,7 @@ Die Einrueckungen und Position dieser Klammer ** {}** ist mit den Befehl astyle 
 Abweichung von der Form sind **nicht akzeptiert**.
 
 ## 11. Kontrollflussgraph
--  **Kontrollflussgraph** für die Methode Empfangesignal(signaltyp Signal) in  BewegungsRoboter.cpp:
+-  **Kontrollflussgraph** für die Methode void BewegungsRoboter::EmpfangeJoystick1(signaltyp Signal) in  BewegungsRoboter.cpp:
 
 
                 +-------------------+
