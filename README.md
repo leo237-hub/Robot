@@ -94,6 +94,8 @@ Abweichung von der Form sind **nicht akzeptiert**.
 
 ## 11. Kontrollflussgraph
 -  **Kontrollflussgraph** für die Methode Empfangesignal(signaltyp Signal) in  BewegungsRoboter.cpp:
+
+
         +-------------------+
         |   Methodenstart   |
         +-------------------+
@@ -162,6 +164,7 @@ Abweichung von der Form sind **nicht akzeptiert**.
 
 - **Kontrollflussgraph** für double LidarSensor::measureBeam(int beamIndex, const std::vector<Obstacle>& obstacles) aus Lidarsensor.cpp
 
+
 +-----------------------------+
 | Methodenstart               |
 +-----------------------------+
@@ -199,37 +202,35 @@ Abweichung von der Form sind **nicht akzeptiert**.
 +-----------+   +----------------------+
 | continue  |   | perpDist berechnen   |
 +-----------+   +----------------------+
-      |               |
-      |               v
-      |       +-----------------------------+
-      |       | if (perpDist <= obs.radius) |
-      |       +-----------------------------+
-      |             |true           |false
-      |             v               v
-      |   +-------------------+   (zurück zu
-      |   | offset,           |   nächstem
-      |   | distToObstacle    |   Obstacle)
-      |   | berechnen         |
-      |   +-------------------+
-      |             |
-      |             v
-      |   +-------------------------------+
-      |   | if (distToObstacle >= 0 &&    |
-      |   |     distToObstacle <          |
-      |   |     closestDist)              |
-      |   +-------------------------------+
-      |         |true           |false
-      |         v               v
-      |   +----------------+   (zurück zu
-      |   | closestDist =  |   nächstem
-      |   | distToObstacle |   Obstacle)
-      |   +----------------+
-      |         |
-      |         v
-      |   (zurück zu nächstem
-      |    Obstacle)
-      v
-(zurück zu nächstem Obstacle)
+                      |
+                      v
+            +-----------------------------+
+            | if (perpDist <= obs.radius) |
+            +-----------------------------+
+                  |true           |false
+                  v               v
+        +-------------------+   (zurück zu
+        | offset,           |    nächstem
+        | distToObstacle    |    Obstacle)
+        | berechnen         |
+        +-------------------+
+                  |
+                  v
+        +-------------------------------+
+        | if (distToObstacle >= 0 &&    |
+        |     distToObstacle <          |
+        |     closestDist)              |
+        +-------------------------------+
+              |true           |false
+              v               v
+        +----------------+   (zurück zu
+        | closestDist =  |    nächstem
+        | distToObstacle |    Obstacle)
+        +----------------+
+              |
+              v
+        (zurück zu nächstem
+         Obstacle)
            |
            v
 +-----------------------------+
