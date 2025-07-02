@@ -27,6 +27,7 @@ RoboterVisualization::RoboterVisualization(BewegungsRoboter* bewegung, double x,
     setPos(x, y);
     setFlag(QGraphicsItem::ItemIsFocusable);
     setFocus();
+    qDebug() << "[RoboterVisualization] Focusable:" << flags().testFlag(QGraphicsItem::ItemIsFocusable) << "Has focus:" << hasFocus();
 }
 
 RoboterVisualization::~RoboterVisualization() {
@@ -79,7 +80,7 @@ void RoboterVisualization::tastaturDruckSimulieren(const QString& key) {
         return;
     }
     
-    bewegungsRoboter->Empfangesignal(signal);
+    bewegungsRoboter->EmpfangeJoystick1(signal);
     bewegungsSimulation->aktualisierePosition(0.05f);
     visualisierungAktualisieren();
 }
@@ -87,34 +88,51 @@ void RoboterVisualization::tastaturDruckSimulieren(const QString& key) {
 void RoboterVisualization::signalSimulieren(signaltyp signal) {
     if (!bewegungsRoboter || !bewegungsSimulation || !simulationIstAktiv) return;
     
-    bewegungsRoboter->Empfangesignal(signal);
+    bewegungsRoboter->EmpfangeJoystick1(signal);
     bewegungsSimulation->aktualisierePosition(0.05f);
     visualisierungAktualisieren();
 }
 
 void RoboterVisualization::keyPressEvent(QKeyEvent *event) {
+    qDebug() << "[RoboterVisualization] keyPressEvent received, key:" << event->key() << "Has focus:" << hasFocus();
     if (!simulationIstAktiv) {
         event->ignore();
         return;
     }
-    
+
+    // Gestione frecce sinistra/destra SOLO per la testa
+    if (event->key() == Qt::Key_Left) {
+        if (bewegungsRoboter)
+            bewegungsRoboter->EmpfangeJoystick2(signaltyp::DrehenLinks);
+        event->accept();
+        return;
+    } else if (event->key() == Qt::Key_Right) {
+        if (bewegungsRoboter)
+            bewegungsRoboter->EmpfangeJoystick2(signaltyp::DrehenRechts);
+        event->accept();
+        return;
+    }
+
+    // Gestione WASD e frecce su/giù SOLO per il movimento
     QString key;
     switch(event->key()) {
     case Qt::Key_W:
-    case Qt::Key_Up:
         key = "w";
         break;
     case Qt::Key_A:
-    case Qt::Key_Left:
         key = "a";
         break;
     case Qt::Key_S:
-    case Qt::Key_Down:
         key = "s";
         break;
     case Qt::Key_D:
-    case Qt::Key_Right:
         key = "d";
+        break;
+    case Qt::Key_Up:
+        key = "w";
+        break;
+    case Qt::Key_Down:
+        key = "s";
         break;
     case Qt::Key_Q:
         qDebug() << "Simulation beendet.";
@@ -125,7 +143,27 @@ void RoboterVisualization::keyPressEvent(QKeyEvent *event) {
         event->ignore();
         return;
     }
-    
     tastaturDruckSimulieren(key);
     event->accept();
+}
+
+void RoboterVisualization::keyReleaseEvent(QKeyEvent *event) {
+    if (!simulationIstAktiv) {
+        event->ignore();
+        return;
+    }
+    if (event->key() == Qt::Key_Left || event->key() == Qt::Key_Right) {
+        if (bewegungsRoboter)
+            bewegungsRoboter->EmpfangeJoystick2(signaltyp::keine);
+        event->accept();
+        return;
+    }
+    if (event->key() == Qt::Key_W || event->key() == Qt::Key_A || event->key() == Qt::Key_S || event->key() == Qt::Key_D ||
+        event->key() == Qt::Key_Up || event->key() == Qt::Key_Down) {
+        if (bewegungsRoboter)
+            bewegungsRoboter->EmpfangeJoystick1(signaltyp::keine);
+        event->accept();
+        return;
+    }
+    event->ignore();
 } 

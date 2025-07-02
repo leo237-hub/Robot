@@ -83,3 +83,7 @@ void Drehmotor::setzeLeistung(float neueLeistung) {
         Leistung = neueLeistung;
     }
 }
+
+void Drehmotor::setzeSignaltyp(signaltyp sig) {
+    aktuellerSignaltyp = sig;
+}

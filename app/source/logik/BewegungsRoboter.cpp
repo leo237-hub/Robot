@@ -3,13 +3,15 @@
 #include "SignalTyp.h"
 #include <iostream>
 #include <cmath>
+#include <QDebug>
 #define PI 3.14159265f
 using namespace std;
 
 BewegungsRoboter::BewegungsRoboter(float startx, float starty, float startwinkel)
     :x(startx), y(starty), Winkel(startwinkel) {}
 
-void BewegungsRoboter::Empfangesignal(signaltyp Signal) {
+void BewegungsRoboter::EmpfangeJoystick1(signaltyp Signal) {
+    qDebug() << "EmpfangeJoystick1 chiamato con segnale:" << static_cast<int>(Signal);
     if (!roboterAktiv) {
         // Roboter ignoriert Signale wenn inaktiv
         stoppen();
@@ -37,6 +39,19 @@ void BewegungsRoboter::Empfangesignal(signaltyp Signal) {
     default:
         stoppen();
         break;
+    }
+}
+
+void BewegungsRoboter::EmpfangeJoystick2(signaltyp Signal) {
+    qDebug() << "EmpfangeJoystick2 chiamato con segnale:" << static_cast<int>(Signal);
+    if (!roboterAktiv) return;
+    if (!drehInterpreter) return;
+    if (Signal == signaltyp::DrehenLinks) {
+        drehInterpreter->aktiviereDrehmotor(-1.0f);
+    } else if (Signal == signaltyp::DrehenRechts) {
+        drehInterpreter->drehenRechts();
+    } else {
+        drehInterpreter->drehenLinks();
     }
 }
 
@@ -107,6 +122,10 @@ void BewegungsRoboter::setzeAktiv(bool aktiv) {
 
 void BewegungsRoboter::setzeBlockVorwaerts(bool blockiert) {
     blockVorwaerts = blockiert;
+}
+
+void BewegungsRoboter::setzeDrehInterpreter(DreheSignalInterpreter* interpreter) {
+    drehInterpreter = interpreter;
 }
 
 

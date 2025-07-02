@@ -39,6 +39,7 @@ SOURCES += \
     source/logik/hauptdisplay.cpp \
     source/logik/WaermeKamera.cpp \
     source/logik/Lidarsensor.cpp \
+    source/logik/Kettensensor.cpp \
     source/simulation/BewegungsSimulation.cpp \
     source/simulation/simulation.cpp \
     source/simulation/SimulationRoboter.cpp \
@@ -76,8 +77,6 @@ HEADERS += \
     include/logik/ReturnHome.h \
     include/logik/SignalTyp.h \
     include/logik/NormalKamera.h \
-    include/logik/Feuchtigkeitssensor.h \
-    include/logik/Gassensor.h \
     include/logik/GpsSensor.h \
     include/logik/Kettesensor.h \
     include/logik/Lidarsensor.h \

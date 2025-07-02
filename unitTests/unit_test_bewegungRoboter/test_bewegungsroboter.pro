@@ -16,7 +16,9 @@ INCLUDEPATH += $$PWD/../../app/include \
 SOURCES += test_bewegungsroboter.cpp \
            ../../app/source/logik/BewegungsRoboter.cpp \
            ../../app/source/logik/dcmotor.cpp \
-           ../../app/source/logik/aktoren.cpp
+           ../../app/source/logik/aktoren.cpp \
+           ../../app/source/logik/DreheSignalinterpreter.cpp \
+           ../../app/source/logik/drehmotor.cpp
 
 HEADERS += test_bewegungsroboter.h \
            ../../app/include/logik/BewegungsRoboter.h \

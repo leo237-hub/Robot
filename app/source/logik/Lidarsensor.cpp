@@ -1,5 +1,4 @@
 // LidarSensor.cpp
-#include "GpsSensor.h"
 #include "Lidarsensor.h"
 #include <cstdlib>
 #include <ctime>
@@ -11,65 +10,55 @@
 -Initialisiert ein Distanz-Array mit numBeams Einträgen, alle auf maxRange gesetzt
 -update: Für jeden Strahl (beamIndex) wird measureBeam aufgerufen, um die Entfernung zum nächstgelegenen Hindernis in dieser Richtung zu messen.
 */
-LidarSensor::LidarSensor(GPSSensor* gpsSensor, double maxRange, int numBeams)
-    : gps(gpsSensor), maxRange(maxRange), numBeams(numBeams), distances(numBeams, maxRange)
+LidarSensor::LidarSensor(double maxReichweite, int anzahlStrahlen)
+    : maxReichweite(maxReichweite), anzahlStrahlen(anzahlStrahlen), distanzen(anzahlStrahlen, maxReichweite), sensorX(0.0), sensorY(0.0)
 {
-   srand(static_cast<unsigned int>(std::time(nullptr)));
+    srand(static_cast<unsigned int>(std::time(nullptr)));
 }
 
-void LidarSensor::update(const std::vector<Obstacle>& obstacles) {
-    for (int i = 0; i < numBeams; ++i) {
-        distances[i] = measureBeam(i, obstacles);
+void LidarSensor::setzePosition(double x, double y) {
+    sensorX = x;
+    sensorY = y;
+}
+
+void LidarSensor::update(const std::vector<Obstacle>& hindernisse) {
+    for (int i = 0; i < anzahlStrahlen; ++i) {
+        distanzen[i] = messeStrahl(i, hindernisse);
     }
 }
 
-const std::vector<double>& LidarSensor::getDistances() const {
-    return distances;
+const std::vector<double>& LidarSensor::gibDistanzen() const {
+    return distanzen;
 }
 
-
-double LidarSensor::measureBeam(int beamIndex, const std::vector<Obstacle>& obstacles) {
-    double angle = (2.0 * M_PI * beamIndex) / numBeams;
-
-    double sensorX = gps->getX();
-    double sensorY = gps->getY();
-
-    double closestDist = maxRange;
-
-    for (const auto& obs : obstacles) {
-        double dx = obs.x - sensorX;
-        double dy = obs.y - sensorY;
-
-        // Projektion des Vektors auf Strahlrichtung
-        double proj = dx * std::cos(angle) + dy * std::sin(angle);
-
-        if (proj < 0 || proj > maxRange)
+double LidarSensor::messeStrahl(int strahlIndex, const std::vector<Obstacle>& hindernisse) {
+    double winkel = (2.0 * M_PI * strahlIndex) / anzahlStrahlen;
+    double naechsteDistanz = maxReichweite;
+    for (const auto& hindernis : hindernisse) {
+        double dx = hindernis.x - sensorX;
+        double dy = hindernis.y - sensorY;
+        double projektion = dx * std::cos(winkel) + dy * std::sin(winkel);
+        if (projektion < 0 || projektion > maxReichweite)
             continue;
-
-        // Abstand des Objekts vom Strahl (senkrecht)
-        double perpDist = std::abs(-dx * std::sin(angle) + dy * std::cos(angle));
-
-        if (perpDist <= obs.radius) {
-            double offset = std::sqrt(obs.radius * obs.radius - perpDist * perpDist);
-            double distToObstacle = proj - offset;
-            if (distToObstacle >= 0 && distToObstacle < closestDist) {
-                closestDist = distToObstacle;
+        double senkrechterAbstand = std::abs(-dx * std::sin(winkel) + dy * std::cos(winkel));
+        if (senkrechterAbstand <= hindernis.radius) {
+            double offset = std::sqrt(hindernis.radius * hindernis.radius - senkrechterAbstand * senkrechterAbstand);
+            double distZumHindernis = projektion - offset;
+            if (distZumHindernis >= 0 && distZumHindernis < naechsteDistanz) {
+                naechsteDistanz = distZumHindernis;
             }
         }
     }
-
-    return closestDist;
+    return naechsteDistanz;
 }
 
 bool LidarSensor::istHindernisVorne(double sicherheitsAbstand, double winkelStart, double winkelEnde) const {
-    // Angoli in gradi rispetto alla direzione "avanti" (0)
-    // Converte in radianti e trova i beam corrispondenti
-    int startIdx = static_cast<int>((winkelStart + 360.0) / 360.0 * numBeams) % numBeams;
-    int endIdx = static_cast<int>((winkelEnde + 360.0) / 360.0 * numBeams) % numBeams;
-    if (startIdx > endIdx) endIdx += numBeams;
+    int startIdx = static_cast<int>((winkelStart + 360.0) / 360.0 * anzahlStrahlen) % anzahlStrahlen;
+    int endIdx = static_cast<int>((winkelEnde + 360.0) / 360.0 * anzahlStrahlen) % anzahlStrahlen;
+    if (startIdx > endIdx) endIdx += anzahlStrahlen;
     for (int i = startIdx; i <= endIdx; ++i) {
-        int idx = i % numBeams;
-        if (distances[idx] < sicherheitsAbstand) {
+        int idx = i % anzahlStrahlen;
+        if (distanzen[idx] < sicherheitsAbstand) {
             return true;
         }
     }

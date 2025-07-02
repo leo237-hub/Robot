@@ -34,6 +34,7 @@ public:
     void setzeGassensorStatus(bool aktiv);
     void setzeWassersensorStatus(bool aktiv);
     void setzeLampeStatus(bool aktiv);
+    void setzePaketfachStatus(bool offen);
 
 private:
     void erstelleLEDs();
@@ -50,6 +51,7 @@ private:
     QLabel* gassensorLED;
     QLabel* wassersensorLED;
     QLabel* lampeLED;
+    QLabel* paketfachLED;
     
     // Layout
     QVBoxLayout* hauptLayout;

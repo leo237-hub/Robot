@@ -5,4 +5,6 @@ enum class signaltyp {
     Rueckwaerts,
     Links,
     Rechts,
+    DrehenRechts,
+    DrehenLinks
 };

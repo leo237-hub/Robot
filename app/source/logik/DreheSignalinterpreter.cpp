@@ -34,11 +34,16 @@ void DreheSignalInterpreter::verarbeiteRotation(float winkel, float intensitaet)
         float drehzahl = (intensitaet / 100.0f) * drehmotor->getMaxDrehzahl();
         drehmotor->DrehZahl(drehzahl);
         
+        // Signaltyp bestimmen
+        signaltyp sig = (winkel < 180.0f) ? signaltyp::DrehenRechts : signaltyp::DrehenLinks;
+        drehmotor->setzeSignaltyp(sig);
+        
         // Führe die Rotation aus
         rotiereKopf(winkel, intensitaet);
     } else if (drehmotor) {
         // Stoppe den Drehmotor bei zu geringer Intensität
         drehmotor->Stoppen();
+        drehmotor->setzeSignaltyp(signaltyp::keine);
     }
 }
 
@@ -59,5 +64,22 @@ void DreheSignalInterpreter::rotiereKopf(float winkel, float intensitaet) {
         // Führe die Rotation aus
         float neuerWinkel = aktuellerWinkel + (winkelDifferenz * (intensitaet / 100.0f));
         drehmotor->DrehWinkel(neuerWinkel);
+    }
+}
+
+// Helper per rotazione diretta
+void DreheSignalInterpreter::drehenLinks() {
+    aktiviereDrehmotor(-1.0f); // sinistra
+}
+
+void DreheSignalInterpreter::drehenRechts() {
+    aktiviereDrehmotor(1.0f); // destra
+}
+
+// Attiva direttamente il Drehmotor con una certa potenza
+void DreheSignalInterpreter::aktiviereDrehmotor(float leistung) {
+    if (drehmotor) {
+        drehmotor->Anschalten();
+        drehmotor->DrehZahl(leistung * drehmotor->getMaxDrehzahl());
     }
 } 

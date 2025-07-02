@@ -26,6 +26,8 @@ Verwaltet die Interaktion zwischen Benutzer, Roboter und Sensoren, steuert die A
 #include "lampe.h"
 #include "Lidarsensor.h"
 #include "simulation.h"
+#include "../logik/MittelWerter.h"
+#include "paketfach.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -69,6 +71,14 @@ private:
     Lampe lampe;
     Simulation* simulation;
     LidarSensor* lidarSensor;
+    // Sensori ridondanti come membri
+    TemperaturSensor* tempSensorArr[3];
+    // MittelWerter per la temperatura
+    MittelWerter<TemperaturSensor>* mittelwertTemp = nullptr;
+    MittelWerter<GasSensor>* mittelwertGas = nullptr;
+    MittelWerter<Wassersensor>* mittelwertWasser = nullptr;
+    MittelWerter<GPSSensor>* mittelwertGPS = nullptr;
+    PaketFach paketfach;
     void updateLidar();
     
     // Variablen um den tatsächlichen Status der Kameras zu verfolgen
@@ -88,6 +98,7 @@ private slots:
     void zeigeGas();
     void zeigeWasser();
     void motorLEDsAktualisieren();
+    void on_PaketfachAnAus_clicked();
 };
 
 

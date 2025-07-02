@@ -16,35 +16,35 @@ void SimRoboter::vorwaerts() {
             stoppen();
             return;
         }
-    roboter->empfangesignal(signaltyp::Vorvaerts);
+    roboter->empfangeJoystick1(signaltyp::Vorvaerts);
     roboter->logikAktualisieren(0.05f);
     refreshView();
 }
 
 void SimRoboter::rueckwaerts() {
     if (!roboter) return;
-    roboter->empfangesignal(signaltyp::Rueckwaerts);
+    roboter->empfangeJoystick1(signaltyp::Rueckwaerts);
     roboter->logikAktualisieren(0.05f);
     refreshView();
 }
 
 void SimRoboter::Links() {
     if (!roboter) return;
-    roboter->empfangesignal(signaltyp::Links);
+    roboter->empfangeJoystick1(signaltyp::Links);
     roboter->logikAktualisieren(0.05f);
     refreshView();
 }
 
 void SimRoboter::Rechts() {
     if (!roboter) return;
-    roboter->empfangesignal(signaltyp::Rechts);
+    roboter->empfangeJoystick1(signaltyp::Rechts);
     roboter->logikAktualisieren(0.05f);
     refreshView();
 }
 
 void SimRoboter::stoppen() {
     if (!roboter) return;
-    roboter->empfangesignal(signaltyp::keine);
+    roboter->empfangeJoystick1(signaltyp::keine);
     roboter->logikAktualisieren(0.05f);
     refreshView();
 }

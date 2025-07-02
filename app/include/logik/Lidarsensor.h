@@ -2,7 +2,6 @@
 
 using namespace  std;
 #include <vector>
-#include "GpsSensor.h"
 
 /*
 Zweck und Verhalten der LidarSensor-Klasse
@@ -14,6 +13,7 @@ Verhalten:
 Misst Distanzen zu Hindernissen, aktualisiert die Messwerte und stellt sie zur Verfügung.
 */
 
+// Struktur für Hindernisse (Obstacle)
 struct Obstacle {
     double x;
     double y;
@@ -22,16 +22,18 @@ struct Obstacle {
 
 class LidarSensor {
 public:
-    LidarSensor(GPSSensor* gpsSensor, double maxRange, int numBeams);
-    void update(const std::vector<Obstacle>& obstacles);
-    const std::vector<double>& getDistances() const;
+    LidarSensor(double maxReichweite, int anzahlStrahlen);
+    void setzePosition(double x, double y); // Setzt die aktuelle Sensorposition
+    void update(const std::vector<Obstacle>& hindernisse);
+    const std::vector<double>& gibDistanzen() const;
     bool istHindernisVorne(double sicherheitsAbstand, double winkelStart = -30.0, double winkelEnde = 30.0) const;
 
 private:
-    double measureBeam(int beamIndex, const std::vector<Obstacle>& obstacles);
-    GPSSensor* gps;
-    double maxRange;
-    int numBeams;
-    vector<double> distances;
+    double maxReichweite;
+    int anzahlStrahlen;
+    std::vector<double> distanzen;
+    double sensorX = 0.0;
+    double sensorY = 0.0;
+    double messeStrahl(int strahlIndex, const std::vector<Obstacle>& hindernisse);
 };
 

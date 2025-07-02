@@ -42,7 +42,7 @@ Test für Empfang Signal Vorwärts
 void TestBewegungsRoboter::testEmpfangeSignalVorwaerts()
 {
     // Test sollte ohne Fehler ausgeführt werden
-    roboter->Empfangesignal(signaltyp::Vorvaerts);
+    roboter->EmpfangeJoystick1(signaltyp::Vorvaerts);
     QVERIFY(true);
 }
 
@@ -52,7 +52,7 @@ Test für Empfang Signal Rückwärts
 void TestBewegungsRoboter::testEmpfangeSignalRueckwaerts()
 {
     // Test sollte ohne Fehler ausgeführt werden
-    roboter->Empfangesignal(signaltyp::Rueckwaerts);
+    roboter->EmpfangeJoystick1(signaltyp::Rueckwaerts);
     QVERIFY(true);
 }
 
@@ -62,7 +62,7 @@ Test für Empfang Signal Links
 void TestBewegungsRoboter::testEmpfangeSignalLinks()
 {
     // Test sollte ohne Fehler ausgeführt werden
-    roboter->Empfangesignal(signaltyp::Links);
+    roboter->EmpfangeJoystick1(signaltyp::Links);
     QVERIFY(true);
 }
 
@@ -72,7 +72,7 @@ Test für Empfang Signal Rechts
 void TestBewegungsRoboter::testEmpfangeSignalRechts()
 {
     // Test sollte ohne Fehler ausgeführt werden
-    roboter->Empfangesignal(signaltyp::Rechts);
+    roboter->EmpfangeJoystick1(signaltyp::Rechts);
     QVERIFY(true);
 }
 
@@ -82,7 +82,7 @@ Test für Empfang Signal Keine
 void TestBewegungsRoboter::testEmpfangeSignalKeine()
 {
     // Test sollte ohne Fehler ausgeführt werden
-    roboter->Empfangesignal(signaltyp::keine);
+    roboter->EmpfangeJoystick1(signaltyp::keine);
     QVERIFY(true);
 }
 
@@ -114,11 +114,11 @@ Test für mehrere Signale hintereinander
 void TestBewegungsRoboter::testMehrereSignaleHintereinander()
 {
     // Teste verschiedene Signale hintereinander
-    roboter->Empfangesignal(signaltyp::Vorvaerts);
-    roboter->Empfangesignal(signaltyp::Links);
-    roboter->Empfangesignal(signaltyp::Rueckwaerts);
-    roboter->Empfangesignal(signaltyp::Rechts);
-    roboter->Empfangesignal(signaltyp::keine);
+    roboter->EmpfangeJoystick1(signaltyp::Vorvaerts);
+    roboter->EmpfangeJoystick1(signaltyp::Links);
+    roboter->EmpfangeJoystick1(signaltyp::Rueckwaerts);
+    roboter->EmpfangeJoystick1(signaltyp::Rechts);
+    roboter->EmpfangeJoystick1(signaltyp::keine);
     
     // Alle Signale sollten ohne Fehler verarbeitet werden
     QVERIFY(true);

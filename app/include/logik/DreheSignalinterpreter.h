@@ -27,6 +27,11 @@ public:
     void setzeDrehmotor(Drehmotor* motor);
     void verarbeiteRotation(float winkel, float intensitaet);
     void rotiereKopf(float winkel, float intensitaet);
+    // Helper per rotazione diretta
+    void drehenLinks();
+    void drehenRechts();
+    // Attiva direttamente il Drehmotor con una certa potenza
+    void aktiviereDrehmotor(float leistung);
 };
 
 

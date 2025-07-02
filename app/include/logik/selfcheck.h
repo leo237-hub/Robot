@@ -2,6 +2,12 @@
 #include<string.h>
 #include<iostream>
 #include"Sensors.h"
+#include "TemperaturSensor.h"
+#include "Lidarsensor.h"
+#include "GpsSensor.h"
+#include "Gassensor.h"
+#include "Wassersensor.h"
+#include "Kettesensor.h"
 using namespace  std;
 
 /*
@@ -16,22 +22,25 @@ Prüft die Funktionsfähigkeit der wichtigsten Komponenten und gibt Prüfergebni
 
 class Selfcheck {
 private:
-    string TemperaturSensor,
-           FeutigkeitSensor,
-           Lidarsensor,
-           GPSsensor,
-           Gassensor,
-           DCmotor;
+    // 3 istanze per ogni sensore
+    TemperaturSensor* tempSensor[3];
+    LidarSensor* lidarSensor[3];
+    GPSSensor* gpsSensor[3];
+    GasSensor* gasSensor[3];
+    Wassersensor* wasserSensor[3];
+    Kettensensor* ketteSensor[3];
+
+    // Soglia massima di differenza accettata
+    const float maxAbweichung = 2.0f; // esempio per sensori float
 
 public:
-    Selfcheck();
+    Selfcheck(TemperaturSensor* t[3], LidarSensor* l[3], GPSSensor* g[3], GasSensor* gas[3], Wassersensor* w[3], Kettensensor* k[3]);
     ~Selfcheck();
     std::vector<Sensor * > Sensor;
     string TemperaturSensPruefen();
-    string FeuchtigkeitSensPruefen();
     string LidarSensorPruefen();
     string WasserSensPruefen();
     string GPsSensorPruefen();
-    string DCMotorPruefen();
+    string GassensorPruefen();
     string KetteSensPruefen();
 };

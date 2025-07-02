@@ -1,6 +1,7 @@
 #include "LEDPanel.h"
 #include <QStyle>
 #include <QApplication>
+#include <QDebug>
 
 LEDPanel::LEDPanel(QWidget *parent)
     : QWidget(parent)
@@ -128,6 +129,15 @@ void LEDPanel::erstelleLEDs() {
     ledLayout->addWidget(lampeLabel, 9, 0);
     ledLayout->addWidget(lampeLED, 9, 1);
     
+    /* Paketfach LED */
+    QLabel* paketfachLabel = new QLabel("Paketfach");
+    paketfachLabel->setStyleSheet("QLabel { color: white; font-size: 10px; }");
+    paketfachLED = new QLabel();
+    paketfachLED->setFixedSize(20, 20);
+    paketfachLED->setStyleSheet("QLabel { background-color: #ff0000; border: 2px solid #333333; border-radius: 10px; }");
+    ledLayout->addWidget(paketfachLabel, 10, 0);
+    ledLayout->addWidget(paketfachLED, 10, 1);
+    
     /* Alle LEDs als ausgeschaltet initialisieren */
     ledZustaende[roboterLED] = false;
     ledZustaende[motorLED] = false;
@@ -139,6 +149,7 @@ void LEDPanel::erstelleLEDs() {
     ledZustaende[gassensorLED] = false;
     ledZustaende[wassersensorLED] = false;
     ledZustaende[lampeLED] = false;
+    ledZustaende[paketfachLED] = false;
 }
 
 void LEDPanel::aktualisiereLED(QLabel* led, bool aktiv) {
@@ -161,6 +172,7 @@ void LEDPanel::setzeMotorStatus(bool aktiv) {
 }
 
 void LEDPanel::setzeDrehmotorStatus(bool aktiv) {
+    qDebug() << "LEDPanel::setzeDrehmotorStatus chiamato con" << aktiv;
     aktualisiereLED(drehmotorLED, aktiv);
 }
 
@@ -190,4 +202,8 @@ void LEDPanel::setzeWassersensorStatus(bool aktiv) {
 
 void LEDPanel::setzeLampeStatus(bool aktiv) {
     aktualisiereLED(lampeLED, aktiv);
+}
+
+void LEDPanel::setzePaketfachStatus(bool offen) {
+    aktualisiereLED(paketfachLED, offen);
 } 

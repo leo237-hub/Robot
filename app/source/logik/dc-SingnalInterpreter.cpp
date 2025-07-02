@@ -11,6 +11,10 @@ signaltyp Dc_SignalInterpreter::EingabeInterpretieren(const std::string & Eingab
         return signaltyp::Links;
     } else if (Eingabe == "d") {
         return signaltyp::Rechts;
+    } else if (Eingabe == ",") {
+        return signaltyp::DrehenLinks;
+    } else if (Eingabe == ".") {
+        return signaltyp::DrehenRechts;
     } else {
         return signaltyp::keine;
     }

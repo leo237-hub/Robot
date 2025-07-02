@@ -22,6 +22,7 @@
 #include "Lidarsensor.h"
 #include "simulationElement.h"
 #include <algorithm>
+#include "../logik/MittelWerter.h"
 
 using namespace std;
 
@@ -61,13 +62,49 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->graphicsView->setScene(scene);
 
-    gpsSensor = new GPSSensor();
-    lidarSensor = new LidarSensor(gpsSensor, 100.0, 360);
-    roboter = new GraphischesRoboter(50, 100, 40, gpsSensor);
+    // --- Inizializza array di 3 sensori condivisi ---
+    LidarSensor* lidarSensorArr[3];
+    GPSSensor* gpsSensorArr[3];
+    GasSensor* gasSensorArr[3];
+    Wassersensor* wasserSensorArr[3];
+    Kettensensor* ketteSensorArr[3];
+    for (int i = 0; i < 3; ++i) {
+        tempSensorArr[i] = new TemperaturSensor();
+        lidarSensorArr[i] = new LidarSensor(100.0, 360);
+        gpsSensorArr[i] = new GPSSensor();
+        gasSensorArr[i] = new GasSensor();
+        wasserSensorArr[i] = new Wassersensor();
+        ketteSensorArr[i] = new Kettensensor();
+    }
+    gpsSensor = gpsSensorArr[0];
+    lidarSensor = lidarSensorArr[0];
+    for (int i = 0; i < 3; ++i) {
+        tempSensorArr[i]->setTemperaturQuelle([this, simulation]() {
+            if (!gpsSensor) return 20.0f;
+            return simulation->erzeugeTemperatur(QPointF(gpsSensor->getX(), gpsSensor->getY()));
+        });
+        gasSensorArr[i]->setGasQuelle([this, simulation]() {
+            if (!gpsSensor) return 5.0f;
+            return simulation->erzeugeGasKonzentration(QPointF(gpsSensor->getX(), gpsSensor->getY()));
+        });
+        wasserSensorArr[i]->setWasserQuelle([this, simulation]() {
+            if (!gpsSensor) return 50.0f;
+            return simulation->erzeugeWasserKonzentration(QPointF(gpsSensor->getX(), gpsSensor->getY()));
+        });
+        tempSensorArr[i]->starten();
+        gasSensorArr[i]->starten();
+        wasserSensorArr[i]->starten();
+    }
+    // Member-GasSensor an Simulation koppeln
+    gasSensor.setGasQuelle([this, simulation]() {
+        if (!gpsSensor) return 5.0f;
+        return simulation->erzeugeGasKonzentration(QPointF(gpsSensor->getX(), gpsSensor->getY()));
+    });
+    gasSensor.starten();
+    roboter = new GraphischesRoboter(tempSensorArr, lidarSensorArr, gpsSensorArr, gasSensorArr, wasserSensorArr, ketteSensorArr, 50, 100, 40);
     scene->addItem(roboter);
     roboter->setFocus();
-    
-    /* Roboter inizialmente deaktiviert (System ist aus) */
+    roboter->setLEDPanel(ledPanel);
     roboter->setzeRoboterAktiv(false);
     
     /* LED Status aktualisieren - Roboter ist inaktiv, GPS ist aktiv */
@@ -80,42 +117,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     SimulationManager.ladeXmlSimulation(":/data/umgebung.xml", *simulation);
     simulation->addiereElementeScene(scene);
-
-    /* Verbinde TemperaturSensor mit der Simulation */
-    tempSensor.setTemperaturQuelle([this, simulation]() {
-        if (!gpsSensor) return 20.0f;
-        QPointF robotPosition(gpsSensor->getX(), gpsSensor->getY());
-        return simulation->erzeugeTemperatur(robotPosition);
-    });
-
-    tempSensor.starten();
-
-    /* LED Status aktualisieren - Temperatursensor ist aktiv */
-    ledPanel->setzeTemperaturSensorStatus(true);
-
-    /* Verbinde GasSensor mit der Simulation */
-    gasSensor.setGasQuelle([this, simulation]() {
-        if (!gpsSensor) return 5.0f; // Hintergrund-Gaskonzentration
-        QPointF robotPosition(gpsSensor->getX(), gpsSensor->getY());
-        return simulation->erzeugeGasKonzentration(robotPosition);
-    });
-
-    gasSensor.starten();
-
-    /* LED Status aktualisieren - Gassensor ist aktiv */
-    ledPanel->setzeGassensorStatus(true);
-
-    /* Verbinde Wassersensor mit der Simulation */
-    wasserSensor.setWasserQuelle([this, simulation]() {
-        if (!gpsSensor) return 50.0f; // Standard Luftfeuchtigkeit 50%
-        QPointF robotPosition(gpsSensor->getX(), gpsSensor->getY());
-        return simulation->erzeugeWasserKonzentration(robotPosition);
-    });
-
-    wasserSensor.starten();
-
-    /* LED Status aktualisieren - Wassersensor ist aktiv */
-    ledPanel->setzeWassersensorStatus(true);
 
     /* Temperaturanzeige regelmäßig aktualisieren */
     QTimer *tempTimer = new QTimer(this);
@@ -148,30 +149,79 @@ MainWindow::MainWindow(QWidget *parent)
     QTimer* lidarTimer = new QTimer(this);
     connect(lidarTimer, &QTimer::timeout, this, &MainWindow::updateLidar);
     lidarTimer->start(100); // alle 100ms aktualisieren
+
+    std::vector<TemperaturSensor*> tempSensorVec;
+    for (int i = 0; i < 3; ++i) tempSensorVec.push_back(tempSensorArr[i]);
+    mittelwertTemp = new MittelWerter<TemperaturSensor>(tempSensorVec);
+
+    std::vector<GasSensor*> gasSensorVec;
+    for (int i = 0; i < 3; ++i) gasSensorVec.push_back(gasSensorArr[i]);
+    mittelwertGas = new MittelWerter<GasSensor>(gasSensorVec);
+
+    std::vector<Wassersensor*> wasserSensorVec;
+    for (int i = 0; i < 3; ++i) wasserSensorVec.push_back(wasserSensorArr[i]);
+    mittelwertWasser = new MittelWerter<Wassersensor>(wasserSensorVec);
+
+    std::vector<GPSSensor*> gpsSensorVec;
+    for (int i = 0; i < 3; ++i) gpsSensorVec.push_back(gpsSensorArr[i]);
+    mittelwertGPS = new MittelWerter<GPSSensor>(gpsSensorVec);
 }
 
 MainWindow::~MainWindow()
 {
+    if (mittelwertTemp) {
+        delete mittelwertTemp;
+    }
+    if (mittelwertGas) {
+        delete mittelwertGas;
+    }
+    if (mittelwertWasser) {
+        delete mittelwertWasser;
+    }
     delete ui;
 }
 
 void MainWindow::updateLidar() {
-    if (!lidarSensor || !roboter || !scene || !ctrl) return;
-    
+    if (!lidarSensor) {
+        return;
+    }
+    if (!roboter) {
+        return;
+    }
+    if (!scene) {
+        return;
+    }
+    if (!ctrl) {
+        return;
+    }
+    // Roboterposition holen (aus GPS oder Simulation)
+    double roboterX = 0.0;
+    double roboterY = 0.0;
+    if (gpsSensor) {
+        roboterX = gpsSensor->getX();
+        roboterY = gpsSensor->getY();
+    }
+    lidarSensor->setzePosition(roboterX, roboterY);
+    auto items = scene->items();
     std::vector<Obstacle> obstacles;
-    for (QGraphicsItem* item : scene->items()) {
+    int simElemCount = 0;
+    for (QGraphicsItem* item : items) {
         simulationElement* element = dynamic_cast<simulationElement*>(item);
-        if (element && element->istSolid()) {
-            Obstacle obs;
-            obs.x = element->getX();
-            obs.y = element->getY();
-            obs.radius = element->holeRadius();
-            obstacles.push_back(obs);
+        if (element) {
+            simElemCount++;
+            if (element->istSolid()) {
+                Obstacle obs;
+                obs.x = element->getX();
+                obs.y = element->getY();
+                obs.radius = element->holeRadius();
+                obstacles.push_back(obs);
+            }
         }
     }
     lidarSensor->update(obstacles);
     const double sicherheitsAbstand = 45.0;
-    if (lidarSensor->istHindernisVorne(sicherheitsAbstand)) {
+    bool vorne = lidarSensor->istHindernisVorne(sicherheitsAbstand);
+    if (vorne) {
         roboter->setzeBlockVorwaerts(true);
     } else {
         roboter->setzeBlockVorwaerts(false);
@@ -201,7 +251,6 @@ void MainWindow::on_pushButtonEinschalten_clicked() {
             "QPushButton:pressed { background-color: #005a9e; }"
         );
         
-        qDebug() << "System eingeschaltet";
     } else {
         /* System ausschalten */
     DisAktiv = false;
@@ -247,7 +296,6 @@ void MainWindow::on_pushButtonEinschalten_clicked() {
         /* Stile standard für inaktiven Zustand */
         ui->pushButtonEinschalten->setStyleSheet("");
         
-        qDebug() << "System ausgeschaltet - alle Kameras und Roboter deaktiviert";
     }
 }
 
@@ -269,7 +317,6 @@ void MainWindow::on_NormalAnAus_toggled()
         timer->start(100);
         ledPanel->setzeKameraStatus(true);
         normalKameraIstAktiv = true;
-        qDebug() << "Kamera ist eingeschaltet";
     } else if (!buttonChecked && normalKameraIstAktiv) {
         /* Kamera ausschalten */
         kamera.setAktiv(false);
@@ -277,7 +324,6 @@ void MainWindow::on_NormalAnAus_toggled()
         ledPanel->setzeKameraStatus(false);
         ui->NormalKamera->clear(); /* Schwarzer Bildschirm wenn ausgeschaltet */
         normalKameraIstAktiv = false;
-        qDebug() << "Kamera ist ausgeschaltet";
     }
 }
 
@@ -291,73 +337,63 @@ void MainWindow::zeigeBild()
 }
 
 void MainWindow::zeigeTemp() {
-    tempSensor.starten();
-
-    float temperatur = tempSensor.getLetzteMessung();
-
-    if (ui->Temperatur) {
-        ui->Temperatur->setText(QString::number(temperatur, 'f', 2) + " °C");
+    if (!DisAktiv) {
+        if (ui->TemperaturLabel) ui->TemperaturLabel->setText("---");
+        return;
+    }
+    float temperatur = mittelwertTemp ? mittelwertTemp->getMittelwert() : 0.0f;
+    if (ui->TemperaturLabel) {
+        ui->TemperaturLabel->setText(QString::number(temperatur, 'f', 2) + " °C");
     }
 }
 
 void MainWindow::zeigeGPS() {
-    if (!gpsSensor) return;
-
-    double x = gpsSensor->getX();
-    double y = gpsSensor->getY();
-
-    QString gpsText = QString("GPS: x:%1, y:%2").arg(x, 0, 'f', 1).arg(y, 0, 'f', 1);
-    
-    // Display GPS coordinates in label_3
-    if (ui->label_3) {
-        ui->label_3->setText(gpsText);
+    if (!DisAktiv) {
+        if (ui->GPSLabel) ui->GPSLabel->setText("---");
+        return;
+    }
+    if (!mittelwertGPS) return;
+    double x = mittelwertGPS->getMittelwertX();
+    double y = mittelwertGPS->getMittelwertY();
+    if (ui->GPSLabel) {
+        ui->GPSLabel->setText(QString("x:%1, y:%2").arg(x, 0, 'f', 1).arg(y, 0, 'f', 1));
     }
 }
 
 void MainWindow::zeigeGas() {
-    gasSensor.starten();
-
-    float gasWert = gasSensor.getLetzteMessung();
-
-    QString gasText = QString("Gas: %1%").arg(gasWert, 0, 'f', 1);
-    
-    // Display gas values in the existing UI label
-    if (ui->label) {
-        ui->label->setText(gasText);
+    if (!DisAktiv) {
+        if (ui->GasLabel) ui->GasLabel->setText("---");
+        return;
+    }
+    float gasWert = mittelwertGas ? mittelwertGas->getMittelwert() : 0.0f;
+    QString gasText = QString("%1%" ).arg(gasWert, 0, 'f', 1);
+    if (ui->GasLabel) {
+        ui->GasLabel->setText(gasText);
     }
 }
 
 void MainWindow::zeigeWasser() {
-    wasserSensor.starten();
-
-    float wasserWert = wasserSensor.getLetzteMessung();
-
-    QString wasserText = QString("Wasser: %1%").arg(wasserWert, 0, 'f', 1);
-    
-    // Display water/humidity values in label_2
-    if (ui->label_2) {
-        ui->label_2->setText(wasserText);
+    if (!DisAktiv) {
+        if (ui->WasserLabel) ui->WasserLabel->setText("---");
+        return;
+    }
+    float wasserWert = mittelwertWasser ? mittelwertWasser->getMittelwert() : 0.0f;
+    QString wasserText = QString("%1" ).arg(wasserWert, 0, 'f', 1);
+    if (ui->WasserLabel) {
+        ui->WasserLabel->setText(wasserText);
     }
 }
 
 void MainWindow::motorLEDsAktualisieren() {
     if (!roboter) return;
-    
-    /* Prüfen ob Roboter aktiv ist */
     if (!DisAktiv) {
-        /* Roboter ist ausgeschaltet - Motoren LEDs aus */
         ledPanel->setzeMotorStatus(false);
         ledPanel->setzeDrehmotorStatus(false);
         return;
     }
-    
-    /* Prüfen ob Roboter sich bewegt (Motor aktiv) */
     bool motorActive = roboter->bewegtSich();
     ledPanel->setzeMotorStatus(motorActive);
-    
-    /* Für jetzt, Drehmotor LED basierend auf Bewegung setzen */
-    /* In einer echten Implementierung würdest du den tatsächlichen Drehmotor-Status prüfen */
-    ledPanel->setzeDrehmotorStatus(motorActive);
+    // Drehemotor-LED NICHT mehr automatisch setzen!
 }
 
 void MainWindow::on_WarmAnAus_clicked()
@@ -378,7 +414,6 @@ void MainWindow::on_WarmAnAus_clicked()
         waermeTimer->start(100);
         ledPanel->setzeWaermeKameraStatus(true);
         waermeKameraIstAktiv = true;
-        qDebug() << "Wärmekamera ist eingeschaltet";
     } else if (!buttonChecked && waermeKameraIstAktiv) {
         /* Wärmekamera ausschalten */
         waermekamera.wSchalten();
@@ -386,7 +421,6 @@ void MainWindow::on_WarmAnAus_clicked()
         ledPanel->setzeWaermeKameraStatus(false);
         ui->WaermeKamera->clear(); /* Schwarzer Bildschirm wenn ausgeschaltet */
         waermeKameraIstAktiv = false;
-        qDebug() << "Wärmekamera ist ausgeschaltet";
     }
 }
 
@@ -406,13 +440,11 @@ void MainWindow::on_LampeAnAus_clicked()
         lampe.einschalten();
         ledPanel->setzeLampeStatus(true);
         lampeIstAktiv = true;
-        qDebug() << "Lampe ist eingeschaltet";
     } else if (!buttonChecked && lampeIstAktiv) {
         /* Lampe ausschalten */
         lampe.ausschalten();
         ledPanel->setzeLampeStatus(false);
         lampeIstAktiv = false;
-        qDebug() << "Lampe ist ausgeschaltet";
     }
 }
 
@@ -463,6 +495,20 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
     
     /* Roboter-Fokus automatisch wiederherstellen bei WASD-Tasten */
     switch(event->key()) {
+    case Qt::Key_J: // 'J' drehen links
+        if (roboter) {
+            roboter->dreheKopfLinks();
+            ledPanel->setzeDrehmotorStatus(true);
+        }
+        event->accept();
+        return;
+    case Qt::Key_L: // 'L' drehen rechts
+        if (roboter) {
+            roboter->dreheKopfRechts();
+            ledPanel->setzeDrehmotorStatus(true);
+        }
+        event->accept();
+        return;
     case Qt::Key_W:
     case Qt::Key_Up:
     case Qt::Key_A:
@@ -471,12 +517,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
     case Qt::Key_Down:
     case Qt::Key_D:
     case Qt::Key_Right:
-        /* Fokus automatisch wiederherstellen */
+        if (!roboter) break;
         if (!roboter->hasFocus()) {
             roboter->setFocus();
-            qDebug() << "Roboter-Fokus automatisch wiederhergestellt";
         }
-        /* Event an den Roboter weiterleiten */
         roboter->tastaturDruckBehandeln(event);
         event->accept();
         return;
@@ -502,13 +546,15 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event) {
     case Qt::Key_Down:
     case Qt::Key_D:
     case Qt::Key_Right:
-        /* Fokus automatisch wiederherstellen */
         if (!roboter->hasFocus()) {
             roboter->setFocus();
-            qDebug() << "Roboter-Fokus automatisch wiederhergestellt";
         }
-        /* Event an den Roboter weiterleiten */
         roboter->tastaturLoslassenBehandeln(event);
+        event->accept();
+        return;
+    case Qt::Key_J: // 'J' loslassen
+    case Qt::Key_L: // 'L' loslassen
+        ledPanel->setzeDrehmotorStatus(false);
         event->accept();
         return;
     default:
@@ -520,6 +566,24 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event) {
 void MainWindow::roboterFokusWiederherstellen() {
     if (roboter) {
         roboter->setFocus();
-        qDebug() << "Roboter-Fokus wiederhergestellt";
+    }
+}
+
+void MainWindow::on_PaketfachAnAus_clicked()
+{
+    if (!DisAktiv){
+        ui->PaketfachAnAus->setChecked(false);
+        ledPanel->setzePaketfachStatus(false);
+        return;
+    }
+    bool buttonChecked = ui->PaketfachAnAus->isChecked();
+    if (buttonChecked) {
+        // Paketfach öffnen
+        paketfach.Oeffnen();
+        ledPanel->setzePaketfachStatus(true);
+    } else {
+        // Paketfach schließen
+        paketfach.Schliessen();
+        ledPanel->setzePaketfachStatus(false);
     }
 }

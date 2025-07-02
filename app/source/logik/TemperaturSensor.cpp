@@ -41,7 +41,8 @@ float TemperaturSensor::getLetzteMessung() const {
 
 void TemperaturSensor::messungLoop() {
     while(!stopFlag) {
-        letzteMessung = temperaturQuelle();
+        float nuovaTemp = temperaturQuelle();
+        letzteMessung = nuovaTemp;
         std::this_thread::sleep_for(std::chrono::milliseconds(2));
     }
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "dcmotor.h"
 #include "SignalTyp.h"
+#include "DreheSignalinterpreter.h"
 
 /*
 Zweck und Verhalten der BewegungsRoboter-Klasse
@@ -20,6 +21,7 @@ private:
     float Winkel;
     bool roboterAktiv = true; // Roboter ist standardmäßig aktiv
     bool blockVorwaerts = false;
+    DreheSignalInterpreter* drehInterpreter = nullptr;
     void vorwaerts(float leistung = 1.0f);
     void rueckwaerts(float leistung = 0.5f);
     void drehenlinks(float leistung = 0.5f);
@@ -27,7 +29,8 @@ private:
     void stoppen();
 public:
     BewegungsRoboter(float startx = 0.0f, float starty = 0.0f, float startwinkel = 0.0f);
-    void Empfangesignal(signaltyp Signal);
+    void EmpfangeJoystick1(signaltyp Signal);
+    void EmpfangeJoystick2(signaltyp Signal);
     void starten();
     float getx() const;
     float gety() const;
@@ -43,4 +46,5 @@ public:
     void setzeAktiv(bool aktiv);
     bool istAktiv() const { return roboterAktiv; }
     void setzeBlockVorwaerts(bool blockiert);
+    void setzeDrehInterpreter(DreheSignalInterpreter* interpreter);
 };

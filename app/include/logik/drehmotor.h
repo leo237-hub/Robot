@@ -1,6 +1,7 @@
 #pragma once
 #include "aktoren.h"
 #include <vector>
+#include "SignalTyp.h"
 
 using namespace std;
 
@@ -23,6 +24,7 @@ private:
     float Aktuelwinkel;
     float Leistung;
     float Winkel;
+    signaltyp aktuellerSignaltyp = signaltyp::keine;
 
 public:
     Drehmotor();
@@ -41,5 +43,6 @@ public:
     // Setter-Methoden
     void setzeAktuellerWinkel(float neuerWinkel);
     void setzeLeistung(float neueLeistung);
+    void setzeSignaltyp(signaltyp sig);
 };
 //Fehlt noch die Methode Ein-Ausschalten von der Klasse Aktoren

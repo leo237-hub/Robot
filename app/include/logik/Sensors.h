@@ -2,7 +2,6 @@
 #include <string>
 #include "Gassensor.h"
 #include "TemperaturSensor.h"
-#include "Feuchtigkeitssensor.h"
 #include "Lidarsensor.h"
 #include "Kettesensor.h"
 #include "GpsSensor.h"

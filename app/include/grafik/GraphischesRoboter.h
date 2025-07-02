@@ -16,6 +16,15 @@ Synchronisiert die grafische Darstellung mit dem internen Zustand, verarbeitet T
 #include "BewegungsSimulation.h"
 #include "Dc-SignalInterpreter.h"
 #include "GpsSensor.h"
+#include "TemperaturSensor.h"
+#include "Lidarsensor.h"
+#include "GasSensor.h"
+#include "Wassersensor.h"
+#include "Kettesensor.h"
+#include "selfcheck.h"
+#include "LEDPanel.h"
+#include "DreheSignalinterpreter.h"
+#include "drehmotor.h"
 
 class GraphischesRoboter : public QObject, public QGraphicsEllipseItem {
     Q_OBJECT
@@ -28,11 +37,29 @@ private:
     signaltyp aktuellesSignal;
     bool istInBewegung;
     bool blockVorwaerts = false;
+    bool sensorenAktiv = false;
+
+    // Sensori ridondanti
+    TemperaturSensor* tempSensor[3];
+    LidarSensor* lidarSensor[3];
+    GPSSensor* gpsSensorArr[3];
+    GasSensor* gasSensor[3];
+    Wassersensor* wasserSensor[3];
+    Kettensensor* ketteSensor[3];
+
+    Selfcheck* selfcheck;
+    QTimer* selfcheckTimer;
+    LEDPanel* ledPanel;
+
+    DreheSignalInterpreter* drehInterpreter = nullptr;
+    Drehmotor* drehmotor = nullptr;
 
 public:
-    GraphischesRoboter(double x = 0.0, double y = 0.0, double radius = 20.0);
+    GraphischesRoboter(TemperaturSensor* t[3], LidarSensor* l[3], GPSSensor* g[3], GasSensor* gas[3], Wassersensor* w[3], Kettensensor* k[3], double x = 0.0, double y = 0.0, double radius = 20.0);
     ~GraphischesRoboter();
-    void empfangesignal(signaltyp);
+    // void empfangesignal(signaltyp s);
+    void empfangeJoystick1(signaltyp s);
+    void empfangeJoystick2(signaltyp s);
     void logikAktualisieren(float dt);
     void grafikSynchronisieren();
     bool bewegtSich() const { return istInBewegung; }
@@ -47,6 +74,11 @@ public:
     void setzeRoboterAktiv(bool aktiv);
     
     void setzeBlockVorwaerts(bool blockiert);
+    
+    void setLEDPanel(LEDPanel* panel);
+    
+    void dreheKopfLinks();
+    void dreheKopfRechts();
     
 private slots:
     void bewegungAktualisieren();
