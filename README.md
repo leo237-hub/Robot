@@ -106,10 +106,10 @@ Abweichung von der Form sind **nicht akzeptiert**.
         +-----------------------------+
            |true                |false
            v                    v
-+-------------------+   +-----------------------------+
-|   stoppen();      |   | switch(Signal)              |
-|   return;         |   +-----------------------------+
-+-------------------+           |
+    +-------------------+   +-----------------------------+
+    |   stoppen();      |   | switch(Signal)              |
+    |   return;         |   +-----------------------------+
+    +-------------------+           |
                                 v
                 +-------------------------------+
                 | case signaltyp::Vorvaerts     |
@@ -165,74 +165,74 @@ Abweichung von der Form sind **nicht akzeptiert**.
 - **Kontrollflussgraph** für double LidarSensor::measureBeam(int beamIndex, const std::vector<Obstacle>& obstacles) aus Lidarsensor.cpp
 
 
-+-----------------------------+
-| Methodenstart               |
-+-----------------------------+
-           |
-           v
-+-----------------------------+
-| Initialisierungen           |
-| (angle, sensorX, sensorY,   |
-| closestDist)                |
-+-----------------------------+
-           |
-           v
-+-----------------------------+
-| for (Obstacle obs :         |
-| obstacles)                  |
-+-----------------------------+
-           |
-           v
-+-----------------------------+
-| dx, dy berechnen            |
-+-----------------------------+
-           |
-           v
-+-----------------------------+
-| proj berechnen              |
-+-----------------------------+
-           |
-           v
-+-----------------------------+
-| if (proj < 0 ||             |
-| proj > maxRange)            |
-+-----------------------------+
-      |true           |false
-      v               v
-+-----------+   +----------------------+
-| continue  |   | perpDist berechnen   |
-+-----------+   +----------------------+
-                      |
-                      v
-            +-----------------------------+
-            | if (perpDist <= obs.radius) |
-            +-----------------------------+
-                  |true           |false
-                  v               v
-        +-------------------+   (zurück zu
-        | offset,           |    nächstem
-        | distToObstacle    |    Obstacle)
-        | berechnen         |
-        +-------------------+
-                  |
-                  v
-        +-------------------------------+
-        | if (distToObstacle >= 0 &&    |
-        |     distToObstacle <          |
-        |     closestDist)              |
-        +-------------------------------+
-              |true           |false
-              v               v
-        +----------------+   (zurück zu
-        | closestDist =  |    nächstem
-        | distToObstacle |    Obstacle)
-        +----------------+
-              |
-              v
-        (zurück zu nächstem
-         Obstacle)
-           |
-           v
-+-----------------------------+
-| return closestDist          |
-+-----------------------------+
+    +-----------------------------+
+    | Methodenstart               |
+    +-----------------------------+
+            |
+            v
+    +-----------------------------+
+    | Initialisierungen           |
+    | (angle, sensorX, sensorY,   |
+    | closestDist)                |
+    +-----------------------------+
+            |
+            v
+    +-----------------------------+
+    | for (Obstacle obs :         |
+    | obstacles)                  |
+    +-----------------------------+
+            |
+            v
+    +-----------------------------+
+    | dx, dy berechnen            |
+    +-----------------------------+
+            |
+            v
+    +-----------------------------+
+    | proj berechnen              |
+    +-----------------------------+
+            |
+            v
+    +-----------------------------+
+    | if (proj < 0 ||             |
+    | proj > maxRange)            |
+    +-----------------------------+
+        |true           |false
+        v               v
+    +-----------+   +----------------------+
+    | continue  |   | perpDist berechnen   |
+    +-----------+   +----------------------+
+                        |
+                        v
+                +-----------------------------+
+                | if (perpDist <= obs.radius) |
+                +-----------------------------+
+                    |true           |false
+                    v               v
+            +-------------------+   (zurück zu
+            | offset,           |    nächstem
+            | distToObstacle    |    Obstacle)
+            | berechnen         |
+            +-------------------+
+                    |
+                    v
+            +-------------------------------+
+            | if (distToObstacle >= 0 &&    |
+            |     distToObstacle <          |
+            |     closestDist)              |
+            +-------------------------------+
+                |true           |false
+                v               v
+            +----------------+   (zurück zu
+            | closestDist =  |    nächstem
+            | distToObstacle |    Obstacle)
+            +----------------+
+                |
+                v
+            (zurück zu nächstem
+            Obstacle)
+            |
+            v
+    +-----------------------------+
+    | return closestDist          |
+    +-----------------------------+
