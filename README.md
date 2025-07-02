@@ -11,6 +11,7 @@ Diese Richtlinien werden dynamisch aktualisiert.
 8. [Commits](#8-commits)
 9. [Ausnahmen/Fehlerbehandlung](#9-ausnahmen-und-fehler)
 10. [Form](#10-Form)
+11. [Kontrollflussgraph](#11-Kontrollflussgraph)
 
 ## 1. Schlechte Praktiken
 Die folgenden Praktiken sollten niemals ohne triftigen Grund verwendet werden.
@@ -90,3 +91,147 @@ Bei Header Definition, ist **#pragma** once zu benutzen und **using namespace st
 
 Die Einrueckungen und Position dieser Klammer ** {}** ist mit den Befehl astyle zu vereinheitlichen.
 Abweichung von der Form sind **nicht akzeptiert**.
+
+## 11. Kontrollflussgraph
+-  **Kontrollflussgraph** für die Methode Empfangesignal(signaltyp Signal) in  BewegungsRoboter.cpp:
+        +-------------------+
+        |   Methodenstart   |
+        +-------------------+
+                  |
+                  v
+        +-----------------------------+
+        | if (!roboterAktiv)          |
+        +-----------------------------+
+           |true                |false
+           v                    v
++-------------------+   +-----------------------------+
+|   stoppen();      |   | switch(Signal)              |
+|   return;         |   +-----------------------------+
++-------------------+           |
+                                v
+                +-------------------------------+
+                | case signaltyp::Vorvaerts     |
+                +-------------------------------+
+                | if (blockVorwaerts)           |
+                +-------------------------------+
+                   |true                |false
+                   v                    v
+            +-------------+      +-----------------+
+            | stoppen();  |      | vorwaerts(0.8); |
+            +-------------+      +-----------------+
+                   |                    |
+                   v                    v
+                [Ende]                [Ende]
+
+                +-------------------------------+
+                | case signaltyp::Rueckwaerts   |
+                +-------------------------------+
+                | rueckwaerts(0.8);             |
+                +-------------------------------+
+                        |
+                        v
+                      [Ende]
+
+                +-------------------------------+
+                | case signaltyp::Rechts        |
+                +-------------------------------+
+                | drehenrechts(0.6);            |
+                +-------------------------------+
+                        |
+                        v
+                      [Ende]
+
+                +-------------------------------+
+                | case signaltyp::Links         |
+                +-------------------------------+
+                | drehenlinks(0.6);             |
+                +-------------------------------+
+                        |
+                        v
+                      [Ende]
+
+                +-------------------------------+
+                | case signaltyp::keine/default |
+                +-------------------------------+
+                | stoppen();                    |
+                +-------------------------------+
+                        |
+                        v
+                      [Ende]
+
+
+- **Kontrollflussgraph** für double LidarSensor::measureBeam(int beamIndex, const std::vector<Obstacle>& obstacles) aus Lidarsensor.cpp
+
++-----------------------------+
+| Methodenstart               |
++-----------------------------+
+           |
+           v
++-----------------------------+
+| Initialisierungen           |
+| (angle, sensorX, sensorY,   |
+| closestDist)                |
++-----------------------------+
+           |
+           v
++-----------------------------+
+| for (Obstacle obs :         |
+| obstacles)                  |
++-----------------------------+
+           |
+           v
++-----------------------------+
+| dx, dy berechnen            |
++-----------------------------+
+           |
+           v
++-----------------------------+
+| proj berechnen              |
++-----------------------------+
+           |
+           v
++-----------------------------+
+| if (proj < 0 ||             |
+| proj > maxRange)            |
++-----------------------------+
+      |true           |false
+      v               v
++-----------+   +----------------------+
+| continue  |   | perpDist berechnen   |
++-----------+   +----------------------+
+      |               |
+      |               v
+      |       +-----------------------------+
+      |       | if (perpDist <= obs.radius) |
+      |       +-----------------------------+
+      |             |true           |false
+      |             v               v
+      |   +-------------------+   (zurück zu
+      |   | offset,           |   nächstem
+      |   | distToObstacle    |   Obstacle)
+      |   | berechnen         |
+      |   +-------------------+
+      |             |
+      |             v
+      |   +-------------------------------+
+      |   | if (distToObstacle >= 0 &&    |
+      |   |     distToObstacle <          |
+      |   |     closestDist)              |
+      |   +-------------------------------+
+      |         |true           |false
+      |         v               v
+      |   +----------------+   (zurück zu
+      |   | closestDist =  |   nächstem
+      |   | distToObstacle |   Obstacle)
+      |   +----------------+
+      |         |
+      |         v
+      |   (zurück zu nächstem
+      |    Obstacle)
+      v
+(zurück zu nächstem Obstacle)
+           |
+           v
++-----------------------------+
+| return closestDist          |
++-----------------------------+
