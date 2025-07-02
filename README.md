@@ -105,8 +105,8 @@ Abweichung von der Form sind **nicht akzeptiert**.
                 +-----------------------------+
                 | if (!roboterAktiv)          |
                 +-----------------------------+
-                |true                |false
-                v                    v
+                   |true                |false
+                   v                    v
             +-------------------+   +-----------------------------+
             |   stoppen();      |   | switch(Signal)              |
             |   return;         |   +-----------------------------+
@@ -122,8 +122,8 @@ Abweichung von der Form sind **nicht akzeptiert**.
                     +-------------+      +-----------------+
                     | stoppen();  |      | vorwaerts(0.8); |
                     +-------------+      +-----------------+
-                        |                    |
-                        v                    v
+                          |                    |
+                          v                    v
                         [Ende]                [Ende]
 
                         +-------------------------------+
@@ -203,13 +203,13 @@ Abweichung von der Form sind **nicht akzeptiert**.
                 +-----------+   +----------------------+
                 | continue  |   | perpDist berechnen   |
                 +-----------+   +----------------------+
-                                    |
-                                    v
+                                      |
+                                      v
                             +-----------------------------+
                             | if (perpDist <= obs.radius) |
                             +-----------------------------+
-                                |true           |false
-                                v               v
+                                |true             |false
+                                v                 v
                         +-------------------+   (zurück zu
                         | offset,           |    nächstem
                         | distToObstacle    |    Obstacle)
@@ -228,12 +228,12 @@ Abweichung von der Form sind **nicht akzeptiert**.
                         | closestDist =  |    nächstem
                         | distToObstacle |    Obstacle)
                         +----------------+
-                            |
-                            v
+                                |
+                                v
                         (zurück zu nächstem
                         Obstacle)
-                        |
-                        v
+                                |
+                                v
                 +-----------------------------+
                 | return closestDist          |
                 +-----------------------------+
@@ -245,19 +245,19 @@ Abweichung von der Form sind **nicht akzeptiert**.
         +-------------------+
         |   Signaltyp       |
         +-------------------+
-        |
-        v
+                |
+                v
         +-------------------+-------------------+-------------------+-------------------+-------------------+
         |   Vorvaerts       |   Rueckwaerts     |   Rechts          |   Links           |   keine/sonstige  |
         +-------------------+-------------------+-------------------+-------------------+-------------------+
-        |                   |                   |                   |                   |
-        v                   v                   v                   v                   v
+                |                   |                   |                   |                   |
+                v                   v                   v                   v                   v
         +-------------------+   +----------------+  +---------------+   +---------------+   +--------------+
         | blockVorwaerts?   |   | Rückwärts-     |  | Rechts-       |   | Links-        |   | Stoppen      |
         |  +---+   +-----+  |   | bewegung       |  | drehung       |   | drehung       |   |              |
         |  |ja |   | nein|  |   +----------------+  +---------------+   +---------------+   +--------------+
-        |  v    v          |         |                   |                   |                   |
-        | Stoppen  Vorwärts|         |                   |                   |                   |
+        |  v    v           |        |                   |                   |                   |
+        | Stoppen  Vorwärts |        |                   |                   |                   |
         +------------------+         |                   |                   |                   |
-                                    v                   v                   v                   v
+                                     v                   v                   v                   v
                                 (jeweilige Methode: rueckwaerts, drehenrechts, drehenlinks, stoppen)
