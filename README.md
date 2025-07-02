@@ -12,6 +12,7 @@ Diese Richtlinien werden dynamisch aktualisiert.
 9. [Ausnahmen/Fehlerbehandlung](#9-ausnahmen-und-fehler)
 10. [Form](#10-Form)
 11. [Kontrollflussgraph](#11-Kontrollflussgraph)
+12. [Äquivalenzdiagramm](#11-Äquivalenzdiagramm)
 
 ## 1. Schlechte Praktiken
 Die folgenden Praktiken sollten niemals ohne triftigen Grund verwendet werden.
@@ -236,3 +237,27 @@ Abweichung von der Form sind **nicht akzeptiert**.
                 +-----------------------------+
                 | return closestDist          |
                 +-----------------------------+
+
+
+## 12. Äquivalenzdiagramm
+**Äquivalenzdiagramm**  für die Methode: void BewegungsRoboter::Empfangesignal(signaltyp Signal):
+
+        +-------------------+
+        |   Signaltyp       |
+        +-------------------+
+        |
+        v
+        +-------------------+-------------------+-------------------+-------------------+-------------------+
+        |   Vorvaerts       |   Rueckwaerts     |   Rechts          |   Links           |   keine/sonstige  |
+        +-------------------+-------------------+-------------------+-------------------+-------------------+
+        |                   |                   |                   |                   |
+        v                   v                   v                   v                   v
+        +-------------------+   +----------------+  +---------------+   +---------------+   +--------------+
+        | blockVorwaerts?   |   | Rückwärts-     |  | Rechts-       |   | Links-        |   | Stoppen      |
+        |  +---+   +-----+  |   | bewegung       |  | drehung       |   | drehung       |   |              |
+        |  |ja |   | nein|  |   +----------------+  +---------------+   +---------------+   +--------------+
+        |  v    v          |         |                   |                   |                   |
+        | Stoppen  Vorwärts|         |                   |                   |                   |
+        +------------------+         |                   |                   |                   |
+                                    v                   v                   v                   v
+                                (jeweilige Methode: rueckwaerts, drehenrechts, drehenlinks, stoppen)
