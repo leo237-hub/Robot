@@ -3,6 +3,17 @@
 #include <thread>
 #include <atomic>
 using namespace std;
+
+/*
+Zweck und Verhalten der TemperaturSensor-Klasse
+
+Zweck:
+Ermöglicht die Erfassung und Messung der Umgebungstemperatur im Roboter.
+
+Verhalten:
+Startet und stoppt Messvorgänge, verwaltet die Quelle der Temperaturdaten und speichert die letzte Messung.
+*/
+
 class TemperaturSensor {
 public:
     TemperaturSensor();

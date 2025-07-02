@@ -4,6 +4,16 @@
 #include <atomic>
 using namespace std;
 
+/*
+Zweck und Verhalten der Wassersensor-Klasse
+
+Zweck:
+Ermöglicht die Erkennung und Messung von Wasser im Roboterumfeld.
+
+Verhalten:
+Startet und stoppt Messvorgänge, verwaltet die Quelle der Messdaten und speichert die letzte Messung.
+*/
+
 class Wassersensor {
 public:
     Wassersensor();

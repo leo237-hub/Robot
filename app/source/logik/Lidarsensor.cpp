@@ -61,3 +61,18 @@ double LidarSensor::measureBeam(int beamIndex, const std::vector<Obstacle>& obst
     return closestDist;
 }
 
+bool LidarSensor::istHindernisVorne(double sicherheitsAbstand, double winkelStart, double winkelEnde) const {
+    // Angoli in gradi rispetto alla direzione "avanti" (0)
+    // Converte in radianti e trova i beam corrispondenti
+    int startIdx = static_cast<int>((winkelStart + 360.0) / 360.0 * numBeams) % numBeams;
+    int endIdx = static_cast<int>((winkelEnde + 360.0) / 360.0 * numBeams) % numBeams;
+    if (startIdx > endIdx) endIdx += numBeams;
+    for (int i = startIdx; i <= endIdx; ++i) {
+        int idx = i % numBeams;
+        if (distances[idx] < sicherheitsAbstand) {
+            return true;
+        }
+    }
+    return false;
+}
+

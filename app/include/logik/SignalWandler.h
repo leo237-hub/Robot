@@ -3,6 +3,9 @@
 
 using namespace std;
 
+class LidarSensor;
+class BewegungsRoboter;
+
 /*
 Zweck und Verhalten der SignalWandler-Klasse:
 
@@ -20,6 +23,8 @@ private:
     bool paketfachOffen;
     bool lampenAn;
     bool audioAn;
+    LidarSensor* lidar = nullptr;
+    BewegungsRoboter* roboter = nullptr;
     
     void behandlePaketfachBefehl();
     void behandleLampenBefehl();
@@ -36,4 +41,6 @@ public:
     bool istPaketfachOffen() const;
     bool sindLampenAn() const;
     bool istAudioAn() const;
+    
+    void setLidarUndRoboter(LidarSensor* l, BewegungsRoboter* r);
 };

@@ -7,6 +7,7 @@
 #include <QGraphicsScene>
 #include <QTimer>
 #include <QDebug>
+#include <QFocusEvent>
 #include "GraphischesRoboter.h"
 #include "dcmotor.h"
 #include "Dc-SignalInterpreter.h"
@@ -108,7 +109,15 @@ void GraphischesRoboter::bewegungAktualisieren() {
         empfangesignal(aktuellesSignal);
         logikAktualisieren(0.05f); /* 50ms = 20 FPS für kontrolliertere Bewegung */
         grafikSynchronisieren();
+    } else {
+        empfangesignal(signaltyp::keine);
+        logikAktualisieren(0.05f);
+        grafikSynchronisieren();
     }
+}
+
+void GraphischesRoboter::setzeBlockVorwaerts(bool blockiert) {
+    bewegung.setzeBlockVorwaerts(blockiert);
 }
 
 void GraphischesRoboter::keyPressEvent(QKeyEvent *event){
@@ -120,6 +129,7 @@ void GraphischesRoboter::keyPressEvent(QKeyEvent *event){
     switch(event->key()){
     case Qt::Key_W:
     case Qt::Key_Up:
+        if (blockVorwaerts) return; // Blockiere vorwärts
         Signal = Interpreter.EingabeInterpretieren("w");
         break;
     case Qt::Key_A:
@@ -186,4 +196,14 @@ void GraphischesRoboter::tastaturLoslassenBehandeln(QKeyEvent *event) {
 
 void GraphischesRoboter::setzeRoboterAktiv(bool aktiv) {
     bewegung.setzeAktiv(aktiv);
-} 
+}
+
+void GraphischesRoboter::focusOutEvent(QFocusEvent *event) {
+    istInBewegung = false;
+    aktuellesSignal = signaltyp::keine;
+    empfangesignal(signaltyp::keine);
+    logikAktualisieren(0.05f);
+    grafikSynchronisieren();
+    QGraphicsEllipseItem::focusOutEvent(event);
+}
+

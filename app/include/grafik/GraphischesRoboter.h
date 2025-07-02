@@ -1,3 +1,12 @@
+/*
+Zweck und Verhalten der GraphischesRoboter-Klasse
+
+Zweck:
+Stellt einen grafischen Roboter dar, der sowohl die grafische Repräsentation als auch die Logik für Bewegung, Signalverarbeitung und Interaktion mit Sensoren übernimmt.
+
+Verhalten:
+Synchronisiert die grafische Darstellung mit dem internen Zustand, verarbeitet Tastatureingaben und steuert die Bewegung und Statusanzeige des Roboters in der Simulation.
+*/
 #pragma once
 #include <QGraphicsEllipseItem>
 #include <QKeyEvent>
@@ -18,6 +27,7 @@ private:
     QTimer* bewegungsTimer;
     signaltyp aktuellesSignal;
     bool istInBewegung;
+    bool blockVorwaerts = false;
 
 public:
     GraphischesRoboter(double x = 0.0, double y = 0.0, double radius = 20.0);
@@ -36,10 +46,13 @@ public:
     // Methode für Roboter-Status
     void setzeRoboterAktiv(bool aktiv);
     
+    void setzeBlockVorwaerts(bool blockiert);
+    
 private slots:
     void bewegungAktualisieren();
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;
     void keyReleaseEvent(QKeyEvent *event) override;
+    void focusOutEvent(QFocusEvent *event) override;
 }; 

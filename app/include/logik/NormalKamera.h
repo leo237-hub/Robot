@@ -1,6 +1,17 @@
 #pragma once
 #include <cstdint>
 using namespace std;
+
+/*
+Zweck und Verhalten der NormalKamera-Klasse
+
+Zweck:
+Repräsentiert eine normale Kamera zur Aufnahme von Fotos und Videos im Roboter.
+
+Verhalten:
+Ermöglicht das Ein- und Ausschalten, Aufnehmen von Fotos und Videos sowie das Setzen des Aktiv-Status.
+*/
+
 class NormalKamera {
 
 private:

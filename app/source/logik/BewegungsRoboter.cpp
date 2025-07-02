@@ -18,6 +18,10 @@ void BewegungsRoboter::Empfangesignal(signaltyp Signal) {
     
     switch(Signal) {
     case signaltyp::Vorvaerts:
+        if (blockVorwaerts) {
+            stoppen();
+            break;
+        }
         vorwaerts(0.8f);
         break;
     case signaltyp::Rueckwaerts:
@@ -99,6 +103,10 @@ void BewegungsRoboter::setzeAktiv(bool aktiv) {
     }
     
     std::cout << "BewegungsRoboter Status: " << (aktiv ? "Aktiv" : "Inaktiv") << std::endl;
+}
+
+void BewegungsRoboter::setzeBlockVorwaerts(bool blockiert) {
+    blockVorwaerts = blockiert;
 }
 
 

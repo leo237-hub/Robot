@@ -1,3 +1,12 @@
+/*
+Zweck und Verhalten der LEDPanel-Klasse
+
+Zweck:
+Visualisiert den Status verschiedener Roboterkomponenten mittels LEDs in der Benutzeroberfläche.
+
+Verhalten:
+Aktualisiert LED-Anzeigen basierend auf dem Status der jeweiligen Komponenten und bietet Methoden zur Steuerung dieser Anzeigen.
+*/
 #pragma once
 #include <QWidget>
 #include <QLabel>

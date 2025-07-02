@@ -1,3 +1,12 @@
+/*
+Zweck und Verhalten der MainWindow-Klasse
+
+Zweck:
+Hauptfenster der grafischen Benutzeroberfläche, das alle visuellen und logischen Komponenten des Roboters integriert.
+
+Verhalten:
+Verwaltet die Interaktion zwischen Benutzer, Roboter und Sensoren, steuert die Anzeige und verarbeitet Benutzereingaben.
+*/
 #pragma once
 #include <QMainWindow>
 #include <QGraphicsScene>

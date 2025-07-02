@@ -157,44 +157,24 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateLidar() {
     if (!lidarSensor || !roboter || !scene || !ctrl) return;
-    QPointF roboterPos(gpsSensor->getX(), gpsSensor->getY());
-    auto items = scene->items();
-    qreal minAbstand = std::numeric_limits<qreal>::max();
-    simulationElement* naechsterStein = nullptr;
-
-    for (QGraphicsItem* item : items) {
+    
+    std::vector<Obstacle> obstacles;
+    for (QGraphicsItem* item : scene->items()) {
         simulationElement* element = dynamic_cast<simulationElement*>(item);
-        if (element) {
-            QPointF elementPos = element->holePosition();
-            qreal abstand = QLineF(roboterPos, elementPos).length();
-
-            if (abstand < minAbstand) {
-                minAbstand = abstand;
-                naechsterStein = element;
-            }
+        if (element && element->istSolid()) {
+            Obstacle obs;
+            obs.x = element->getX();
+            obs.y = element->getY();
+            obs.radius = element->holeRadius();
+            obstacles.push_back(obs);
         }
     }
-
-    const qreal sicherheitsAbstand = 20.0;
-
-    if (naechsterStein && minAbstand < sicherheitsAbstand) {
-        ctrl->istBlockiert = true;
-        ctrl->stoppen();
-
-        if (!ctrl->ausweichenAktiv) {
-            ctrl->ausweichenAktiv = true;
-            if (rand() % 2 == 0) {
-                ctrl->Links();
-            } else {
-                ctrl->Rechts();
-            }
-        }
-
+    lidarSensor->update(obstacles);
+    const double sicherheitsAbstand = 45.0;
+    if (lidarSensor->istHindernisVorne(sicherheitsAbstand)) {
+        roboter->setzeBlockVorwaerts(true);
     } else {
-        // Kein Stein oder weit genug weg
-        ctrl->istBlockiert = false;
-        ctrl->ausweichenAktiv = false;
-        ctrl->vorwaerts();
+        roboter->setzeBlockVorwaerts(false);
     }
 }
 

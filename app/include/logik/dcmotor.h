@@ -6,6 +6,16 @@
 #include "Dc-SignalInterpreter.h"
 #include "selfcheck.h"
 
+/*
+Zweck und Verhalten der dcMotor-Klasse
+
+Zweck:
+Repräsentiert einen Gleichstrommotor im Roboter und steuert dessen Leistung und Richtung.
+
+Verhalten:
+Ermöglicht das Drehen, Stoppen und Abfragen des aktuellen Zustands des Motors.
+*/
+
 // to do : include Header Kettesensor
 
 class dcMotor : public Aktoren {

@@ -2,6 +2,8 @@
 #include "paketfach.h"
 #include "lampe.h"
 #include "Lautsprecher.h"
+#include "Lidarsensor.h"
+#include "BewegungsRoboter.h"
 
 /*
 Konstruktor
@@ -19,6 +21,16 @@ Parameter: gedrucktesKnopf - Index des gedrückten Knopfes
 Rückgabe: String mit dem interpretierten Befehl
 */
 string SignalWandler::EmpfangeBefehlFernBedienung(int gedrucktesKnopf) {
+    // Esempio: supponiamo che 0 = vorwärts
+    if (gedrucktesKnopf == 0 && lidar && roboter) {
+        // Soglia e angolo possono essere parametrizzati
+        if (lidar->istHindernisVorne(30.0)) {
+            roboter->setzeBlockVorwaerts(true);
+            return "Blockiert: Hindernis vorne!";
+        } else {
+            roboter->setzeBlockVorwaerts(false);
+        }
+    }
     string befehl;
     
     switch(gedrucktesKnopf) {
@@ -132,4 +144,9 @@ bool SignalWandler::sindLampenAn() const {
 
 bool SignalWandler::istAudioAn() const {
     return audioAn;
+}
+
+void SignalWandler::setLidarUndRoboter(LidarSensor* l, BewegungsRoboter* r) {
+    lidar = l;
+    roboter = r;
 }

@@ -8,6 +8,17 @@
 #include "GpsSensor.h"
 #include "Wassersensor.h"
 using namespace std;
+
+/*
+Zweck und Verhalten der Sensor-Klasse
+
+Zweck:
+Basisklasse für verschiedene Sensortypen im Roboter, verwaltet ID, Typ, Einheit und Messwert.
+
+Verhalten:
+Ermöglicht das Messen und Kalibrieren von Sensoren und speichert die letzte Messung.
+*/
+
 class Sensor {
 private:
     std::string sensorID;

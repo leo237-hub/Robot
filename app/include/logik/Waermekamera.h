@@ -2,6 +2,16 @@
 #include <cstdint>
 using namespace std;
 
+/*
+Zweck und Verhalten der WaermeKamera-Klasse
+
+Zweck:
+Repräsentiert eine Wärmebildkamera zur Erfassung von Temperaturdaten und Bildern.
+
+Verhalten:
+Ermöglicht das Ein- und Ausschalten, Aufnehmen von Fotos und Videos sowie das Auslesen der aktuellen Temperatur.
+*/
+
 class WaermeKamera {
 private:
 

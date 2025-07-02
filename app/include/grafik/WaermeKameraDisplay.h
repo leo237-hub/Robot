@@ -4,6 +4,16 @@
 #include <QLabel>
 #include <cstdint>
 
+/*
+Zweck und Verhalten der WaermekameraDisplay-Klasse
+
+Zweck:
+Stellt die Anzeige der Wärmebilddaten auf einem QLabel bereit.
+
+Verhalten:
+Empfängt Wärmebilddaten und aktualisiert die grafische Anzeige entsprechend.
+*/
+
 class WaermekameraDisplay : public QObject {
     Q_OBJECT
 
